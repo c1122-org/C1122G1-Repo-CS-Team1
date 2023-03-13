@@ -57,18 +57,18 @@
             <swiper-container class="mySwiper w-100" space-between="30"
                               slides-per-view="5">
                 <c:forEach items="${newMovieList}" var="newMovie">
-                    <swiper-slide><img src="${newMovie.getImage()}" alt="">
+                    <swiper-slide onclick="showDetailMovie(${newMovie.getId()})"><img src="${newMovie.getImage()}" alt="">
                         <div class="detail-movie">
-                            <p class="fw-bold">${newMovie.getTitle()}</p>
-                            <div class="d-flex">
+                            <p class="fw-bolder">${newMovie.getTitle()}</p>
+                            <div class="d-flex" style="font-size: 16px">
                                 <p class="fw-bold">Rating: &nbsp;</p>
                                 <p>${newMovie.getRating()}</p>
                             </div>
-                            <div class="d-flex">
+                            <div class="d-flex" style="font-size: 16px">
                                 <p class="fw-bold">Rank: &nbsp;</p>
                                 <p>${newMovie.getRank()}</p>
                             </div>
-                            <div class="d-flex">
+                            <div class="d-flex" style="font-size: 16px">
                                 <p class="fw-bold">Year public: &nbsp;</p>
                                 <p>${newMovie.getYearPublic()}</p>
                             </div>
@@ -84,18 +84,18 @@
             <swiper-container class="mySwiper w-100" space-between="30"
                               slides-per-view="5">
                 <c:forEach items="${actionMovieList}" var="actionMovie">
-                    <swiper-slide><img src="${actionMovie.getImage()}" alt="">
+                    <swiper-slide onclick="showDetailMovie(${actionMovie.getId()})"><img src="${actionMovie.getImage()}" alt="">
                         <div class="detail-movie">
-                            <p class="fw-bold">${actionMovie.getTitle()}</p>
-                            <div class="d-flex">
+                            <p class="fw-bolder">${actionMovie.getTitle()}</p>
+                            <div class="d-flex" style="font-size: 16px">
                                 <p class="fw-bold">Rating: &nbsp;</p>
                                 <p>${actionMovie.getRating()}</p>
                             </div>
-                            <div class="d-flex">
+                            <div class="d-flex" style="font-size: 16px">
                                 <p class="fw-bold">Rank: &nbsp;</p>
                                 <p>${actionMovie.getRank()}</p>
                             </div>
-                            <div class="d-flex">
+                            <div class="d-flex" style="font-size: 16px">
                                 <p class="fw-bold">Year public: &nbsp;</p>
                                 <p>${actionMovie.getYearPublic()}</p>
                             </div>
@@ -111,18 +111,18 @@
             <swiper-container class="mySwiper w-100" space-between="30"
                               slides-per-view="5">
                 <c:forEach items="${popularMovieList}" var="popularMovie">
-                    <swiper-slide><img src="${popularMovie.getImage()}" alt="">
+                    <swiper-slide onclick="showDetailMovie(${popularMovie.getId()})"><img src="${popularMovie.getImage()}" alt="">
                         <div class="detail-movie">
-                            <p class="fw-bold">${popularMovie.getTitle()}</p>
-                            <div class="d-flex">
+                            <p class="fw-bolder">${popularMovie.getTitle()}</p>
+                            <div class="d-flex" style="font-size: 16px">
                                 <p class="fw-bold">Rating: &nbsp;</p>
                                 <p>${popularMovie.getRating()}</p>
                             </div>
-                            <div class="d-flex">
+                            <div class="d-flex" style="font-size: 16px">
                                 <p class="fw-bold">Rank: &nbsp;</p>
                                 <p>${popularMovie.getRank()}</p>
                             </div>
-                            <div class="d-flex">
+                            <div class="d-flex" style="font-size: 16px">
                                 <p class="fw-bold">Year public: &nbsp;</p>
                                 <p>${popularMovie.getYearPublic()}</p>
                             </div>
@@ -138,9 +138,9 @@
             <swiper-container class="mySwiper w-100" space-between="30"
                               slides-per-view="5">
                 <c:forEach items="${animationMovieList}" var="animationMovie">
-                    <swiper-slide><img src="${animationMovie.getImage()}" alt="">
+                    <swiper-slide onclick="showDetailMovie(${animationMovie.getId()})"><img src="${animationMovie.getImage()}" alt="">
                         <div class="detail-movie">
-                            <p class="fw-bold">${animationMovie.getTitle()}</p>
+                            <p class="fw-bolder">${animationMovie.getTitle()}</p>
                             <div class="d-flex">
                                 <p class="fw-bold">Rating: &nbsp;</p>
                                 <p>${animationMovie.getRating()}</p>
@@ -201,4 +201,10 @@
         crossorigin="anonymous"
 ></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
+<script type="text/javascript">
+    function showDetailMovie(id) {
+        console.log(id);
+        location.href = "home?action=detail&id=" + id;
+    }
+</script>
 </html>
