@@ -1,4 +1,4 @@
-package com.traillermovie.models;
+package com.traillermovie.model;
 
 public class Genre {
     private int id;
