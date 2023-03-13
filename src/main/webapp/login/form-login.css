@@ -45,11 +45,13 @@ body {
     border-radius: 5px;
     padding: 60px 68px 40px;
 }
+
 .form-login #login h1 {
     font-size: 32px;
     font-weight: 500;
     margin-bottom: 28px;
 }
+
 #login .username,
 #login .password {
     outline: 0;
@@ -63,6 +65,7 @@ body {
     margin-bottom: 16px;
     line-height: 50px;
 }
+
 #login .submit-btn {
     background: #e50914;
     border-radius: 4px;
@@ -72,6 +75,7 @@ body {
     margin: 24px 0 12px;
     height: 50px;
 }
+
 #login .modified {
     display: flex;
     justify-content: space-between;
@@ -81,6 +85,7 @@ body {
     font-weight: 400;
     margin-bottom: 50px;
 }
+
 #login .modified a {
     text-decoration: none;
     color: #b3b3b3;
@@ -88,21 +93,29 @@ body {
 #login .modified a:hover {
     text-decoration: underline;
 }
+
+#login .modified a:hover {
+    text-decoration: underline;
+}
+
 #login .login-form-other p:first-child {
     margin-bottom: 20px;
     color: #b3b3b3;
     font-size: 16px;
     font-weight: 400;
 }
+
 #login .login-form-other p:last-child {
     color: #b3b3b3;
     font-size: 13px;
     font-weight: 400;
 }
+
 @media only screen and (max-width: 768px) {
     .container {
         background: none;
     }
+
     .main .form-login {
         background: transparent;
         width: 100%;
