@@ -4,7 +4,6 @@ p {
     margin: 0;
     padding: 0;
 }
-
 body {
     background: #000;
     color: #fff;
@@ -15,14 +14,12 @@ body {
     padding: 0;
     background-image: linear-gradient(
             rgba(10, 10, 10, 0.7),
-            rgba(10, 10, 10, 0.7)
-    ),
+            rgba(10, 10, 10, 0.7)),
     url(../assets/images/header-image.png);
     height: 100vh;
     font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
     sans-serif;
 }
-
 /* --------------------HEADER-------------------- */
 .header {
     width: 100%;
@@ -31,7 +28,6 @@ body {
     padding: 10px 5%;
     position: relative;
 }
-
 .header .logo {
     width: 150px;
 }
@@ -42,7 +38,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
 .main .form-login {
     width: 450px;
     height: 600px;
@@ -94,6 +89,9 @@ body {
 #login .modified a {
     text-decoration: none;
     color: #b3b3b3;
+}
+#login .modified a:hover {
+    text-decoration: underline;
 }
 
 #login .modified a:hover {
