@@ -1,6 +1,6 @@
-package com.traillermovie.models;
+package com.traillermovie.model;
 
-public class Director {
+public class Writer {
     private int id;
     private String name;
     private String image;
