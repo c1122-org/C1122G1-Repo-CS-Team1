@@ -1,4 +1,4 @@
-package com.traillermovie.service.homeService;
+package com.traillermovie.repository.homeRepository;
 
 import com.traillermovie.model.Director;
 import com.traillermovie.model.Movie;
@@ -7,7 +7,7 @@ import com.traillermovie.model.Writer;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface IHomeService {
+public interface IHomeRepository {
     List<Movie> getListActionMovies();
 
     List<Movie> getListPopularMovies();

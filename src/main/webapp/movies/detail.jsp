@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="icon" href="../assets/images/logo-title.png">
-    <title>Detail movie</title>
+    <title>${movie.getTitle()}</title>
     <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -27,27 +27,7 @@
     <link rel="stylesheet" href="../movies/detail.css"/>
 </head>
 <body style="background-image: linear-gradient(rgba(0, 0, 0, 0.8), #000000),url(${movie.getImage()}); background-repeat: no-repeat; background-size: cover">
-<div class="header">
-    <div class="left-header">
-        <ul>
-            <li><img src="../assets/images/logo.png" alt=""></li>
-            <li>Trang chủ</li>
-            <li>Thể loại</li>
-            <li>Phim hot</li>
-            <li>Khác</li>
-        </ul>
-    </div>
-    <div class="right-header">
-        <form class="form-search-header d-flex" method="get">
-            <input type="text" class="input-search-header" name="search" placeholder="Search movie">
-            <button class="search-btn d-flex align-items-end" type="submit"><i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-        </form>
-        <div class="account-user">
-            <i class="fa-solid fa-user"></i>
-        </div>
-    </div>
-</div>
+<jsp:include page="../common/header.jsp"></jsp:include>
 <div class="content">
     <div class="movie-content d-flex">
         <div class="movie-content__poster">
@@ -86,35 +66,7 @@
         <p class="fw-bold">${movie.getTitle()} | Official Trailer | Prime Video ZA</p>
         <iframe class="embed-responsive-item" src="${movie.getTrailer()}" allowfullscreen></iframe>
     </div>
-    <div class="footer mt-5">
-        <div>
-            <section class="link">
-                <div class="sub-links">
-                    <ul>
-                        <li><a href="#">Audio and Subtitles</a></li>
-                        <li><a href="#">Audio Description</a></li>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Gift Cards</a></li>
-                        <li><a href="#">Media Center</a></li>
-                        <li><a href="#">Investor Relations</a></li>
-                        <li><a href="#">Jobs</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Privacy</a></li>
-                        <li><a href="#">Legal Notices</a></li>
-                        <li><a href="#">Corporate Information</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-            </section>
-
-        </div>    <!-- END OF LINKS -->
-
-        <!-- FOOTER -->
-        <footer>
-            <p>&copy 1997-2018 Netflix, Inc.</p>
-            <p>Carlos Avila &copy 2018</p>
-        </footer>
-    </div>
+    <jsp:include page="../common/footer.jsp"></jsp:include>
 </div>
 </body>
 <script
@@ -123,4 +75,14 @@
         crossorigin="anonymous"
 ></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
+<script type="text/javascript">
+    function navigateNewPage(navigation) {
+        if (navigation == "#") {
+            location.href = "home";
+        }
+        else {
+            location.href = "navigation?path=" + navigation;
+        }
+    }
+</script>
 </html>
