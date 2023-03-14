@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="icon" href="../assets/images/logo-title.png">
-    <title>Netflix home</title>
+    <title>Type Netflix</title>
     <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -24,10 +24,10 @@
           integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
-    <link rel="stylesheet" href="../home/home.css"/>
+    <link rel="stylesheet" href="../../navigation/typeMovie/typeMovie.css"/>
 </head>
 <body>
-<jsp:include page="../common/header.jsp"></jsp:include>
+<jsp:include page="../../common/header.jsp"></jsp:include>
 <div class="content">
     <div class="movies">
         <div class="new-movie d-flex flex-column justify-content-start align-items-center">
@@ -143,7 +143,7 @@
             </swiper-container>
         </div>
     </div>
-    <jsp:include page="../common/footer.jsp"></jsp:include>
+    <jsp:include page="../../common/footer.jsp"></jsp:include>
 </div>
 </div>
 </body>
