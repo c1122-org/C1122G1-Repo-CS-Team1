@@ -69,14 +69,23 @@
                     <c:forEach items="${directorList}" var="director">
                         <div class="casts-item">
                             <img src="${director.getImage()}" alt="">
-                            <p class="casts-item-name" style="font-size: 14px">${director.getName()}</p>
+                            <p class="casts-item-name p-2 fw-semibold" style="font-size: 14px">${director.getName()}</p>
+                        </div>
+                    </c:forEach>
+                    <c:forEach items="${writerList}" var="writer">
+                        <div class="casts-item">
+                            <img src="${writer.getImage()}" alt="">
+                            <p class="casts-item-name p-2 fw-semibold" style="font-size: 14px">${writer.getName()}</p>
                         </div>
                     </c:forEach>
                 </div>
             </div>
         </div>
     </div>
-    <h1>${movie.getTrailer()}</h1>
+    <div class="trailer-movie">
+        <p class="fw-bold">${movie.getTitle()} | Official Trailer | Prime Video ZA</p>
+        <iframe class="embed-responsive-item" src="${movie.getTrailer()}" allowfullscreen></iframe>
+    </div>
     <div class="footer mt-5">
         <div>
             <section class="link">

@@ -2,6 +2,7 @@ package com.traillermovie.controller;
 
 import com.traillermovie.model.Director;
 import com.traillermovie.model.Movie;
+import com.traillermovie.model.Writer;
 import com.traillermovie.service.homeService.HomeServiceImpl;
 
 import javax.servlet.*;
@@ -55,8 +56,10 @@ public class HomeServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         Movie movie = homeService.getMovieById(id);
         List<Director> directorList = homeService.getDirectorListByIdMovie(id);
+        List<Writer> writerList = homeService.getWriterListByIdMovie(id);
         request.setAttribute("movie", movie);
         request.setAttribute("directorList", directorList);
+        request.setAttribute("writerList", writerList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("movies/detail.jsp");
         dispatcher.forward(request, response);
     }
