@@ -1,5 +1,6 @@
 package com.traillermovie.service.navigationService;
 
+import com.traillermovie.model.Genre;
 import com.traillermovie.model.Movie;
 import com.traillermovie.repository.navigationRepository.NavigationRepositoryImpl;
 
@@ -11,6 +12,8 @@ public class NavigationServiceImpl implements INavigationService{
     public List<Movie> getAllMovie() {
         return navigationRepository.getAllMovie();
     }
+
+
     public int getNumberPage() {
         return navigationRepository.getNumberPage();
     }
@@ -18,6 +21,16 @@ public class NavigationServiceImpl implements INavigationService{
     @Override
     public List<Movie> getMovieListByPage(int index) {
         return navigationRepository.getMovieListByPage(index);
+    }
+
+    @Override
+    public List<Movie> getMovieListByGenre(int genre) {
+        return navigationRepository.getMovieListByGenre(genre);
+    }
+
+    @Override
+    public String getNameGenreById(int genre) {
+        return navigationRepository.getNameGenreById(genre);
     }
 
     ;

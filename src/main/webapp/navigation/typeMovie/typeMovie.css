@@ -41,14 +41,33 @@ body {
     align-items: center;
 }
 
-.left-header ul li {
+.left-header ul li  {
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
 }
 
-.left-header ul li:not(:last-child) {
+.left-header ul li {
     margin-right: 30px;
+}
+
+/*DROPDOWN HEADER*/
+ul#dropdown-menu-header {
+    background: transparent;
+}
+#dropdown-header #dropdown-menu-header li {
+    background: #000000;
+}
+#dropdown-menu-header li  a{
+    color: #d9d9d9;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 30px;
+}
+#dropdown-menu-header li  a:hover {
+    color: #000000;
 }
 
 .left-header ul img {
@@ -97,9 +116,50 @@ body {
 }
 
 /*----------------CONTENT--------------------*/
+.content {
+    margin: 150px 100px 0;
+    justify-content: center;
+}
+.content .name-genre {
+    color: #d9d9d9;
+    text-align: center;
+}
+.row {
+    justify-content: center;
+}
+.col-2 {
+    margin: 50px 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.row .col-2 img {
+    width: 200px;
+    height: 300px;
+}
+.col-2 .detail-movie {
+    width: 201px;
+    height: 300px;
+    display: none;
+    position: absolute;
+    background: rgba(0,0,0,0.8);
+    z-index: 1;
+    color: #ffffff;
+    text-align: start;
+    padding: 10px 20px;
+}
+.col-2:hover .detail-movie {
+    display: block;
+    cursor: pointer;
+}
 
-/*----------------SWIPER SLIDER--------------*/
+.paging .pagination .page-item a {
+    background: transparent;
+    color: #d9d9d9;
+    font-weight: bold;
+    border: 3px solid;
 
+}
 /*---------------FOOTER------------------*/
 
 .link {

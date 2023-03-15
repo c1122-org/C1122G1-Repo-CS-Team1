@@ -1,6 +1,7 @@
 package com.traillermovie.controller;
 
 import com.traillermovie.model.Director;
+import com.traillermovie.model.Genre;
 import com.traillermovie.model.Movie;
 import com.traillermovie.model.Writer;
 import com.traillermovie.service.homeService.HomeServiceImpl;
@@ -44,7 +45,8 @@ public class HomeServlet extends HttpServlet {
         List<Movie> actionMovieList = homeService.getListActionMovies();
         List<Movie> popularMovieList = homeService.getListPopularMovies();
         List<Movie> animationMovieList = homeService.getListAnimationMovies();
-        System.out.println(popularMovieList);
+        List<Genre> genreList = homeService.getAllGenre();
+        request.setAttribute("genreList",genreList);
         request.setAttribute("newMovieList", newMovieList);
         request.setAttribute("actionMovieList", actionMovieList);
         request.setAttribute("popularMovieList", popularMovieList);
@@ -57,6 +59,8 @@ public class HomeServlet extends HttpServlet {
         Movie movie = homeService.getMovieById(id);
         List<Director> directorList = homeService.getDirectorListByIdMovie(id);
         List<Writer> writerList = homeService.getWriterListByIdMovie(id);
+        List<Genre> genreList = homeService.getAllGenre();
+        request.setAttribute("genreList",genreList);
         request.setAttribute("movie", movie);
         request.setAttribute("directorList", directorList);
         request.setAttribute("writerList", writerList);
