@@ -31,9 +31,6 @@ public class NavigationServlet extends HttpServlet {
             case "type":
                 gotoTypeMovie(request, response);
                 break;
-            case "hot-movie":
-                gotoHotMovie(request, response);
-                break;
             default:
                 response.sendRedirect("home");
                 break;
@@ -59,12 +56,18 @@ public class NavigationServlet extends HttpServlet {
     }
     private void gotoTypeMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int genre = Integer.parseInt(request.getParameter("genre"));
-        List<Movie> genreMovieList = navigationService.getMovieListByGenre(genre);
+        String indexPage = request.getParameter("page");
+        if (indexPage == null) {
+            indexPage = "1";
+        }
+        int index = Integer.parseInt(indexPage);
+        List<Movie> genreMovieList = navigationService.getMovieListByPageTypeMovie(index, genre);
         String nameGenre = navigationService.getNameGenreById(genre);
         List<Genre> genreList = homeService.getAllGenre();
         request.setAttribute("genreList", genreList);
         request.setAttribute("genreMovieList", genreMovieList);
         request.setAttribute("nameGenre", nameGenre);
+        request.setAttribute("id_genre", genre);
         RequestDispatcher dispatcher = request.getRequestDispatcher("navigation/typeMovie/typeMovie.jsp");
         dispatcher.forward(request, response);
     }

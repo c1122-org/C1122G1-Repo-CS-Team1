@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="icon" href="../assets/images/logo-title.png">
-    <title>General Netflix</title>
+    <title>Type Netflix</title>
     <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -51,6 +51,17 @@
                 </div>
             </div>
         </c:forEach>
+        <div class="paging d-flex justify-content-center m-5">
+            <ul class="pagination pagination-lg">
+                <%
+                    NavigationServiceImpl navigationService = new NavigationServiceImpl();
+                    int genre = Integer.parseInt(request.getParameter("genre"));
+                %>
+                <c:forEach begin="1" end="<%= navigationService.getNumberPageTypeMovie(genre)%>" var="i">
+                    <li class="page-item"><a class="page-link" href="navigation?path=type&genre=<%= genre%>&page=${i}">${i}</a></li>
+                </c:forEach>
+            </ul>
+        </div>
         <jsp:include page="../../common/footer.jsp"></jsp:include>
     </div>
 </div>

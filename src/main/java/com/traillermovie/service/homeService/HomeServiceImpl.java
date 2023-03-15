@@ -48,4 +48,9 @@ public class HomeServiceImpl implements IHomeService {
     public List<Genre> getAllGenre() {
         return homeRepository.getAllGenre();
     }
+
+    @Override
+    public List<Movie> getListMoviesByName(String name) {
+        return homeRepository.getListMoviesByName(name);
+    }
 }

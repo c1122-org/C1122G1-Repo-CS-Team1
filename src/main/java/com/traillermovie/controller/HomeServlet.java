@@ -11,11 +11,13 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "HomeServlet", value = "/home")
 public class HomeServlet extends HttpServlet {
     private HomeServiceImpl homeService = new HomeServiceImpl();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -38,15 +40,27 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "search":
+                showListSearchMovie(request, response);
+                break;
+            default:
+                showListMovie(request, response);
+                break;
+        }
     }
+
     private void showListMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Movie> newMovieList = homeService.getListNewMovies();
         List<Movie> actionMovieList = homeService.getListActionMovies();
         List<Movie> popularMovieList = homeService.getListPopularMovies();
         List<Movie> animationMovieList = homeService.getListAnimationMovies();
         List<Genre> genreList = homeService.getAllGenre();
-        request.setAttribute("genreList",genreList);
+        request.setAttribute("genreList", genreList);
         request.setAttribute("newMovieList", newMovieList);
         request.setAttribute("actionMovieList", actionMovieList);
         request.setAttribute("popularMovieList", popularMovieList);
@@ -54,17 +68,30 @@ public class HomeServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("home/home.jsp");
         dispatcher.forward(request, response);
     }
+
     private void showDetailMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         int id = Integer.parseInt(request.getParameter("id"));
         Movie movie = homeService.getMovieById(id);
         List<Director> directorList = homeService.getDirectorListByIdMovie(id);
         List<Writer> writerList = homeService.getWriterListByIdMovie(id);
         List<Genre> genreList = homeService.getAllGenre();
-        request.setAttribute("genreList",genreList);
+        request.setAttribute("genreList", genreList);
         request.setAttribute("movie", movie);
         request.setAttribute("directorList", directorList);
         request.setAttribute("writerList", writerList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("movies/detail.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void showListSearchMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String search = request.getParameter("search");
+        List<Genre> genreList = homeService.getAllGenre();
+        request.setAttribute("genreList", genreList);
+        List<Movie> movieList = homeService.getListMoviesByName(search);
+            request.setAttribute("movieList", movieList);
+            if (movieList.size() == 0) {
+            request.setAttribute("message", "Không thể tìm thấy bộ phim có lên là \"" + search+ "\". Vui lòng thử lại.");
+        }
+        request.getRequestDispatcher("navigation/generalMovie/generalMovie.jsp").forward(request, response);
     }
 }

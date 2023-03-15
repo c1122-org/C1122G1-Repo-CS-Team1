@@ -16,6 +16,7 @@ public interface IHomeRepository {
     List<Movie> getListAnimationMovies();
 
     List<Movie> getListNewMovies();
+    List<Movie> getListMoviesByName(String name);
 
     Movie getMovieById(int id) throws SQLException;
 

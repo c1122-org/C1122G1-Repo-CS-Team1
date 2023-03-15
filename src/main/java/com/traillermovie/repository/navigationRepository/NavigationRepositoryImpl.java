@@ -67,6 +67,24 @@ public class NavigationRepositoryImpl implements INavigationRepository {
         return 0;
     }
 
+    public int getNumberPageTypeMovie(int id_genre) {
+        String query = "select count(*) from movies where id_genre = ?;";
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id_genre);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int total = resultSet.getInt(1);
+                int countPage = total / 10;
+                if (total % 10 != 0) countPage++;
+                System.out.println(countPage);
+                return countPage;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
+
     @Override
     public List<Movie> getMovieListByPage(int index) {
         String query = "SELECT * FROM movies LIMIT ?, 15;";
@@ -90,8 +108,32 @@ public class NavigationRepositoryImpl implements INavigationRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
 
+    }
+    public List<Movie> getMovieListByPageTypeMovie(int index, int id_genre) {
+        String query = "SELECT * FROM movies where id_genre = ? LIMIT ?, 10;";
+        List<Movie> movieList = new ArrayList<>();
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id_genre);
+            preparedStatement.setInt(2, (index - 1) * 10);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id_movie");
+                String title = resultSet.getString("title_movie");
+                double rating = resultSet.getDouble("rating_movie");
+                int rank = resultSet.getInt("rank_movie");
+                int yearPublic = resultSet.getInt("year_movie");
+                String image = resultSet.getString("image_movie");
+                String description = resultSet.getString("description_movie");
+                String trailer = resultSet.getString("traller_movie");
+                movieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer));
+            }
+            connection.close();
+            return movieList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @Override
     public List<Movie> getMovieListByGenre(int genre) {
         List<Movie> movieList = new ArrayList<>();
