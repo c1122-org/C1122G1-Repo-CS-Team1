@@ -23,4 +23,5 @@ public interface IHomeService {
 
     List<Writer> getWriterListByIdMovie(int id) throws SQLException;
     List<Genre> getAllGenre();
+    List<Movie> getListMoviesByName(String name);
 }

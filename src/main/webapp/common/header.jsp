@@ -20,7 +20,7 @@
         </ul>
     </div>
     <div class="right-header">
-        <form class="form-search-header d-flex" method="get">
+        <form class="form-search-header d-flex" action="/home?action=search" method="post">
             <input type="text" class="input-search-header" name="search" placeholder="Search movie">
             <button class="search-btn d-flex align-items-end" type="submit"><i class="fa-solid fa-magnifying-glass"></i>
             </button>
@@ -30,4 +30,3 @@
         </div>
     </div>
 </div>
-

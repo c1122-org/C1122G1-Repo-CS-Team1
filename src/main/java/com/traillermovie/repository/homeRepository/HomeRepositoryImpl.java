@@ -30,7 +30,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
     protected Connection getConnection() {
         Connection connection = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(jdbcUrl, jdbcUserName, jdbcPassword);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -127,6 +127,32 @@ public class HomeRepositoryImpl implements IHomeRepository {
             }
             connection.close();
             return newMovieList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<Movie> getListMoviesByName(String name) {
+        String query = "select * from movies where title_movie like ?;";
+        List<Movie> movieList = new ArrayList<>();
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, name + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id_movie");
+                String title = resultSet.getString("title_movie");
+                double rating = resultSet.getDouble("rating_movie");
+                int rank = resultSet.getInt("rank_movie");
+                int yearPublic = resultSet.getInt("year_movie");
+                String image = resultSet.getString("image_movie");
+                String description = resultSet.getString("description_movie");
+                String trailer = resultSet.getString("traller_movie");
+                movieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer));
+            }
+            System.out.println(movieList);
+            connection.close();
+            return movieList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

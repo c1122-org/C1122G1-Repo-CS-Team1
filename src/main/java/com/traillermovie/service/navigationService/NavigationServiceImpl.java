@@ -19,6 +19,16 @@ public class NavigationServiceImpl implements INavigationService{
     }
 
     @Override
+    public int getNumberPageTypeMovie(int id_genre) {
+        return navigationRepository.getNumberPageTypeMovie(id_genre);
+    }
+
+    @Override
+    public List<Movie> getMovieListByPageTypeMovie(int index, int id_genre) {
+        return navigationRepository.getMovieListByPageTypeMovie(index, id_genre);
+    }
+
+    @Override
     public List<Movie> getMovieListByPage(int index) {
         return navigationRepository.getMovieListByPage(index);
     }
