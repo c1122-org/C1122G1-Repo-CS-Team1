@@ -1,6 +1,7 @@
 package com.traillermovie.repository.homeRepository;
 
 import com.traillermovie.model.Director;
+import com.traillermovie.model.Genre;
 import com.traillermovie.model.Movie;
 import com.traillermovie.model.Writer;
 
@@ -25,6 +26,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
             "join movie_writer as mw on wr.id_writer = mw.id_writer\n" +
             "where mw.id_movie = ?;";
 
+    private static final String SELECT_ALL_TYPE_MOVIE = "select * from genres;";
     protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -184,6 +186,21 @@ public class HomeRepositoryImpl implements IHomeRepository {
             }
             connection.close();
             return writerList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public List<Genre> getAllGenre() {
+        List<Genre> genreList = new ArrayList<>();
+        try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_TYPE_MOVIE)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id_genre");
+                String name = resultSet.getString("name_genre");
+                genreList.add(new Genre(id, name));
+            }
+            connection.close();
+            return genreList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

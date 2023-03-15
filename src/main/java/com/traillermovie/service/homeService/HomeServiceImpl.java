@@ -1,6 +1,7 @@
 package com.traillermovie.service.homeService;
 
 import com.traillermovie.model.Director;
+import com.traillermovie.model.Genre;
 import com.traillermovie.model.Movie;
 import com.traillermovie.model.Writer;
 import com.traillermovie.repository.homeRepository.HomeRepositoryImpl;
@@ -41,5 +42,10 @@ public class HomeServiceImpl implements IHomeService {
     @Override
     public List<Writer> getWriterListByIdMovie(int id) throws SQLException {
         return homeRepository.getWriterListByIdMovie(id);
+    }
+
+    @Override
+    public List<Genre> getAllGenre() {
+        return homeRepository.getAllGenre();
     }
 }

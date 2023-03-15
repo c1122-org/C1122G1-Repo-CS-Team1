@@ -85,5 +85,16 @@
             location.href = "navigation?path=" + navigation;
         }
     }
+
+    function handleDropdown() {
+        let statusShowDropdownHeader = document.getElementsByClassName("show")[0];
+        if (statusShowDropdownHeader == undefined) {
+            let dropdownMenuHeader = document.getElementById("dropdown-menu-header");
+            dropdownMenuHeader.style.display = "none";
+        } else {
+            let dropdownMenuHeader = document.getElementById("dropdown-menu-header");
+            dropdownMenuHeader.style.display = "block";
+        }
+    }
 </script>
 </html>

@@ -76,12 +76,28 @@
 ></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
 <script type="text/javascript">
+    function showDetailMovie(id) {
+        console.log(id);
+        location.href = "home?action=detail&id=" + id;
+    }
+
     function navigateNewPage(navigation) {
         if (navigation == "#") {
             location.href = "home";
+        } else {
+            location.href = "navigation?path=" + navigation;
+        }
+    }
+    function handleDropdown() {
+        let statusShowDropdownHeader = document.getElementsByClassName("show")[0];
+        console.log(statusShowDropdownHeader);
+        if (statusShowDropdownHeader == undefined) {
+            let dropdownMenuHeader = document.getElementById("dropdown-menu-header");
+            dropdownMenuHeader.style.display = "none";
         }
         else {
-            location.href = "navigation?path=" + navigation;
+            let dropdownMenuHeader = document.getElementById("dropdown-menu-header");
+            dropdownMenuHeader.style.display = "block";
         }
     }
 </script>

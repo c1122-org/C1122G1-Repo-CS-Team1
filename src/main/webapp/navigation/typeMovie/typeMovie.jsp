@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.traillermovie.service.navigationService.NavigationServiceImpl" %><%--
   Created by IntelliJ IDEA.
   User: ADMIN
   Date: 3/12/2023
@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="icon" href="../assets/images/logo-title.png">
-    <title>Type Netflix</title>
+    <title>General Netflix</title>
     <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -29,121 +29,31 @@
 <body>
 <jsp:include page="../../common/header.jsp"></jsp:include>
 <div class="content">
-    <div class="movies">
-        <div class="new-movie d-flex flex-column justify-content-start align-items-center">
-            <div class="title-new-movie w-100 pb-3">
-                <h2 class="fs-24">Phim mới</h2>
+    <h2 class="name-genre">${nameGenre} movie</h2>
+    <div class="row align-items-start">
+        <c:forEach items="${genreMovieList}" var="movie">
+            <div class="col-2" onclick="showDetailMovie(${movie.getId()})">
+                <img src="${movie.getImage()}" alt="">
+                <div class="detail-movie">
+                    <p class="fw-bolder">${movie.getTitle()}</p>
+                    <div class="d-flex" style="font-size: 16px">
+                        <p class="fw-bold">Rating: &nbsp;</p>
+                        <p>${movie.getRating()}</p>
+                    </div>
+                    <div class="d-flex" style="font-size: 16px">
+                        <p class="fw-bold">Rank: &nbsp;</p>
+                        <p>${movie.getRank()}</p>
+                    </div>
+                    <div class="d-flex" style="font-size: 16px">
+                        <p class="fw-bold">Year public: &nbsp;</p>
+                        <p>${movie.getYearPublic()}</p>
+                    </div>
+                </div>
             </div>
-            <swiper-container class="mySwiper w-100" space-between="30"
-                              slides-per-view="5">
-                <c:forEach items="${newMovieList}" var="newMovie">
-                    <swiper-slide onclick="showDetailMovie(${newMovie.getId()})"><img src="${newMovie.getImage()}"
-                                                                                      alt="">
-                        <div class="detail-movie">
-                            <p class="fw-bolder">${newMovie.getTitle()}</p>
-                            <div class="d-flex" style="font-size: 16px">
-                                <p class="fw-bold">Rating: &nbsp;</p>
-                                <p>${newMovie.getRating()}</p>
-                            </div>
-                            <div class="d-flex" style="font-size: 16px">
-                                <p class="fw-bold">Rank: &nbsp;</p>
-                                <p>${newMovie.getRank()}</p>
-                            </div>
-                            <div class="d-flex" style="font-size: 16px">
-                                <p class="fw-bold">Year public: &nbsp;</p>
-                                <p>${newMovie.getYearPublic()}</p>
-                            </div>
-                        </div>
-                    </swiper-slide>
-                </c:forEach>
-            </swiper-container>
-        </div>
-        <div class="action-movie d-flex flex-column justify-content-start align-items-center">
-            <div class="title-action-movie w-100 pb-3">
-                <h2 class="fs-24">Hành động</h2>
-            </div>
-            <swiper-container class="mySwiper w-100" space-between="30"
-                              slides-per-view="5">
-                <c:forEach items="${actionMovieList}" var="actionMovie">
-                    <swiper-slide onclick="showDetailMovie(${actionMovie.getId()})"><img src="${actionMovie.getImage()}"
-                                                                                         alt="">
-                        <div class="detail-movie">
-                            <p class="fw-bolder">${actionMovie.getTitle()}</p>
-                            <div class="d-flex" style="font-size: 16px">
-                                <p class="fw-bold">Rating: &nbsp;</p>
-                                <p>${actionMovie.getRating()}</p>
-                            </div>
-                            <div class="d-flex" style="font-size: 16px">
-                                <p class="fw-bold">Rank: &nbsp;</p>
-                                <p>${actionMovie.getRank()}</p>
-                            </div>
-                            <div class="d-flex" style="font-size: 16px">
-                                <p class="fw-bold">Year public: &nbsp;</p>
-                                <p>${actionMovie.getYearPublic()}</p>
-                            </div>
-                        </div>
-                    </swiper-slide>
-                </c:forEach>
-            </swiper-container>
-        </div>
-        <div class="popular-movie d-flex flex-column justify-content-start align-items-center">
-            <div class="title-popular-movie w-100 pb-3">
-                <h2 class="fs-24">Phổ biến</h2>
-            </div>
-            <swiper-container class="mySwiper w-100" space-between="30"
-                              slides-per-view="5">
-                <c:forEach items="${popularMovieList}" var="popularMovie">
-                    <swiper-slide onclick="showDetailMovie(${popularMovie.getId()})"><img
-                            src="${popularMovie.getImage()}" alt="">
-                        <div class="detail-movie">
-                            <p class="fw-bolder">${popularMovie.getTitle()}</p>
-                            <div class="d-flex" style="font-size: 16px">
-                                <p class="fw-bold">Rating: &nbsp;</p>
-                                <p>${popularMovie.getRating()}</p>
-                            </div>
-                            <div class="d-flex" style="font-size: 16px">
-                                <p class="fw-bold">Rank: &nbsp;</p>
-                                <p>${popularMovie.getRank()}</p>
-                            </div>
-                            <div class="d-flex" style="font-size: 16px">
-                                <p class="fw-bold">Year public: &nbsp;</p>
-                                <p>${popularMovie.getYearPublic()}</p>
-                            </div>
-                        </div>
-                    </swiper-slide>
-                </c:forEach>
-            </swiper-container>
-        </div>
-        <div class="animation-movie d-flex flex-column justify-content-start align-items-center">
-            <div class="title-animation-movie w-100 pb-3">
-                <h2 class="fs-24">Hoạt hình</h2>
-            </div>
-            <swiper-container class="mySwiper w-100" space-between="30"
-                              slides-per-view="5">
-                <c:forEach items="${animationMovieList}" var="animationMovie">
-                    <swiper-slide onclick="showDetailMovie(${animationMovie.getId()})"><img
-                            src="${animationMovie.getImage()}" alt="">
-                        <div class="detail-movie">
-                            <p class="fw-bolder">${animationMovie.getTitle()}</p>
-                            <div class="d-flex">
-                                <p class="fw-bold">Rating: &nbsp;</p>
-                                <p>${animationMovie.getRating()}</p>
-                            </div>
-                            <div class="d-flex">
-                                <p class="fw-bold">Rank: &nbsp;</p>
-                                <p>${animationMovie.getRank()}</p>
-                            </div>
-                            <div class="d-flex">
-                                <p class="fw-bold">Year public: &nbsp;</p>
-                                <p>${animationMovie.getYearPublic()}</p>
-                            </div>
-                        </div>
-                    </swiper-slide>
-                </c:forEach>
-            </swiper-container>
-        </div>
+        </c:forEach>
+        <jsp:include page="../../common/footer.jsp"></jsp:include>
     </div>
-    <jsp:include page="../../common/footer.jsp"></jsp:include>
+</div>
 </div>
 </div>
 </body>
@@ -164,6 +74,18 @@
             location.href = "home";
         } else {
             location.href = "navigation?path=" + navigation;
+        }
+    }
+
+    function handleDropdown() {
+        let statusShowDropdownHeader = document.getElementsByClassName("show")[0];
+        console.log(statusShowDropdownHeader);
+        if (statusShowDropdownHeader == undefined) {
+            let dropdownMenuHeader = document.getElementById("dropdown-menu-header");
+            dropdownMenuHeader.style.display = "none";
+        } else {
+            let dropdownMenuHeader = document.getElementById("dropdown-menu-header");
+            dropdownMenuHeader.style.display = "block";
         }
     }
 </script>

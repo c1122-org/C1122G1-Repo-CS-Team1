@@ -1,6 +1,7 @@
 package com.traillermovie.repository.homeRepository;
 
 import com.traillermovie.model.Director;
+import com.traillermovie.model.Genre;
 import com.traillermovie.model.Movie;
 import com.traillermovie.model.Writer;
 
@@ -21,4 +22,5 @@ public interface IHomeRepository {
     List<Director> getDirectorListByIdMovie(int id) throws SQLException;
 
     List<Writer> getWriterListByIdMovie(int id) throws SQLException;
+    List<Genre> getAllGenre();
 }

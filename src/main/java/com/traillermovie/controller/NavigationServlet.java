@@ -1,17 +1,23 @@
 package com.traillermovie.controller;
 
+import com.traillermovie.model.Genre;
 import com.traillermovie.model.Movie;
+import com.traillermovie.service.homeService.HomeServiceImpl;
 import com.traillermovie.service.navigationService.NavigationServiceImpl;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "NavigationServlet", value = "/navigation")
 public class NavigationServlet extends HttpServlet {
     private static NavigationServiceImpl navigationService = new NavigationServiceImpl();
+    private HomeServiceImpl homeService = new HomeServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getParameter("path");
@@ -45,15 +51,26 @@ public class NavigationServlet extends HttpServlet {
         }
         int index = Integer.parseInt(indexPage);
         List<Movie> movieList = navigationService.getMovieListByPage(index);
+        List<Genre> genreList = homeService.getAllGenre();
+        request.setAttribute("genreList", genreList);
         request.setAttribute("movieList", movieList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("navigation/generalMovie/generalMovie.jsp");
         dispatcher.forward(request, response);
     }
     private void gotoTypeMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int genre = Integer.parseInt(request.getParameter("genre"));
+        List<Movie> genreMovieList = navigationService.getMovieListByGenre(genre);
+        String nameGenre = navigationService.getNameGenreById(genre);
+        List<Genre> genreList = homeService.getAllGenre();
+        request.setAttribute("genreList", genreList);
+        request.setAttribute("genreMovieList", genreMovieList);
+        request.setAttribute("nameGenre", nameGenre);
         RequestDispatcher dispatcher = request.getRequestDispatcher("navigation/typeMovie/typeMovie.jsp");
         dispatcher.forward(request, response);
     }
     private void gotoHotMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Genre> genreList = homeService.getAllGenre();
+        request.setAttribute("genreList", genreList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("navigation/hotMovie/hotMovie.jsp");
         dispatcher.forward(request, response);
     }
