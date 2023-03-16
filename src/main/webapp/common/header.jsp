@@ -26,7 +26,18 @@
             </button>
         </form>
         <div class="account-user">
-            <i class="fa-solid fa-user"></i>
+            <div class="dropdown">
+                <button class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+                        style="background: transparent; outline: 0; border: 0; color: #d9d9d9">
+                    <i class="fa-solid fa-house-user"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <c:if test="${(sessionScope.account.isAdmin() ? 1: 0) == 1}">
+                        <li><a class="dropdown-item" href="/admin">Quản lí</a></li>
+                    </c:if>
+                    <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
