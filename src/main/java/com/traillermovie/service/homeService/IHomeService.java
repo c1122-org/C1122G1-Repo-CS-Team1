@@ -1,9 +1,6 @@
 package com.traillermovie.service.homeService;
 
-import com.traillermovie.model.Director;
-import com.traillermovie.model.Genre;
-import com.traillermovie.model.Movie;
-import com.traillermovie.model.Writer;
+import com.traillermovie.model.*;
 
 import java.sql.SQLException;
 import java.util.List;

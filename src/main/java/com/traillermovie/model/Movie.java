@@ -9,8 +9,9 @@ public class Movie {
     private String image;
     private String description;
     private String trailer;
+    private int genre;
 
-    public Movie(int id, String title, double rating, int rank, int yearPublic, String image, String description, String trailer) {
+    public Movie(int id, String title, double rating, int rank, int yearPublic, String image, String description, String trailer, int genre) {
         this.id = id;
         this.title = title;
         this.rating = rating;
@@ -19,6 +20,7 @@ public class Movie {
         this.image = image;
         this.description = description;
         this.trailer = trailer;
+        this.genre = genre;
     }
 
     public int getId() {
@@ -83,5 +85,13 @@ public class Movie {
 
     public void setTrailer(String trailer) {
         this.trailer = trailer;
+    }
+
+    public int getGenre() {
+        return genre;
+    }
+
+    public void setGenre(int genre) {
+        this.genre = genre;
     }
 }

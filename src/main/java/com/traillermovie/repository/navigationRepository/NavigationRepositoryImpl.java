@@ -42,7 +42,8 @@ public class NavigationRepositoryImpl implements INavigationRepository {
                 String image = resultSet.getString("image_movie");
                 String description = resultSet.getString("description_movie");
                 String trailer = resultSet.getString("traller_movie");
-                movieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer));
+                int genre = resultSet.getInt("id_genre");
+                movieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer, genre));
             }
             connection.close();
             return movieList;
@@ -101,7 +102,8 @@ public class NavigationRepositoryImpl implements INavigationRepository {
                 String image = resultSet.getString("image_movie");
                 String description = resultSet.getString("description_movie");
                 String trailer = resultSet.getString("traller_movie");
-                movieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer));
+                int genre = resultSet.getInt("id_genre");
+                movieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer, genre));
             }
             connection.close();
             return movieList;
@@ -126,7 +128,8 @@ public class NavigationRepositoryImpl implements INavigationRepository {
                 String image = resultSet.getString("image_movie");
                 String description = resultSet.getString("description_movie");
                 String trailer = resultSet.getString("traller_movie");
-                movieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer));
+                int genre = resultSet.getInt("id_genre");
+                movieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer, genre));
             }
             connection.close();
             return movieList;
@@ -149,7 +152,7 @@ public class NavigationRepositoryImpl implements INavigationRepository {
                 String image = resultSet.getString("image_movie");
                 String description = resultSet.getString("description_movie");
                 String trailer = resultSet.getString("traller_movie");
-                movieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer));
+                movieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer, genre));
             }
             connection.close();
             return movieList;
