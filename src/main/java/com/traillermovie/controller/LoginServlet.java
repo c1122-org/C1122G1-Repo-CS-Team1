@@ -1,5 +1,8 @@
 package com.traillermovie.controller;
 
+import com.traillermovie.model.AccountUser;
+import com.traillermovie.service.loginService.LoginServiceImpl;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -7,6 +10,7 @@ import java.io.IOException;
 
 @WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
+    private LoginServiceImpl loginService = new LoginServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("login/form-login.jsp");
@@ -17,9 +21,13 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        if (username.equals("chinh") && password.equals("chinh")) {
-            response.sendRedirect("/home" + "?role=client");
+        AccountUser accountUser = loginService.checkAccountUser(username, password);
+        if (accountUser != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("account", accountUser);
+            response.sendRedirect("/home");
         } else {
+            request.setAttribute("message", "Tên đăng nhập hoặc mật khẩu không đúng.");
             RequestDispatcher dispatcher = request.getRequestDispatcher("login/form-login.jsp");
             dispatcher.forward(request, response);
         }

@@ -1,9 +1,6 @@
 package com.traillermovie.controller;
 
-import com.traillermovie.model.Director;
-import com.traillermovie.model.Genre;
-import com.traillermovie.model.Movie;
-import com.traillermovie.model.Writer;
+import com.traillermovie.model.*;
 import com.traillermovie.service.homeService.HomeServiceImpl;
 
 import javax.servlet.*;
@@ -20,21 +17,28 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-        if (action == null) {
-            action = "";
+        HttpSession session = request.getSession();
+        AccountUser accountUser = (AccountUser) session.getAttribute("account");
+        if (accountUser == null) {
+            response.sendRedirect("/login");
         }
-        switch (action) {
-            case "detail":
-                try {
-                    showDetailMovie(request, response);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-                break;
-            default:
-                showListMovie(request, response);
-                break;
+        else {
+            String action = request.getParameter("action");
+            if (action == null) {
+                action = "";
+            }
+            switch (action) {
+                case "detail":
+                    try {
+                        showDetailMovie(request, response);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
+                default:
+                    showListMovie(request, response);
+                    break;
+            }
         }
     }
 

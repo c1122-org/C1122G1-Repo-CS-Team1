@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: ADMIN
@@ -43,6 +44,9 @@
                         class="username w-100"
                         placeholder="Nhập tên người dùng"
                 />
+                <c:if test="${message != null}">
+                    <p style="color: red; margin-top: -8px; margin-bottom: 8px" class="title-error-login">${message}</p>
+                </c:if>
                 <input
                         type="password"
                         name="password"

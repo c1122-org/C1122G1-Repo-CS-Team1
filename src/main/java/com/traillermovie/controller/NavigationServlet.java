@@ -1,5 +1,6 @@
 package com.traillermovie.controller;
 
+import com.traillermovie.model.AccountUser;
 import com.traillermovie.model.Genre;
 import com.traillermovie.model.Movie;
 import com.traillermovie.service.homeService.HomeServiceImpl;
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -20,20 +22,27 @@ public class NavigationServlet extends HttpServlet {
     private HomeServiceImpl homeService = new HomeServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path = request.getParameter("path");
-        if (path == null) {
-            path = "";
+        HttpSession session = request.getSession();
+        AccountUser accountUser = (AccountUser) session.getAttribute("account");
+        if (accountUser == null) {
+            response.sendRedirect("/login");
         }
-        switch (path) {
-            case "general":
-                gotoGeneralMovie(request, response);
-                break;
-            case "type":
-                gotoTypeMovie(request, response);
-                break;
-            default:
-                response.sendRedirect("home");
-                break;
+        else {
+            String path = request.getParameter("path");
+            if (path == null) {
+                path = "";
+            }
+            switch (path) {
+                case "general":
+                    gotoGeneralMovie(request, response);
+                    break;
+                case "type":
+                    gotoTypeMovie(request, response);
+                    break;
+                default:
+                    response.sendRedirect("home");
+                    break;
+            }
         }
     }
 
