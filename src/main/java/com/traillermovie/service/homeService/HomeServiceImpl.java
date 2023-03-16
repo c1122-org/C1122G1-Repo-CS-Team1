@@ -13,6 +13,11 @@ import java.util.List;
 public class HomeServiceImpl implements IHomeService {
     private static HomeRepositoryImpl homeRepository = new HomeRepositoryImpl();
 
+    @Override
+    public List<Movie> getAllMovie() {
+        return homeRepository.getAllMovie();
+    }
+
     public List<Movie> getListActionMovies() {
         return homeRepository.getListActionMovies();
     }

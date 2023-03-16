@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface IHomeRepository {
+
+    List<Movie> getAllMovie();
     List<Movie> getListActionMovies();
 
     List<Movie> getListPopularMovies();
