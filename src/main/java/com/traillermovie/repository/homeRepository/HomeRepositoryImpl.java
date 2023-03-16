@@ -41,6 +41,29 @@ public class HomeRepositoryImpl implements IHomeRepository {
     }
 
     @Override
+    public List<Movie> getAllMovie() {
+        List<Movie> actionMovieList = new ArrayList<>();
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_MOVIES)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id_movie");
+                String title = resultSet.getString("title_movie");
+                double rating = resultSet.getDouble("rating_movie");
+                int rank = resultSet.getInt("rank_movie");
+                int yearPublic = resultSet.getInt("year_movie");
+                String image = resultSet.getString("image_movie");
+                String description = resultSet.getString("description_movie");
+                String trailer = resultSet.getString("traller_movie");
+                actionMovieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer));
+            }
+            connection.close();
+            return actionMovieList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public List<Movie> getListActionMovies() {
         List<Movie> actionMovieList = new ArrayList<>();
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ACTION_MOVIES)) {
