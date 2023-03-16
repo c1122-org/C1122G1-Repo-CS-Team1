@@ -1,9 +1,6 @@
 package com.traillermovie.service.homeService;
 
-import com.traillermovie.model.Director;
-import com.traillermovie.model.Genre;
-import com.traillermovie.model.Movie;
-import com.traillermovie.model.Writer;
+import com.traillermovie.model.*;
 import com.traillermovie.repository.homeRepository.HomeRepositoryImpl;
 
 import java.sql.*;
@@ -58,4 +55,5 @@ public class HomeServiceImpl implements IHomeService {
     public List<Movie> getListMoviesByName(String name) {
         return homeRepository.getListMoviesByName(name);
     }
+
 }

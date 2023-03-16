@@ -1,9 +1,6 @@
 package com.traillermovie.repository.homeRepository;
 
-import com.traillermovie.model.Director;
-import com.traillermovie.model.Genre;
-import com.traillermovie.model.Movie;
-import com.traillermovie.model.Writer;
+import com.traillermovie.model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -54,7 +51,8 @@ public class HomeRepositoryImpl implements IHomeRepository {
                 String image = resultSet.getString("image_movie");
                 String description = resultSet.getString("description_movie");
                 String trailer = resultSet.getString("traller_movie");
-                actionMovieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer));
+                int genre = resultSet.getInt("id_genre");
+                actionMovieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer, genre));
             }
             connection.close();
             return actionMovieList;
@@ -77,7 +75,8 @@ public class HomeRepositoryImpl implements IHomeRepository {
                 String image = resultSet.getString("image_movie");
                 String description = resultSet.getString("description_movie");
                 String trailer = resultSet.getString("traller_movie");
-                actionMovieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer));
+                int genre = resultSet.getInt("id_genre");
+                actionMovieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer, genre));
             }
             connection.close();
             return actionMovieList;
@@ -100,7 +99,8 @@ public class HomeRepositoryImpl implements IHomeRepository {
                 String image = resultSet.getString("image_movie");
                 String description = resultSet.getString("description_movie");
                 String trailer = resultSet.getString("traller_movie");
-                popularMovieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer));
+                int genre = resultSet.getInt("id_genre");
+                popularMovieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer, genre));
             }
             connection.close();
             return popularMovieList;
@@ -123,7 +123,8 @@ public class HomeRepositoryImpl implements IHomeRepository {
                 String image = resultSet.getString("image_movie");
                 String description = resultSet.getString("description_movie");
                 String trailer = resultSet.getString("traller_movie");
-                animationMovieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer));
+                int genre = resultSet.getInt("id_genre");
+                animationMovieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer, genre));
             }
             connection.close();
             return animationMovieList;
@@ -146,7 +147,8 @@ public class HomeRepositoryImpl implements IHomeRepository {
                 String image = resultSet.getString("image_movie");
                 String description = resultSet.getString("description_movie");
                 String trailer = resultSet.getString("traller_movie");
-                newMovieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer));
+                int genre = resultSet.getInt("id_genre");
+                newMovieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer, genre));
             }
             connection.close();
             return newMovieList;
@@ -171,7 +173,8 @@ public class HomeRepositoryImpl implements IHomeRepository {
                 String image = resultSet.getString("image_movie");
                 String description = resultSet.getString("description_movie");
                 String trailer = resultSet.getString("traller_movie");
-                movieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer));
+                int genre = resultSet.getInt("id_genre");
+                movieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer, genre));
             }
             System.out.println(movieList);
             connection.close();
@@ -195,7 +198,8 @@ public class HomeRepositoryImpl implements IHomeRepository {
                 String image = resultSet.getString("image_movie");
                 String description = resultSet.getString("description_movie");
                 String trailer = resultSet.getString("traller_movie");
-                movie = new Movie(id, title, rating, rank, yearPublic, image, description, trailer);
+                int genre = resultSet.getInt("id_genre");
+                movie = new Movie(id, title, rating, rank, yearPublic, image, description, trailer, genre);
             }
             connection.close();
             return movie;
