@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: ADMIN
-  Date: 3/16/2023
-  Time: 10:09 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -18,9 +11,9 @@
 <body>
 <div class="container">
     <div class="header">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" style="box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;">
             <div class="container-fluid">
-                <a class="navbar-brand fw-bold" href="/home">Trang chủ</a>
+                <a class="navbar-brand fw-bold" href="home">Trang chủ</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -29,10 +22,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/admin?path=movie">Movies</a>
+                            <a class="nav-link" aria-current="page" href="admin?path=movie">Movies</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin?path=user">User</a>
+                            <a class="nav-link" href="admin?path=user">User</a>
                         </li>
                     </ul>
                     <ul>
@@ -44,9 +37,9 @@
                                 </button>
                                 <ul class="dropdown-menu" style="left: auto !important; right: 0 !important;">
                                     <c:if test="${(sessionScope.account.isAdmin() ? 1: 0) == 1}">
-                                        <li><a class="dropdown-item" href="/admin">Quản lí</a></li>
+                                        <li><a class="dropdown-item" href="admin">Quản lí</a></li>
                                     </c:if>
-                                    <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
+                                    <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -57,7 +50,7 @@
     </div>
 
     <div class="main" style="padding: 100px 0">
-        <a href="/admin?path=movie&action=create" style="margin-bottom: 20px; display: block">Add more new movie</a>
+        <a href="admin?path=movie&action=create" style="margin-bottom: 20px; display: block">Add more new movie</a>
         <table id="example" class="table table-striped" style="width:100%">
             <thead>
             <tr>
@@ -89,38 +82,41 @@
                     </td>
                     <td>
                         <button type="button"
-                                onclick="location.href='/admin?path=movie&action=update&id=${movie.getId()}';"
+                                onclick="location.href='admin?path=movie&action=update&id=${movie.getId()}';"
                                 class="btn btn-warning">Update
                         </button>
                     </td>
                     <td>
                         <button type="button"
+                                onclick="passID = () => {return ${movie.getId()}};"
                                 class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete
                         </button>
-                    </td>
-                </tr>
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Xác nhận</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                Bạn muốn xoá phim "${movie.getTitle()}" ?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button"
-                                        onclick="location.href='/admin?path=movie&action=delete&id=${movie.getId()}';"
-                                        class="btn btn-danger">Delete
-                                </button>
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Xác nhận</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Chắc chắn xoá phim này ?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                        </button>
+                                        <button type="button"
+                                            <%--                                            ${movie.getId()}--%>
+                                                onclick="location.href='admin?path=movie&action=delete&id='+passID()"
+                                                class="btn btn-danger">Delete
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </td>
+                </tr>
             </c:forEach>
             </tbody>
         </table>

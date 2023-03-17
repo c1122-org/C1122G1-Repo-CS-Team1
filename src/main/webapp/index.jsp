@@ -21,7 +21,7 @@
         <img src="./assets/images/logo.png" class="logo" />
         <div>
             <button>Tiếng việt</button>
-            <a href="/login">Đăng nhập</a>
+            <a href="login">Đăng nhập</a>
         </div>
     </nav>
     <div class="header-content">

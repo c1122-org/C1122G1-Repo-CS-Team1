@@ -20,7 +20,7 @@
     <div class="header">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand fw-bold" href="/home">Trang chủ</a>
+                <a class="navbar-brand fw-bold" href="home">Trang chủ</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -29,10 +29,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/admin?path=movie">Movies</a>
+                            <a class="nav-link" aria-current="page" href="admin?path=movie">Movies</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin?path=user">User</a>
+                            <a class="nav-link" href="admin?path=user">User</a>
                         </li>
                     </ul>
                     <ul>
@@ -44,9 +44,9 @@
                                 </button>
                                 <ul class="dropdown-menu" style="left: auto !important; right: 0 !important;">
                                     <c:if test="${(sessionScope.account.isAdmin() ? 1: 0) == 1}">
-                                        <li><a class="dropdown-item" href="/admin">Quản lí</a></li>
+                                        <li><a class="dropdown-item" href="admin">Quản lí</a></li>
                                     </c:if>
-                                    <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
+                                    <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -75,10 +75,10 @@
                     <td class="name-movie">${acountUser.getUsername()}</td>
                     <td>${acountUser.getPassword()}</td>
                     <td>
-                        <button type="button" onclick="location.href='/admin?path=user&action=update&id=${acountUser.getId()}';"
+                        <button type="button" onclick="location.href='admin?path=user&action=update&id=${acountUser.getId()}';"
                                 class="btn btn-warning me-3">Update
                         </button>
-                        <button type="button" onclick="location.href='/admin?path=user&action=delete&id=${acountUser.getId()}';"
+                        <button type="button" onclick="location.href='admin?path=user&action=delete&id=${acountUser.getId()}';"
                                 class="btn btn-danger">Delete
                         </button>
                     </td>

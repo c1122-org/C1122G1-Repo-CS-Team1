@@ -11,6 +11,7 @@ public class AdminRepositoryImpl implements IAdminRepository {
     private final static String SAVE_MOVIE = "insert into movies(title_movie,rating_movie,rank_movie, year_movie, image_movie, description_movie, traller_movie, id_genre) values (?,?,?,?,?,?,?,?)";
     private final static String UPDATE_MOVIE = "update movies set title_movie = ?,rating_movie = ?,rank_movie = ?, year_movie = ?, image_movie = ?, description_movie = ?, traller_movie = ?, id_genre = ? where id_movie = ?";
 
+    private final static String DELETE_MOVIE = "delete from movies where id_movie = ?";
     protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -54,6 +55,17 @@ public class AdminRepositoryImpl implements IAdminRepository {
             preparedStatement.setString(7, movie.getTrailer());
             preparedStatement.setInt(8, movie.getGenre());
             preparedStatement.setInt(9, movie.getId());
+            int result = preparedStatement.executeUpdate();
+            return result;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public int deleteMovieById(int id) {
+        try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(DELETE_MOVIE)) {
+            preparedStatement.setInt(1, id);
             int result = preparedStatement.executeUpdate();
             return result;
         } catch (SQLException e) {
