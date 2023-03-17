@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NavigationRepositoryImpl implements INavigationRepository {
-    private String jdbcUrl = "jdbc:mysql://localhost:3306/trailler_movie";
+    private String jdbcUrl = "jdbc:mysql://localhost:3307/trailler_movie";
     private String jdbcUserName = "root";
-    private String jdbcPassword = "chinh@240203";
+    private String jdbcPassword = "123456";
     private static final String SELECT_ALL_MOVIE = "select * from movies;";
     private static final String SELECT_GENRE_MOVIE = "select * from movies where id_genre = ?;";
     private static final String SELECT_NAME_GENRE = "select name_genre from genres where id_genre = ?;";

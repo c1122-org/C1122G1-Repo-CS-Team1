@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoginRepositoryImpl implements ILoginRepository {
-    private String jdbcUrl = "jdbc:mysql://localhost:3306/trailler_movie";
+    private String jdbcUrl = "jdbc:mysql://localhost:3307/trailler_movie";
     private String jdbcUserName = "root";
-    private String jdbcPassword = "chinh@240203";
+    private String jdbcPassword = "123456";
     private static final String SELECT_ALL_ACCOUNT = "select * from account;";
 
     private Connection getConnection() {
