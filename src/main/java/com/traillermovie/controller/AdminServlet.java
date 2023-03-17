@@ -3,6 +3,7 @@ package com.traillermovie.controller;
 import com.traillermovie.model.AccountUser;
 import com.traillermovie.model.Genre;
 import com.traillermovie.model.Movie;
+import com.traillermovie.service.adminService.AdminServiceImpl;
 import com.traillermovie.service.homeService.HomeServiceImpl;
 import com.traillermovie.service.loginService.LoginServiceImpl;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class AdminServlet extends HttpServlet {
     private HomeServiceImpl homeService = new HomeServiceImpl();
     private LoginServiceImpl loginService = new LoginServiceImpl();
+    private AdminServiceImpl adminService = new AdminServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getParameter("path");
@@ -52,11 +54,7 @@ public class AdminServlet extends HttpServlet {
         }
         switch (path) {
             case "movie":
-                try {
-                    handlePathMovie(request, response);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                handleSubmitFormMovie(request, response);
                 break;
             case "user":
                 try {
@@ -83,6 +81,7 @@ public class AdminServlet extends HttpServlet {
                 showUpdateFormMovie(request, response);
                 break;
             case "delete":
+                deleteMovie(request, response);
                 break;
             default:
                 showListMovie(request, response);
@@ -121,7 +120,7 @@ public class AdminServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-//    CRUD MOVIE
+//    SHOW FORM CRUD MOVIE
     public void showCreateFormMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Genre> genreList = homeService.getAllGenre();
         request.setAttribute("genreList", genreList);
@@ -136,5 +135,60 @@ public class AdminServlet extends HttpServlet {
         request.setAttribute("message", "Chỉnh sửa phim");
         request.setAttribute("movie", movie);
         request.getRequestDispatcher("admin/formMovie.jsp").forward(request, response);
+    }
+
+//    HANDLE ACTION WHEN SUBMIT FORM
+    public void handleSubmitFormMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "create":
+                createNewMovie(request, response);
+                break;
+            case "update":
+                updateMovie(request, response);
+                break;
+            case "delete":
+                deleteMovie(request, response);
+                break;
+            default:
+                showListMovie(request, response);
+                break;
+        }
+    }
+    public void createNewMovie(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = homeService.getAllMovie().size() + 1;
+        String title = request.getParameter("title");
+        double rating = Double.parseDouble(request.getParameter("rating"));
+        int rank = Integer.parseInt(request.getParameter("rank"));
+        int yearPublic = Integer.parseInt(request.getParameter("yearPublic"));
+        String image = request.getParameter("image");
+        String description = request.getParameter("description");
+        String trailer = request.getParameter("trailer");
+        int id_genre = Integer.parseInt(request.getParameter("type"));
+        Movie movie = new Movie(id, title, rating, rank, yearPublic, image, description, trailer, id_genre);
+        adminService.saveMovie(movie);
+        response.sendRedirect("admin?path=movie&action=create");
+    }
+    public void updateMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String title = request.getParameter("title");
+        double rating = Double.parseDouble(request.getParameter("rating"));
+        int rank = Integer.parseInt(request.getParameter("rank"));
+        int yearPublic = Integer.parseInt(request.getParameter("yearPublic"));
+        String image = request.getParameter("image");
+        String description = request.getParameter("description");
+        String trailer = request.getParameter("trailer");
+        int id_genre = Integer.parseInt(request.getParameter("type"));
+        Movie movie = new Movie(id, title, rating, rank, yearPublic, image, description, trailer, id_genre);
+        adminService.updateMovie(movie);
+        response.sendRedirect("admin?path=movie&action=update&id=" + id);
+    }
+    public void deleteMovie(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        adminService.deleteMovieById(id);
+        response.sendRedirect("admin");
     }
 }

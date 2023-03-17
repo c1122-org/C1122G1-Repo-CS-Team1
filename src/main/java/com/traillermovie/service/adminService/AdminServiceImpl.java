@@ -14,4 +14,9 @@ public class AdminServiceImpl implements IAdminService{
     public int updateMovie(Movie movie) {
         return adminRepository.updateMovie(movie);
     }
+
+    @Override
+    public int deleteMovieById(int id) {
+        return adminRepository.deleteMovieById(id);
+    }
 }
