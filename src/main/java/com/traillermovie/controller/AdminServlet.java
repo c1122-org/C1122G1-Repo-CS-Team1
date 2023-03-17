@@ -1,6 +1,5 @@
 package com.traillermovie.controller;
 
-import com.sun.tools.javac.jvm.Gen;
 import com.traillermovie.model.AccountUser;
 import com.traillermovie.model.Genre;
 import com.traillermovie.model.Movie;
@@ -33,7 +32,11 @@ public class AdminServlet extends HttpServlet {
                 }
                 break;
             case "user":
-                showListUSer(request, response);
+                try {
+                    handlePathUser(request, response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             default:
                 showListMovie(request, response);
@@ -43,9 +46,50 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String path = request.getParameter("path");
+        if (path == null) {
+            path = "";
+        }
+        switch (path) {
+            case "movie":
+                try {
+                    handlePathMovie(request, response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "user":
+                try {
+                    handlePathUser(request, response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            default:
+                showListMovie(request, response);
+                break;
+        }
     }
     public void handlePathMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "create":
+                showCreateFormMovie(request, response);
+                break;
+            case "update":
+                showUpdateFormMovie(request, response);
+                break;
+            case "delete":
+                break;
+            default:
+                showListMovie(request, response);
+                break;
+        }
+    }
+    public void handlePathUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
