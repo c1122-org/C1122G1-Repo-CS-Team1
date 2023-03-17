@@ -61,46 +61,6 @@
 </head>
 <body>
 <div class="form-update" style="margin: 100px auto 100px;">
-<%--  <c:if test="${user == null}">--%>
-<%--    <form id="user" method="post">--%>
-<%--      <h1>${message}</h1>--%>
-<%--      <input--%>
-<%--              type="text"--%>
-<%--              name="username"--%>
-<%--              class="username w-100"--%>
-<%--              placeholder="Username"--%>
-<%--      />--%>
-<%--      <input--%>
-<%--              type="text"--%>
-<%--              name="currentPassword"--%>
-<%--              class="username w-100"--%>
-<%--              placeholder="Current Password"--%>
-<%--      />--%>
-<%--      <input--%>
-<%--              type="text"--%>
-<%--              name="newPassword"--%>
-<%--              class="username w-100"--%>
-<%--              placeholder="New Password"--%>
-<%--      />--%>
-<%--      <input--%>
-<%--              type="text"--%>
-<%--              name="repeatPassword"--%>
-<%--              class="username w-100"--%>
-<%--              placeholder="Repeat Password"--%>
-<%--      />--%>
-<%--      <input--%>
-<%--              type="text"--%>
-<%--              name="image"--%>
-<%--              class="username w-100"--%>
-<%--              placeholder="Nhập link ảnh"--%>
-<%--      />--%>
-<%--      <input--%>
-<%--              type="submit"--%>
-<%--              class="submit-btn w-100 fw-bold"--%>
-<%--              value="update"--%>
-<%--      />--%>
-<%--    </form>--%>
-<%--  </c:if>--%>
   <c:if test="${acountUser != null}">
     <form id="update" method="get">
       <h1>${messeger}</h1>
