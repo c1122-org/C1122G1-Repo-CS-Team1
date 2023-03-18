@@ -75,48 +75,12 @@
                     <td class="name-movie">${acountUser.getUsername()}</td>
                     <td>${acountUser.getPassword()}</td>
                     <td>
-<<<<<<< HEAD
+
                         <button type="button"
                                 onclick="location.href='/admin?path=user&action=update&id=${acountUser.getId()}';"
                                 class="btn btn-warning">Update
                         </button>
-<%--                        <button type="button"--%>
-<%--                                class="btn btn-warning me-3" data-bs-toggle="modal"--%>
-<%--                                data-bs-target="#updateModal${acountUser.getId()}">Update--%>
-<%--                        </button>--%>
-<%--                        <div class="modal fade" id="updateModal${acountUser.getId()}" tabindex="-1"--%>
-<%--                             aria-labelledby="updateModalLabel" aria-hidden="true">--%>
-<%--                            <div class="modal-dialog">--%>
-<%--                                <div class="modal-content">--%>
-<%--                                    <div class="modal-header">--%>
-<%--                                        <h1 class="modal-title" id="updateModalLabel">Cập nhật tài khoản</h1>--%>
-<%--                                        <button type="button" class="btn-close" data-bs-dismiss="modal"--%>
-<%--                                                aria-label="Close"></button>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="modal-body">--%>
-<%--                                        <form id="login" method="post">--%>
-<%--                                            <p>Username</p>--%>
-<%--                                            <input type="text" name="username" class="username w-100"--%>
-<%--                                                   placeholder="Username">--%>
-<%--                                            <p>Current Password</p>--%>
-<%--                                            <input type="text" name="currentPassword" class="username w-100"--%>
-<%--                                                   placeholder="Current Password">--%>
-<%--                                            <p>New Password</p>--%>
-<%--                                            <input type="text" name="newPassword" class="username w-100"--%>
-<%--                                                   placeholder="New Password">--%>
-<%--                                            <p>Repeat Password</p>--%>
-<%--                                            <input type="text" name="repeatPassword" class="username w-100"--%>
-<%--                                                   placeholder="Repeat Password">--%>
-<%--                                            <input type="submit" class="submit-btn w-100 fw-bold" value="Chỉnh sửa">--%>
-<%--                                        </form>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                                                    <button type="button" onclick="location.href='/admin?path=user&action=delete&id=${acountUser.getId()}';"--%>
-                            <%--                                class="btn btn-danger">Delete--%>
-                            <%--                        </button>--%>
-                        <!-- Button trigger modal -->
+
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal${acountUser.getId()}">
                             Delete
@@ -126,7 +90,6 @@
                         </button>
                         <button type="button" onclick="location.href='admin?path=user&action=delete&id=${acountUser.getId()}';"
                                 class="btn btn-danger">Delete
->>>>>>> a36cfb4cbc9b7fd054620fe686fc9de22640585a
                         </button>
 
                         <!-- Modal -->
