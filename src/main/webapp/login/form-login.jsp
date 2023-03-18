@@ -13,7 +13,7 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" href="../assets/images/logo-title.png">
+    <link rel="icon" href="/assets/images/logo-title.png">
     <title>Login</title>
     <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -21,7 +21,7 @@
             integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
             crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../login/form-login.css"/>
+    <link rel="stylesheet" href="/login/form-login.css"/>
 </head>
 <body>
 <div class="container">
@@ -30,7 +30,7 @@
             <nav
                     class="d-flex justify-content-between align-items-center pt-3 pb-3"
             >
-                <img src="../assets/images/logo.png" class="logo"/>
+                <img src="/assets/images/logo.png" class="logo"/>
             </nav>
         </nav>
     </div>
@@ -70,7 +70,7 @@
                 <div class="login-form-other">
                     <p>
                         Bạn mới tham gia Netflix?
-                        <b style="color: #fff; margin-left: 5px">Đăng kí ngay</b>
+                        <b id="register-btn" style="color: #fff; margin-left: 5px" onclick="location.href = 'register'">Đăng kí ngay</b>
                     </p>
                     <p>
                         Trang này được Google reCAPTCHA bảo vệ để đảm bảo bạn không phải

@@ -17,6 +17,7 @@ public class AdminServlet extends HttpServlet {
     private HomeServiceImpl homeService = new HomeServiceImpl();
     private LoginServiceImpl loginService = new LoginServiceImpl();
     private AdminServiceImpl adminService = new AdminServiceImpl();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getParameter("path");
@@ -66,6 +67,7 @@ public class AdminServlet extends HttpServlet {
                 break;
         }
     }
+
     public void handlePathMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         String action = request.getParameter("action");
         if (action == null) {
@@ -86,6 +88,7 @@ public class AdminServlet extends HttpServlet {
                 break;
         }
     }
+
     public void handlePathUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         String action = request.getParameter("action");
         if (action == null) {
@@ -93,10 +96,8 @@ public class AdminServlet extends HttpServlet {
         }
         switch (action) {
             case "create":
-                showCreateFormMovie(request, response);
                 break;
             case "update":
-                showUpdateFormMovie(request, response);
                 break;
             case "delete":
                 break;
@@ -105,12 +106,14 @@ public class AdminServlet extends HttpServlet {
                 break;
         }
     }
+
     public void showListMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Movie> movieList = homeService.getAllMovie();
         request.setAttribute("movieList", movieList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("admin/listMovie.jsp");
         dispatcher.forward(request, response);
     }
+
     public void showListUSer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<AccountUser> accountUserList = loginService.getListAccountUser();
         request.setAttribute("accountUserList", accountUserList);
@@ -118,7 +121,7 @@ public class AdminServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-//    SHOW FORM CRUD MOVIE
+    //    SHOW FORM CRUD MOVIE
     public void showCreateFormMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Genre> genreList = homeService.getAllGenre();
         List<Director> directorList = adminService.getListDirector();
@@ -129,17 +132,26 @@ public class AdminServlet extends HttpServlet {
         request.setAttribute("message", "Thêm mới phim");
         request.getRequestDispatcher("admin/formMovie.jsp").forward(request, response);
     }
+
     public void showUpdateFormMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         int id = Integer.parseInt(request.getParameter("id"));
         Movie movie = homeService.getMovieById(id);
         List<Genre> genreList = homeService.getAllGenre();
+        List<Director> directorList = adminService.getListDirector();
+        List<Writer> writerList = adminService.getListWriter();
+        List<Director> directorListSelected = homeService.getDirectorListByIdMovie(id);
+        List<Writer> writerListSelected = homeService.getWriterListByIdMovie(id);
+        request.setAttribute("directorList", directorList);
+        request.setAttribute("writerList", writerList);
+        request.setAttribute("directorListSelected", directorListSelected);
+        request.setAttribute("writerListSelected", writerListSelected);
         request.setAttribute("genreList", genreList);
         request.setAttribute("message", "Chỉnh sửa phim");
         request.setAttribute("movie", movie);
         request.getRequestDispatcher("admin/formMovie.jsp").forward(request, response);
     }
 
-//    HANDLE ACTION WHEN SUBMIT FORM
+    //    HANDLE ACTION WHEN SUBMIT FORM
     public void handleSubmitFormMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action == null) {
@@ -160,6 +172,7 @@ public class AdminServlet extends HttpServlet {
                 break;
         }
     }
+
     public void createNewMovie(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = adminService.getIdMovieLatestVersion();
         String title = request.getParameter("title");
@@ -183,12 +196,13 @@ public class AdminServlet extends HttpServlet {
         for (int i = 0; i < writers.length; i++) {
             id_writers[i] = Integer.parseInt(writers[i]);
         }
-        adminService.saveDirectorListByIdMovie(id,id_directors);
+        adminService.saveDirectorListByIdMovie(id, id_directors);
         adminService.saveWriterListByIdMovie(id, id_writers);
         Movie movie = new Movie(id, title, rating, rank, yearPublic, image, description, trailer, id_genre);
         adminService.saveMovie(movie);
         response.sendRedirect("admin?path=movie&action=create");
     }
+
     public void updateMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         String title = request.getParameter("title");
@@ -199,10 +213,27 @@ public class AdminServlet extends HttpServlet {
         String description = request.getParameter("description");
         String trailer = request.getParameter("trailer");
         int id_genre = Integer.parseInt(request.getParameter("type"));
+        //        GET LIST DIRECTORS AND WRITERS SELECTED TO SAVE DATABASE BY ID MOVIE
+
+        String[] directors = request.getParameterValues("directorSelected");
+        String[] writers = request.getParameterValues("writerSelected");
+        int[] id_directors = new int[directors.length];
+        int[] id_writers = new int[writers.length];
+        for (int i = 0; i < directors.length; i++) {
+            id_directors[i] = Integer.parseInt(directors[i]);
+        }
+        for (int i = 0; i < writers.length; i++) {
+            id_writers[i] = Integer.parseInt(writers[i]);
+        }
+        adminService.removeOldDirectorByIdMovie(id);
+        adminService.removeOldWriterByIdMovie(id);
+        adminService.saveDirectorListByIdMovie(id, id_directors);
+        adminService.saveWriterListByIdMovie(id, id_writers);
         Movie movie = new Movie(id, title, rating, rank, yearPublic, image, description, trailer, id_genre);
         adminService.updateMovie(movie);
         response.sendRedirect("admin?path=movie&action=update&id=" + id);
     }
+
     public void deleteMovie(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         adminService.deleteMovieById(id);

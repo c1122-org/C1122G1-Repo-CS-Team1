@@ -16,4 +16,6 @@ public interface IAdminService {
     void saveDirectorListByIdMovie(int id_movie, int[] directors);
     void saveWriterListByIdMovie(int id_movie, int[] writers);
     int getIdMovieLatestVersion();
+    void removeOldDirectorByIdMovie(int id_movie);
+    void removeOldWriterByIdMovie(int id_movie);
 }
