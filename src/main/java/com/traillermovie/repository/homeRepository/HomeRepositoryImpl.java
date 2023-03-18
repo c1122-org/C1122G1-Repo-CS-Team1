@@ -8,12 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeRepositoryImpl implements IHomeRepository {
-<<<<<<< HEAD
     private String jdbcUrl = "jdbc:mysql://localhost:3307/trailler_movie";
-    private String jdbcUserName = "root";
-    private String jdbcPassword = "123456";
-=======
->>>>>>> a36cfb4cbc9b7fd054620fe686fc9de22640585a
     private static final String SELECT_ALL_MOVIES = "select * from movies;";
     private static final String SELECT_ALL_ACTION_MOVIES = "select * from movies where id_genre = 3;";
     private static final String SELECT_ALL_POPULAR_MOVIES = "select * from movies where rating_movie between 8.8 and 10;";

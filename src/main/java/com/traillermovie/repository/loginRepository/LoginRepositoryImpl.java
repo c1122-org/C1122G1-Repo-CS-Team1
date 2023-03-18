@@ -8,12 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoginRepositoryImpl implements ILoginRepository {
-<<<<<<< HEAD
-    private String jdbcUrl = "jdbc:mysql://localhost:3307/trailler_movie";
-    private String jdbcUserName = "root";
-    private String jdbcPassword = "123456";
-=======
->>>>>>> a36cfb4cbc9b7fd054620fe686fc9de22640585a
     private static final String SELECT_ALL_ACCOUNT = "select * from account;";
 
     @Override
