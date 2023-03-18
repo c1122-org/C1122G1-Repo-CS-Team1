@@ -24,10 +24,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/home/home.css"/>
 </head>
 <body>
-<jsp:include page="${pageContext.request.contextPath}/common/header.jsp"></jsp:include>
+<jsp:include page="../common/header.jsp"></jsp:include>
 <div class="content">
-    <jsp:include page="${pageContext.request.contextPath}/common/home.jsp"></jsp:include>
-    <jsp:include page="${pageContext.request.contextPath}/common/footer.jsp"></jsp:include>
+    <jsp:include page="../common/home.jsp"></jsp:include>
+    <jsp:include page="../common/footer.jsp"></jsp:include>
 </div>
 </div>
 </body>
