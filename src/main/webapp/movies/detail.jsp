@@ -12,7 +12,7 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" href="../assets/images/logo-title.png">
+    <link rel="icon" href="${pageContext.request.contextPath}/assets/images/logo-title.png">
     <title>${movie.getTitle()}</title>
     <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -24,10 +24,10 @@
           integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
-    <link rel="stylesheet" href="../movies/detail.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/movies/detail.css"/>
 </head>
 <body style="background-image: linear-gradient(rgba(0, 0, 0, 0.8), #000000),url(${movie.getImage()}); background-repeat: no-repeat; background-size: cover">
-<jsp:include page="../common/header.jsp"></jsp:include>
+<jsp:include page="${pageContext.request.contextPath}/common/header.jsp"></jsp:include>
 <div class="content">
     <div class="movie-content d-flex">
         <div class="movie-content__poster">
@@ -66,7 +66,7 @@
         <p class="fw-bold">${movie.getTitle()} | Official Trailer | Prime Video ZA</p>
         <iframe class="embed-responsive-item" src="${movie.getTrailer()}" allowfullscreen></iframe>
     </div>
-    <jsp:include page="../common/footer.jsp"></jsp:include>
+    <jsp:include page="${pageContext.request.contextPath}/common/footer.jsp"></jsp:include>
 </div>
 </body>
 <script

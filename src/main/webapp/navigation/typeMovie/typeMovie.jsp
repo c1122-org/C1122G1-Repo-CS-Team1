@@ -12,7 +12,7 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" href="../assets/images/logo-title.png">
+    <link rel="icon" href="${pageContext.request.contextPath}/assets/images/logo-title.png">
     <title>Type Netflix</title>
     <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -24,10 +24,10 @@
           integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
-    <link rel="stylesheet" href="../../navigation/typeMovie/typeMovie.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/navigation/typeMovie/typeMovie.css"/>
 </head>
 <body>
-<jsp:include page="../../common/header.jsp"></jsp:include>
+<jsp:include page="${pageContext.request.contextPath}/common/header.jsp"></jsp:include>
 <div class="content">
     <h2 class="name-genre">${nameGenre} movie</h2>
     <div class="row align-items-start">
@@ -62,7 +62,7 @@
                 </c:forEach>
             </ul>
         </div>
-        <jsp:include page="../../common/footer.jsp"></jsp:include>
+        <jsp:include page="${pageContext.request.contextPath}/common/footer.jsp"></jsp:include>
     </div>
 </div>
 </div>

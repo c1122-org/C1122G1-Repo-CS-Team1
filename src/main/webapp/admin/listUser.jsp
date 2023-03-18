@@ -75,16 +75,6 @@
                     <td class="name-movie">${acountUser.getUsername()}</td>
                     <td>${acountUser.getPassword()}</td>
                     <td>
-
-                        <button type="button"
-                                onclick="location.href='/admin?path=user&action=update&id=${acountUser.getId()}';"
-                                class="btn btn-warning">Update
-                        </button>
-
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal${acountUser.getId()}">
-                            Delete
-=======
                         <button type="button" onclick="location.href='admin?path=user&action=update&id=${acountUser.getId()}';"
                                 class="btn btn-warning me-3">Update
                         </button>
