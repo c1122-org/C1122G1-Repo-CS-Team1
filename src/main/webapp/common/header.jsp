@@ -20,7 +20,7 @@
         </ul>
     </div>
     <div class="right-header">
-        <form class="form-search-header d-flex" action="/home?action=search" method="post">
+        <form class="form-search-header d-flex" action="home?action=search" method="post">
             <input type="text" class="input-search-header" name="search" placeholder="Search movie">
             <button class="search-btn d-flex align-items-end" type="submit"><i class="fa-solid fa-magnifying-glass"></i>
             </button>
@@ -33,9 +33,9 @@
                 </button>
                 <ul class="dropdown-menu">
                     <c:if test="${(sessionScope.account.isAdmin() ? 1: 0) == 1}">
-                        <li><a class="dropdown-item" href="/admin">Quản lí</a></li>
+                        <li><a class="dropdown-item" href="admin">Quản lí</a></li>
                     </c:if>
-                    <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
+                    <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
                 </ul>
             </div>
         </div>

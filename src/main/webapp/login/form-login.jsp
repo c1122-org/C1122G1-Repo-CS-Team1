@@ -65,7 +65,7 @@
                     >Ghi nhớ tôi</label
                     >
                     </div>
-                    <a href="/">Bạn cần trợ giúp ?</a>
+                    <a href="">Bạn cần trợ giúp ?</a>
                 </div>
                 <div class="login-form-other">
                     <p>

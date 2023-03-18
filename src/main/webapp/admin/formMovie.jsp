@@ -11,6 +11,7 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
     <title>Admin</title>
 </head>
 <style>
@@ -61,13 +62,16 @@
         margin: 24px 0 12px;
         height: 50px;
     }
+    .mult-select-tag .rounded {
+        background: #d9d9d9;
+    }
 </style>
 </head>
 <body>
 <div class="header" style="position: fixed; top: 0; left: 0; right: 0">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold" href="/home">Trang chủ</a>
+            <a class="navbar-brand fw-bold" href="home">Trang chủ</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -76,10 +80,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/admin?path=movie">Movies</a>
+                        <a class="nav-link" aria-current="page" href="admin?path=movie">Movies</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin?path=user">User</a>
+                        <a class="nav-link" href="admin?path=user">User</a>
                     </li>
                 </ul>
                 <ul>
@@ -91,9 +95,9 @@
                             </button>
                             <ul class="dropdown-menu" style="left: auto !important; right: 0 !important;">
                                 <c:if test="${(sessionScope.account.isAdmin() ? 1: 0) == 1}">
-                                    <li><a class="dropdown-item" href="/admin">Quản lí</a></li>
+                                    <li><a class="dropdown-item" href="admin">Quản lí</a></li>
                                 </c:if>
-                                <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
+                                <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
                             </ul>
                         </div>
                     </div>
@@ -106,12 +110,14 @@
     <c:if test="${movie == null}">
         <form id="login" method="post">
             <h1>${message}</h1>
+            <p>Tên phim</p>
             <input
                     type="text"
                     name="title"
                     class="username w-100"
                     placeholder="Nhập tên phim"
             />
+            <p>Thể loại</p>
             <select name="type" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
                     aria-label="Default select example">
                 <option selected>Chọn thể loại</option>
@@ -119,36 +125,56 @@
                         <option value="${genre.getId()}">${genre.getName()}</option>
                 </c:forEach>
             </select>
+            <p style="margin-top: 16px">Đạo diễn phim</p>
+            <select name="director" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
+                    aria-label="Default select example" id="director" multiple>
+                <c:forEach items="${directorList}" var="director">
+                    <option value="${director.getId()}">${director.getName()}</option>
+                </c:forEach>
+            </select>
+            <p style="margin-top: 16px">Tác giả phim</p>
+            <select name="writer" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
+                    aria-label="Default select example" id="writer" multiple>
+                <c:forEach items="${writerList}" var="writer">
+                    <option value="${writer.getId()}">${writer.getName()}</option>
+                </c:forEach>
+            </select>
+            <p style="margin-top: 16px">Điểm số phim</p>
             <input
                     type="text"
                     name="rating"
                     class="username w-100"
                     placeholder="Nhập điểm bình chọn"
             />
+            <p>Xếp hạng phim</p>
             <input
                     type="text"
                     name="rank"
                     class="username w-100"
                     placeholder="Nhập vị trí xếp hạng"
             />
+            <p>Năm sản xuất</p>
             <input
                     type="text"
                     name="yearPublic"
                     class="username w-100"
                     placeholder="Nhập năm sản xuất"
             />
+            <p>Link ảnh đại diện</p>
             <input
                     type="text"
                     name="image"
                     class="username w-100"
                     placeholder="Nhập link ảnh"
             />
+            <p>Miêu tả phim</p>
             <input
                     type="text"
                     name="description"
                     class="username w-100"
                     placeholder="Miêu tả về phim"
             />
+            <p>Link trailer phim</p>
             <input
                     type="text"
                     name="trailer"
@@ -234,15 +260,47 @@
                     value="${movie.getTrailer()}"
             />
             <input
-                    type="submit"
+                    type="button"
+                    id="update-submit-btn"
                     class="submit-btn w-100 fw-bold"
+                    data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                     value="Chỉnh sửa"
             />
         </form>
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Xác nhận</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Xác nhận chỉnh sửa "${movie.getTitle()}" ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button"
+                                onclick="handleSubmitFromUpdate()"
+                                class="btn btn-warning">Update
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </c:if>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+<script type="text/javascript">
+    function handleSubmitFromUpdate() {
+        let btn = document.getElementById("login").submit();
+    }
+    new MultiSelectTag('director');
+    new MultiSelectTag('writer');
+</script>
 </html>

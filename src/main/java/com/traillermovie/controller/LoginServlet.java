@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
         if (accountUser != null) {
             HttpSession session = request.getSession();
             session.setAttribute("account", accountUser);
-            response.sendRedirect("/home");
+            response.sendRedirect("home");
         } else {
             request.setAttribute("message", "Tên đăng nhập hoặc mật khẩu không đúng.");
             RequestDispatcher dispatcher = request.getRequestDispatcher("login/form-login.jsp");

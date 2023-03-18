@@ -25,7 +25,7 @@ public class NavigationServlet extends HttpServlet {
         HttpSession session = request.getSession();
         AccountUser accountUser = (AccountUser) session.getAttribute("account");
         if (accountUser == null) {
-            response.sendRedirect("/login");
+            response.sendRedirect("login");
         }
         else {
             String path = request.getParameter("path");

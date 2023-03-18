@@ -8,7 +8,6 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "HomeServlet", value = "/home")
@@ -20,7 +19,7 @@ public class HomeServlet extends HttpServlet {
         HttpSession session = request.getSession();
         AccountUser accountUser = (AccountUser) session.getAttribute("account");
         if (accountUser == null) {
-            response.sendRedirect("/login");
+            response.sendRedirect("login");
         }
         else {
             String action = request.getParameter("action");

@@ -1,15 +1,19 @@
 package com.traillermovie.repository.homeRepository;
 
 import com.traillermovie.model.*;
+import com.traillermovie.repository.DBConnecttion.DBConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeRepositoryImpl implements IHomeRepository {
+<<<<<<< HEAD
     private String jdbcUrl = "jdbc:mysql://localhost:3307/trailler_movie";
     private String jdbcUserName = "root";
     private String jdbcPassword = "123456";
+=======
+>>>>>>> a36cfb4cbc9b7fd054620fe686fc9de22640585a
     private static final String SELECT_ALL_MOVIES = "select * from movies;";
     private static final String SELECT_ALL_ACTION_MOVIES = "select * from movies where id_genre = 3;";
     private static final String SELECT_ALL_POPULAR_MOVIES = "select * from movies where rating_movie between 8.8 and 10;";
@@ -24,23 +28,11 @@ public class HomeRepositoryImpl implements IHomeRepository {
             "where mw.id_movie = ?;";
 
     private static final String SELECT_ALL_TYPE_MOVIE = "select * from genres;";
-    protected Connection getConnection() {
-        Connection connection = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(jdbcUrl, jdbcUserName, jdbcPassword);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return connection;
-    }
 
     @Override
     public List<Movie> getAllMovie() {
         List<Movie> actionMovieList = new ArrayList<>();
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_MOVIES)) {
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_MOVIES)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id_movie");
@@ -54,7 +46,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
                 int genre = resultSet.getInt("id_genre");
                 actionMovieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer, genre));
             }
-            connection.close();
+            DBConnection.close();
             return actionMovieList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -64,7 +56,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
     @Override
     public List<Movie> getListActionMovies() {
         List<Movie> actionMovieList = new ArrayList<>();
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ACTION_MOVIES)) {
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ACTION_MOVIES)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id_movie");
@@ -78,7 +70,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
                 int genre = resultSet.getInt("id_genre");
                 actionMovieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer, genre));
             }
-            connection.close();
+            DBConnection.close();
             return actionMovieList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -88,7 +80,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
     @Override
     public List<Movie> getListPopularMovies() {
         List<Movie> popularMovieList = new ArrayList<>();
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_POPULAR_MOVIES)) {
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_POPULAR_MOVIES)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id_movie");
@@ -102,7 +94,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
                 int genre = resultSet.getInt("id_genre");
                 popularMovieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer, genre));
             }
-            connection.close();
+            DBConnection.close();
             return popularMovieList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -112,7 +104,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
     @Override
     public List<Movie> getListAnimationMovies() {
         List<Movie> animationMovieList = new ArrayList<>();
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ANIMATION_MOVIES)) {
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ANIMATION_MOVIES)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id_movie");
@@ -126,7 +118,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
                 int genre = resultSet.getInt("id_genre");
                 animationMovieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer, genre));
             }
-            connection.close();
+            DBConnection.close();
             return animationMovieList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -136,7 +128,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
     @Override
     public List<Movie> getListNewMovies() {
         List<Movie> newMovieList = new ArrayList<>();
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_NEW_MOVIES)) {
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_NEW_MOVIES)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id_movie");
@@ -150,7 +142,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
                 int genre = resultSet.getInt("id_genre");
                 newMovieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer, genre));
             }
-            connection.close();
+            DBConnection.close();
             return newMovieList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -161,7 +153,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
     public List<Movie> getListMoviesByName(String name) {
         String query = "select * from movies where title_movie like ?;";
         List<Movie> movieList = new ArrayList<>();
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, name + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -177,7 +169,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
                 movieList.add(new Movie(id, title, rating, rank, yearPublic, image, description, trailer, genre));
             }
             System.out.println(movieList);
-            connection.close();
+            DBConnection.close();
             return movieList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -187,7 +179,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
     @Override
     public Movie getMovieById(int id) throws SQLException {
         Movie movie = null;
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_MOVIE_BY_ID)) {
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_MOVIE_BY_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -201,7 +193,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
                 int genre = resultSet.getInt("id_genre");
                 movie = new Movie(id, title, rating, rank, yearPublic, image, description, trailer, genre);
             }
-            connection.close();
+            DBConnection.close();
             return movie;
         }
     }
@@ -209,7 +201,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
     @Override
     public List<Director> getDirectorListByIdMovie(int id) throws SQLException {
         List<Director> directorList = new ArrayList<>();
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_DIRECTOR_BY_ID_MOVIE)) {
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_DIRECTOR_BY_ID_MOVIE)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -218,7 +210,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
                 String image = resultSet.getString("dr.image_director");
                 directorList.add(new Director(id_director, name, image));
             }
-            connection.close();
+            DBConnection.close();
             return directorList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -228,7 +220,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
     @Override
     public List<Writer> getWriterListByIdMovie(int id) throws SQLException {
         List<Writer> writerList = new ArrayList<>();
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_WRITER_BY_ID_MOVIE)) {
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_WRITER_BY_ID_MOVIE)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -237,7 +229,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
                 String image = resultSet.getString("wr.image_writer");
                 writerList.add(new Writer(id_writer, name, image));
             }
-            connection.close();
+            DBConnection.close();
             return writerList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -245,14 +237,14 @@ public class HomeRepositoryImpl implements IHomeRepository {
     }
     public List<Genre> getAllGenre() {
         List<Genre> genreList = new ArrayList<>();
-        try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_TYPE_MOVIE)) {
+        try(Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_TYPE_MOVIE)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id_genre");
                 String name = resultSet.getString("name_genre");
                 genreList.add(new Genre(id, name));
             }
-            connection.close();
+            DBConnection.close();
             return genreList;
         } catch (SQLException e) {
             throw new RuntimeException(e);

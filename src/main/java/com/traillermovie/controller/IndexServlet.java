@@ -5,13 +5,11 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "LogoutServlet", value = "/logout")
-public class LogoutServlet extends HttpServlet {
+@WebServlet(name = "IndexServlet", value = "")
+public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.removeAttribute("account");
-        response.sendRedirect("");
+        response.sendRedirect("index.jsp");
     }
 
     @Override
