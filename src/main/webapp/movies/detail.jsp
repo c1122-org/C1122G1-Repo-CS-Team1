@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/movies/detail.css"/>
 </head>
 <body style="background-image: linear-gradient(rgba(0, 0, 0, 0.8), #000000),url(${movie.getImage()}); background-repeat: no-repeat; background-size: cover">
-<jsp:include page="${pageContext.request.contextPath}/common/header.jsp"></jsp:include>
+<jsp:include page="../common/header.jsp"></jsp:include>
 <div class="content">
     <div class="movie-content d-flex">
         <div class="movie-content__poster">
@@ -66,7 +66,7 @@
         <p class="fw-bold">${movie.getTitle()} | Official Trailer | Prime Video ZA</p>
         <iframe class="embed-responsive-item" src="${movie.getTrailer()}" allowfullscreen></iframe>
     </div>
-    <jsp:include page="${pageContext.request.contextPath}/common/footer.jsp"></jsp:include>
+    <jsp:include page="../common/footer.jsp"></jsp:include>
 </div>
 </body>
 <script

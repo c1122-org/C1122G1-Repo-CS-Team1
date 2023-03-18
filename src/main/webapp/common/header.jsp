@@ -3,7 +3,7 @@
 <div class="header">
     <div class="left-header">
         <ul>
-            <li onClick="navigateNewPage('#')"><img src="../assets/images/logo.png" alt=""></li>
+            <li onClick="navigateNewPage('#')"><img src="${pageContext.request.contextPath}/assets/images/logo.png" alt=""></li>
             <li onClick="navigateNewPage('general')">Tổng hợp</li>
             <li onclick="handleDropdown()" class="dropdown-toggle" id="dropdown-header" data-bs-toggle="dropdown">Thể
                 loại

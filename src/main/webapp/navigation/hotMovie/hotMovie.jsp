@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/navigation/hotMovie/hotMovie.css"/>
 </head>
 <body>
-<jsp:include page="${pageContext.request.contextPath}/common/header.jsp"></jsp:include>
+<jsp:include page="../../common/header.jsp"></jsp:include>
 <div class="content">
   <div class="movies">
     <div class="new-movie d-flex flex-column justify-content-start align-items-center">
@@ -143,7 +143,7 @@
       </swiper-container>
     </div>
   </div>
-  <jsp:include page="${pageContext.request.contextPath}/common/footer.jsp"></jsp:include>
+  <jsp:include page="../../common/footer.jsp"></jsp:include>
 </div>
 </div>
 </body>

@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/navigation/generalMovie/generalMovie.css"/>
 </head>
 <body>
-<jsp:include page="${pageContext.request.contextPath}/common/header.jsp"></jsp:include>
+<jsp:include page="../../common/header.jsp"></jsp:include>
 <div class="content">
     <c:if test="${movieList.size() > 0}">
 
@@ -71,7 +71,7 @@
     <c:if test="${movieList.size() == 0}">
         <h2 class="message-not-found">${message}</h2>
     </c:if>
-        <jsp:include page="${pageContext.request.contextPath}/common/footer.jsp"></jsp:include>
+        <jsp:include page="../../common/footer.jsp"></jsp:include>
 </div>
 </div>
 </div>
