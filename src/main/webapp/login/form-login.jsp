@@ -69,13 +69,13 @@
                 </div>
                 <div class="login-form-other">
                     <p>
-<%--                        Bạn mới tham gia Netflix?--%>
+                        Bạn mới tham gia Netflix?
                         <b style="color: #fff; margin-left: 5px">Đăng kí ngay</b>
                     </p>
                     <p>
                         Trang này được Google reCAPTCHA bảo vệ để đảm bảo bạn không phải
                         là robot.
-<%--                        Tìm hiểu thêm.--%>
+                        Tìm hiểu thêm.
                     </p>
                 </div>
             </form>
