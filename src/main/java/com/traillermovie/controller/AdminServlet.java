@@ -1,8 +1,6 @@
 package com.traillermovie.controller;
 
-import com.traillermovie.model.AccountUser;
-import com.traillermovie.model.Genre;
-import com.traillermovie.model.Movie;
+import com.traillermovie.model.*;
 import com.traillermovie.service.adminService.AdminServiceImpl;
 import com.traillermovie.service.homeService.HomeServiceImpl;
 import com.traillermovie.service.loginService.LoginServiceImpl;
@@ -123,6 +121,10 @@ public class AdminServlet extends HttpServlet {
 //    SHOW FORM CRUD MOVIE
     public void showCreateFormMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Genre> genreList = homeService.getAllGenre();
+        List<Director> directorList = adminService.getListDirector();
+        List<Writer> writerList = adminService.getListWriter();
+        request.setAttribute("directorList", directorList);
+        request.setAttribute("writerList", writerList);
         request.setAttribute("genreList", genreList);
         request.setAttribute("message", "Thêm mới phim");
         request.getRequestDispatcher("admin/formMovie.jsp").forward(request, response);
@@ -159,7 +161,7 @@ public class AdminServlet extends HttpServlet {
         }
     }
     public void createNewMovie(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int id = homeService.getAllMovie().size() + 1;
+        int id = adminService.getIdMovieLatestVersion();
         String title = request.getParameter("title");
         double rating = Double.parseDouble(request.getParameter("rating"));
         int rank = Integer.parseInt(request.getParameter("rank"));
@@ -168,6 +170,21 @@ public class AdminServlet extends HttpServlet {
         String description = request.getParameter("description");
         String trailer = request.getParameter("trailer");
         int id_genre = Integer.parseInt(request.getParameter("type"));
+
+//        GET LIST DIRECTORS AND WRITERS SELECTED TO SAVE DATABASE BY ID MOVIE
+
+        String[] directors = request.getParameterValues("director");
+        String[] writers = request.getParameterValues("writer");
+        int[] id_directors = new int[directors.length];
+        int[] id_writers = new int[writers.length];
+        for (int i = 0; i < directors.length; i++) {
+            id_directors[i] = Integer.parseInt(directors[i]);
+        }
+        for (int i = 0; i < writers.length; i++) {
+            id_writers[i] = Integer.parseInt(writers[i]);
+        }
+        adminService.saveDirectorListByIdMovie(id,id_directors);
+        adminService.saveWriterListByIdMovie(id, id_writers);
         Movie movie = new Movie(id, title, rating, rank, yearPublic, image, description, trailer, id_genre);
         adminService.saveMovie(movie);
         response.sendRedirect("admin?path=movie&action=create");
