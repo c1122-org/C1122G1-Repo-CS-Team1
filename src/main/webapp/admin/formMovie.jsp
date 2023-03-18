@@ -1,17 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: ADMIN
-  Date: 3/16/2023
-  Time: 10:09 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
+    <link rel="stylesheet"
+          href="../assets/dist/css/multi-select-tag.css">
     <title>Admin</title>
 </head>
 <style>
@@ -62,13 +56,14 @@
         margin: 24px 0 12px;
         height: 50px;
     }
+
     .mult-select-tag .rounded {
         background: #d9d9d9;
     }
 </style>
 </head>
 <body>
-<div class="header" style="position: fixed; top: 0; left: 0; right: 0">
+<div class="header" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold" href="home">Trang chủ</a>
@@ -106,6 +101,16 @@
         </div>
     </nav>
 </div>
+<div class="toast align-items-center"
+     style="position: fixed; top: 70px; right: 5px; background: forestgreen; color: #ffffff" role="alert"
+     aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+        <div class="toast-body">
+            Hello, world! This is a toast message.
+        </div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
 <div class="form-login" style="margin: 100px auto 100px;">
     <c:if test="${movie == null}">
         <form id="login" method="post">
@@ -122,7 +127,7 @@
                     aria-label="Default select example">
                 <option selected>Chọn thể loại</option>
                 <c:forEach items="${genreList}" var="genre">
-                        <option value="${genre.getId()}">${genre.getName()}</option>
+                    <option value="${genre.getId()}">${genre.getName()}</option>
                 </c:forEach>
             </select>
             <p style="margin-top: 16px">Đạo diễn phim</p>
@@ -183,6 +188,7 @@
             />
             <input
                     type="submit"
+                    onclick="showToastMessageCreateSuccess(e)"
                     class="submit-btn w-100 fw-bold"
                     value="Thêm mới"
             />
@@ -211,7 +217,27 @@
                     </c:if>
                 </c:forEach>
             </select>
-            <p>Điểm số phim</p>
+            <p style="margin-top: 16px">Đạo diễn phim</p>
+            <select name="directorSelected" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
+                    aria-label="Default select example" id="directorSelected" multiple="multiple">
+                <c:forEach items="${directorListSelected}" var="directorSelected">
+                    <option value="${directorSelected.getId()}" selected>${directorSelected.getName()}</option>
+                </c:forEach>
+                <c:forEach items="${directorList}" var="director">
+                    <option value="${director.getId()}">${director.getName()}</option>
+                </c:forEach>
+            </select>
+            <p style="margin-top: 16px">Tác giả phim</p>
+            <select name="writerSelected" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
+                    aria-label="Default select example" id="writerSelected" multiple>
+                <c:forEach items="${writerListSelected}" var="writerSelected">
+                    <option value="${writerSelected.getId()}" selected>${writerSelected.getName()}</option>
+                </c:forEach>
+                <c:forEach items="${writerList}" var="writer">
+                    <option value="${writer.getId()}">${writer.getName()}</option>
+                </c:forEach>
+            </select>
+            <p style="margin-top: 16px">Điểm số phim</p>
             <input
                     type="text"
                     name="rating"
@@ -292,15 +318,28 @@
     </c:if>
 </div>
 </body>
+<script src="../assets/dist/js/multi-select-tag.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
 <script type="text/javascript">
     function handleSubmitFromUpdate() {
         let btn = document.getElementById("login").submit();
+    };
+
+    function showToastMessageCreateSuccess() {
+            setTimeout(function() { return false; }, 10000);
+            console.log(document.getElementById("login"))
+        let toast = document.getElementsByClassName("toast")[0];
+        toast.style.display = "block";
+        toast.style.transition = "display" + 1 + "s ease-in";
     }
+
     new MultiSelectTag('director');
     new MultiSelectTag('writer');
+</script>
+<script type="text/javascript">
+    new MultiSelectTag('directorSelected');
+    new MultiSelectTag('writerSelected');
 </script>
 </html>

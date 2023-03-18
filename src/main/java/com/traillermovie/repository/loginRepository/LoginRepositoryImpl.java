@@ -9,6 +9,8 @@ import java.util.List;
 
 public class LoginRepositoryImpl implements ILoginRepository {
     private static final String SELECT_ALL_ACCOUNT = "select * from account;";
+    private static final String SAVE_ACCOUNT_REGISTER = "insert into account(username, password, isClient, isAdmin) \n" +
+            "values (?,?,1,0);";
 
     @Override
     public List<AccountUser> getListAccountUser() {
@@ -39,5 +41,28 @@ public class LoginRepositoryImpl implements ILoginRepository {
             }
         }
         return null;
+    }
+
+    @Override
+    public int checkUsernameRetrive(String name) {
+        List<AccountUser> accountUserList = getListAccountUser();
+        for (AccountUser accountUser: accountUserList) {
+            if (name.equals(accountUser.getUsername())) {
+                return 0;
+            }
+        }
+        return 1;
+    }
+
+    @Override
+    public void saveAccountRegister(String name, String password) {
+        try(Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SAVE_ACCOUNT_REGISTER)) {
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, password);
+            preparedStatement.executeUpdate();
+            DBConnection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

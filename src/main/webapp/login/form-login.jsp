@@ -70,7 +70,7 @@
                 <div class="login-form-other">
                     <p>
                         Bạn mới tham gia Netflix?
-                        <b style="color: #fff; margin-left: 5px">Đăng kí ngay</b>
+                        <b id="register-btn" style="color: #fff; margin-left: 5px" onclick="location.href = 'register'">Đăng kí ngay</b>
                     </p>
                     <p>
                         Trang này được Google reCAPTCHA bảo vệ để đảm bảo bạn không phải
