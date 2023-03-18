@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/navigation/typeMovie/typeMovie.css"/>
 </head>
 <body>
-<jsp:include page="${pageContext.request.contextPath}/common/header.jsp"></jsp:include>
+<jsp:include page="../../common/header.jsp"></jsp:include>
 <div class="content">
     <h2 class="name-genre">${nameGenre} movie</h2>
     <div class="row align-items-start">
@@ -62,7 +62,7 @@
                 </c:forEach>
             </ul>
         </div>
-        <jsp:include page="${pageContext.request.contextPath}/common/footer.jsp"></jsp:include>
+        <jsp:include page="../../common/footer.jsp"></jsp:include>
     </div>
 </div>
 </div>
