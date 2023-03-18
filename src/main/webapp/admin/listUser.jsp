@@ -112,7 +112,7 @@
 <%--                                </div>--%>
 <%--                            </div>--%>
 <%--                        </div>--%>
-<%--                            &lt;%&ndash;                        <button type="button" onclick="location.href='/admin?path=user&action=delete&id=${acountUser.getId()}';"&ndash;%&gt;--%>
+<%--                                                    <button type="button" onclick="location.href='/admin?path=user&action=delete&id=${acountUser.getId()}';"--%>
                             <%--                                class="btn btn-danger">Delete--%>
                             <%--                        </button>--%>
                         <!-- Button trigger modal -->
