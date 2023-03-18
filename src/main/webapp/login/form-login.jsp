@@ -21,7 +21,7 @@
             integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
             crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/login/form-login.css"/>
+    <link rel="stylesheet" href="../../login/form-login.css"/>
 </head>
 <body>
 <div class="container">
@@ -30,7 +30,7 @@
             <nav
                     class="d-flex justify-content-between align-items-center pt-3 pb-3"
             >
-                <img src="/assets/images/logo.png" class="logo"/>
+                <img src="../../assets/images/logo.png" class="logo"/>
             </nav>
         </nav>
     </div>
