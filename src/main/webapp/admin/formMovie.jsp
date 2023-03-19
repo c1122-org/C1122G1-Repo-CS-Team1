@@ -188,7 +188,7 @@
             />
             <input
                     type="submit"
-                    onclick="showToastMessageCreateSuccess(e)"
+                    onclick="showToastMessageCreateSuccess()"
                     class="submit-btn w-100 fw-bold"
                     value="Thêm mới"
             />
@@ -328,13 +328,18 @@
     };
 
     function showToastMessageCreateSuccess() {
-            setTimeout(function() { return false; }, 10000);
-            console.log(document.getElementById("login"))
         let toast = document.getElementsByClassName("toast")[0];
-        toast.style.display = "block";
-        toast.style.transition = "display" + 1 + "s ease-in";
+        setTimeout(() => {
+            toast.style.display = "block";
+        }, 1000);
     }
-
+    let formCreate = document.getElementById("login");
+    formCreate.addEventListener('submit', function (event) {
+        setTimeout(() => {
+            formCreate.submit();
+        },2500);
+        event.preventDefault();
+    })
     new MultiSelectTag('director');
     new MultiSelectTag('writer');
 </script>
