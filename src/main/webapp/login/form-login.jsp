@@ -74,8 +74,7 @@
                     </p>
                     <p>
                         Trang này được Google reCAPTCHA bảo vệ để đảm bảo bạn không phải
-                        là robot.
-                        Tìm hiểu thêm.
+                        là robot. Tìm hiểu thêm.
                     </p>
                 </div>
             </form>
