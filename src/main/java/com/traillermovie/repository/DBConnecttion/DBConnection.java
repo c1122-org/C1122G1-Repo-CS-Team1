@@ -4,7 +4,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 public class DBConnection {
     private static final String USER_NAME = "root";
+<<<<<<< HEAD
     private static final String PASSWORD = "123456";
+=======
+    private static final String PASSWORD = "chinh@240203";
+>>>>>>> 71741e7134981c2d102df3251660d98f509b8356
     private static final String HOST = "localhost";
     private static final String DATABASE = "trailler_movie";
     private static final String PORT = "3306";
