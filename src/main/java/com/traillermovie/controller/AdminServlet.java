@@ -100,11 +100,19 @@ public class AdminServlet extends HttpServlet {
             case "update":
                 break;
             case "delete":
+                deleteUser(request, response);
                 break;
             default:
-                showListMovie(request, response);
+                showListUser(request, response);
                 break;
         }
+    }
+
+    private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        loginService.deleteUser(id);
+        response.sendRedirect("admin?path=user");
+
     }
 
     public void showListMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -114,8 +122,8 @@ public class AdminServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    public void showListUSer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<AccountUser> accountUserList = loginService.getListAccountUser();
+    public void showListUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<AccountUser> accountUserList = loginService.getListAccountUserInAdmin();
         request.setAttribute("accountUserList", accountUserList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("admin/listUser.jsp");
         dispatcher.forward(request, response);
