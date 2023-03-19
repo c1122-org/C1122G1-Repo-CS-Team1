@@ -181,9 +181,13 @@ public class AdminServlet extends HttpServlet {
         }
     }
 
-    public void createNewMovie(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void createNewMovie(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         int id = adminService.getIdMovieLatestVersion();
         String title = request.getParameter("title");
+        if (!isNumeric(request.getParameter("rating")) || !isNumeric(request.getParameter("rank")) || !isNumeric(request.getParameter("yearPublic"))) {
+            response.sendRedirect("admin?path=movie&action=create&status=false");
+            return;
+        }
         double rating = Double.parseDouble(request.getParameter("rating"));
         int rank = Integer.parseInt(request.getParameter("rank"));
         int yearPublic = Integer.parseInt(request.getParameter("yearPublic"));
@@ -191,7 +195,6 @@ public class AdminServlet extends HttpServlet {
         String description = request.getParameter("description");
         String trailer = request.getParameter("trailer");
         int id_genre = Integer.parseInt(request.getParameter("type"));
-
 //        GET LIST DIRECTORS AND WRITERS SELECTED TO SAVE DATABASE BY ID MOVIE
 
         String[] directors = request.getParameterValues("director");
@@ -208,20 +211,28 @@ public class AdminServlet extends HttpServlet {
         adminService.saveWriterListByIdMovie(id, id_writers);
         Movie movie = new Movie(id, title, rating, rank, yearPublic, image, description, trailer, id_genre);
         adminService.saveMovie(movie);
-        response.sendRedirect("admin?path=movie&action=create");
+        response.sendRedirect("admin?path=movie&action=create&status=true");
     }
 
     public void updateMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        String title = request.getParameter("title");
+        if (request.getParameter("title").equals("") || request.getParameter("image").equals("") || request.getParameter("description").equals("") || request.getParameter("trailer").equals("")) {
+            response.sendRedirect("admin?path=movie&action=update&id=" + id + "&status=false&error=required");
+            return;
+        }
+        if (!isNumeric(request.getParameter("rating")) || !isNumeric(request.getParameter("rank")) || !isNumeric(request.getParameter("yearPublic"))) {
+            response.sendRedirect("admin?path=movie&action=update&id=" + id + "&status=false&error=number");
+            return;
+        }
         double rating = Double.parseDouble(request.getParameter("rating"));
         int rank = Integer.parseInt(request.getParameter("rank"));
         int yearPublic = Integer.parseInt(request.getParameter("yearPublic"));
+        String title = request.getParameter("title");
         String image = request.getParameter("image");
         String description = request.getParameter("description");
         String trailer = request.getParameter("trailer");
         int id_genre = Integer.parseInt(request.getParameter("type"));
-        //        GET LIST DIRECTORS AND WRITERS SELECTED TO SAVE DATABASE BY ID MOVIE
+//        GET LIST DIRECTORS AND WRITERS SELECTED TO SAVE DATABASE BY ID MOVIE
 
         String[] directors = request.getParameterValues("directorSelected");
         String[] writers = request.getParameterValues("writerSelected");
@@ -239,12 +250,24 @@ public class AdminServlet extends HttpServlet {
         adminService.saveWriterListByIdMovie(id, id_writers);
         Movie movie = new Movie(id, title, rating, rank, yearPublic, image, description, trailer, id_genre);
         adminService.updateMovie(movie);
-        response.sendRedirect("admin?path=movie&action=update&id=" + id);
+        response.sendRedirect("admin?path=movie&action=update&id=" + id + "&status=true");
     }
 
     public void deleteMovie(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         adminService.deleteMovieById(id);
         response.sendRedirect("admin");
+    }
+
+    public boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 }
