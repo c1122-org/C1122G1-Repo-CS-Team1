@@ -26,4 +26,14 @@ public class LoginServiceImpl implements ILoginService{
     public void saveAccountRegister(String name, String password) {
         loginRepository.saveAccountRegister(name, password);
     }
+
+    @Override
+    public boolean updateUserRegister(int id,AccountUser accountUser) {
+        return loginRepository.updateUserRegister(id,accountUser);
+    }
+
+    @Override
+    public AccountUser selectById(int id) {
+        return loginRepository.selectById(id);
+    }
 }
