@@ -19,11 +19,10 @@ public class AdminRepositoryImpl implements IAdminRepository {
     private final static String SAVE_WRITER = "insert into movie_writer(id_movie, id_writer) values (?, ?);";
     private final static String SET_FOREIGN_KEY_0 = "SET FOREIGN_KEY_CHECKS=0";
     private final static String SET_FOREIGN_KEY_1 = "SET FOREIGN_KEY_CHECKS=1";
-    private final static String GET_ID_MOVIE_LATEST_VERSION = "SELECT AUTO_INCREMENT \n" +
-            "FROM information_schema.tables\n" +
-            "WHERE table_name = 'movies'\n" +
-            "     and table_schema = database();";
+    private final static String GET_ID_MOVIE_LATEST_VERSION = "SELECT AUTO_INCREMENT as CurrentId FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'trailler_movie' AND TABLE_NAME = 'movies'";
 
+    private final static String REMOVE_OLD_DIRECTOR_BY_ID_MOVIE = "delete from movie_director where id_movie = ?;";
+    private final static String REMOVE_OLD_WRITER_BY_ID_MOVIE = "delete from movie_writer where id_movie = ?;";
     @Override
     public int saveMovie(Movie movie) {
         try (Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SAVE_MOVIE)) {
@@ -150,13 +149,39 @@ public class AdminRepositoryImpl implements IAdminRepository {
 
     @Override
     public int getIdMovieLatestVersion() {
-        try(Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(GET_ID_MOVIE_LATEST_VERSION)) {
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(GET_ID_MOVIE_LATEST_VERSION)) {
+            String query = "set @@SESSION.information_schema_stats_expiry = 0;";
+            PreparedStatement setSession = connection.prepareStatement(query);
+            setSession.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
             int idLatest = 0;
             while (resultSet.next()) {
                 idLatest = resultSet.getInt(1);
             }
+            DBConnection.close();
             return idLatest;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void removeOldDirectorByIdMovie(int id_movie) {
+        try(Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(REMOVE_OLD_DIRECTOR_BY_ID_MOVIE)) {
+            preparedStatement.setInt(1, id_movie);
+            preparedStatement.executeUpdate();
+            DBConnection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void removeOldWriterByIdMovie(int id_movie) {
+        try(Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(REMOVE_OLD_WRITER_BY_ID_MOVIE)) {
+            preparedStatement.setInt(1, id_movie);
+            preparedStatement.executeUpdate();
+            DBConnection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -16,4 +16,14 @@ public class LoginServiceImpl implements ILoginService{
     public AccountUser checkAccountUser(String username, String password) {
         return loginRepository.checkAccountUser(username, password);
     }
+
+    @Override
+    public int checkUsernameRetrive(String name) {
+        return loginRepository.checkUsernameRetrive(name);
+    }
+
+    @Override
+    public void saveAccountRegister(String name, String password) {
+        loginRepository.saveAccountRegister(name, password);
+    }
 }

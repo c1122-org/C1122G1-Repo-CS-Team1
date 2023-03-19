@@ -49,4 +49,14 @@ public class AdminServiceImpl implements IAdminService{
         return adminRepository.getIdMovieLatestVersion();
     }
 
+    @Override
+    public void removeOldDirectorByIdMovie(int id_movie) {
+        adminRepository.removeOldDirectorByIdMovie(id_movie);
+    }
+
+    @Override
+    public void removeOldWriterByIdMovie(int id_movie) {
+        adminRepository.removeOldWriterByIdMovie(id_movie);
+    }
+
 }
