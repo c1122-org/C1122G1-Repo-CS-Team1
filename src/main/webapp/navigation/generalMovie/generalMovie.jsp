@@ -31,49 +31,48 @@
 <div class="content">
     <c:if test="${movieList.size() > 0}">
 
-    <div class="row align-items-start">
-        <c:forEach items="${movieList}" var="movie">
-            <div class="col-2" onclick="showDetailMovie(${movie.getId()})">
-                <img src="${movie.getImage()}" alt="">
-                <div class="detail-movie">
-                    <p class="fw-bolder">${movie.getTitle()}</p>
-                    <div class="d-flex" style="font-size: 16px">
-                        <p class="fw-bold">Rating: &nbsp;</p>
-                        <p>${movie.getRating()}</p>
-                    </div>
-                    <div class="d-flex" style="font-size: 16px">
-                        <p class="fw-bold">Rank: &nbsp;</p>
-                        <p>${movie.getRank()}</p>
-                    </div>
-                    <div class="d-flex" style="font-size: 16px">
-                        <p class="fw-bold">Year public: &nbsp;</p>
-                        <p>${movie.getYearPublic()}</p>
+        <div class="row align-items-start">
+            <c:forEach items="${movieList}" var="movie">
+                <div class=" xl col-2 xs small medium large" onclick="showDetailMovie(${movie.getId()})">
+                    <img src="${movie.getImage()}" alt="">
+                    <div class="detail-movie">
+                        <p class="fw-bolder">${movie.getTitle()}</p>
+                        <div class="d-flex" style="font-size: 16px">
+                            <p class="fw-bold">Rating: &nbsp;</p>
+                            <p>${movie.getRating()}</p>
+                        </div>
+                        <div class="d-flex" style="font-size: 16px">
+                            <p class="fw-bold">Rank: &nbsp;</p>
+                            <p>${movie.getRank()}</p>
+                        </div>
+                        <div class="d-flex" style="font-size: 16px">
+                            <p class="fw-bold">Year public: &nbsp;</p>
+                            <p>${movie.getYearPublic()}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </c:forEach>
-        <c:choose>
-            <c:when test="${param.action == null}">
-                <div class="paging d-flex justify-content-center m-5">
-                    <ul class="pagination pagination-lg">
-                        <%
-                            NavigationServiceImpl navigationService = new NavigationServiceImpl();
-                        %>
-                        <c:forEach begin="1" end="<%= navigationService.getNumberPage()%>" var="i">
-                            <li class="page-item"><a class="page-link" href="navigation?path=general&page=${i}">${i}</a></li>
-                        </c:forEach>
-                    </ul>
-                </div>
-            </c:when>
-        </c:choose>
-    </div>
+            </c:forEach>
+            <c:choose>
+                <c:when test="${param.action == null}">
+                    <div class="paging d-flex justify-content-center m-5">
+                        <ul class="pagination pagination-lg">
+                            <%
+                                NavigationServiceImpl navigationService = new NavigationServiceImpl();
+                            %>
+                            <c:forEach begin="1" end="<%= navigationService.getNumberPage()%>" var="i">
+                                <li class="page-item"><a class="page-link"
+                                                         href="navigation?path=general&page=${i}">${i}</a></li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </c:when>
+            </c:choose>
+        </div>
     </c:if>
     <c:if test="${movieList.size() == 0}">
         <h2 class="message-not-found">${message}</h2>
     </c:if>
-        <jsp:include page="../../common/footer.jsp"></jsp:include>
-</div>
-</div>
+    <jsp:include page="../../common/footer.jsp"></jsp:include>
 </div>
 </body>
 <script
