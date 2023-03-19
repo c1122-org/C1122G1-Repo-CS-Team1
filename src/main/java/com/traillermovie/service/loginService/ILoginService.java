@@ -9,4 +9,6 @@ public interface ILoginService {
     AccountUser checkAccountUser(String username, String password);
     int checkUsernameRetrive(String name);
     void saveAccountRegister(String name, String password);
+    int deleteUser(int id);
+    List<AccountUser> getListAccountUserInAdmin();
 }
