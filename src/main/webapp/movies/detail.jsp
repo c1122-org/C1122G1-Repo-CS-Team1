@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/movies/detail.css"/>
 
 </head>
-<body class="img" style="background-image: linear-gradient(rgba(0, 0, 0, 0.8), #000000),url(${movie.getImage()}); background-repeat: no-repeat; background-size: cover">
+<body class="bg-img-body" style="background-image: linear-gradient(rgba(0, 0, 0, 0.8), #000000),url(${movie.getImage()}); background-repeat: no-repeat; background-size: cover">
 <jsp:include page="../common/header.jsp"></jsp:include>
 <div class="content">
     <div class="movie-content d-flex">
