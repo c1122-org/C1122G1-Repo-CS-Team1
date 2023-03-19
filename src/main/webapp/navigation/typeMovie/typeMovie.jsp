@@ -32,7 +32,7 @@
     <h2 class="name-genre">${nameGenre} movie</h2>
     <div class="row align-items-start">
         <c:forEach items="${genreMovieList}" var="movie">
-            <div class="col-2" onclick="showDetailMovie(${movie.getId()})">
+            <div class="col-2 xl large medium small xs" onclick="showDetailMovie(${movie.getId()})">
                 <img src="${movie.getImage()}" alt="">
                 <div class="detail-movie">
                     <p class="fw-bolder">${movie.getTitle()}</p>

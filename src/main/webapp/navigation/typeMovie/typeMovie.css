@@ -200,3 +200,109 @@ footer {
     color: #686868;
     margin: 10px;
 }
+
+@media only screen and (max-width: 600px) {
+    .xs {
+        margin: 39px 4em;
+        /*display:contents;*/
+        justify-content: center;
+        align-items: center;
+        flex: 0 0 auto;
+        width: 99.666667%;
+    }
+    .row .xs img {
+        width: 236px;
+        height: 336px;
+    }
+    .xs .detail-movie {
+        width: 237px;
+        height: 337px;
+    }
+    .row {
+        --bs-gutter-x: 5.5rem;
+        text-align: center;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .small {
+        margin: 37px 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 0 0 auto;
+        width: 44.666667%;
+    }
+    .row .small img {
+        width: 225px;
+        height: 325px;
+    }
+    .small .detail-movie {
+        width: 226px;
+        height: 326px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .medium {
+        margin: 50px 1.5em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 0 0 auto;
+        width: 26.66666667%;
+    }
+
+    .row .medium img {
+        width: 200px;
+        height: 300px;
+    }
+
+    .medium .detail-movie {
+        width: 201px;
+        height: 301px;
+    }
+}
+
+@media only screen and (min-width: 996px ) {
+    .large {
+        margin: 50px 1.5em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 0 0 auto;
+        width: 19.666667%;
+    }
+    .row .large img {
+        width: 215px;
+        height: 308px;
+    }
+    .large .detail-movie {
+        width: 215px;
+        height: 311px;
+    }
+}
+
+@media only screen and (min-width: 1281px ) {
+    .xl {
+        margin: 50px 1%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 0 0 auto;
+        width: 16.66666667%;
+    }
+    .row .xl img {
+        width: 215px;
+        height: 308px;
+    }
+    .xl .detail-movie {
+        width: 215px;
+        height: 311px;
+    }
+}
+
+.row {
+    --bs-gutter-x: 5.5rem;
+    /*justify-content: flex-start;*/
+}
