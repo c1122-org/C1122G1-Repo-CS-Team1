@@ -137,7 +137,7 @@ public class AdminServlet extends HttpServlet {
         request.setAttribute("directorList", directorList);
         request.setAttribute("writerList", writerList);
         request.setAttribute("genreList", genreList);
-        request.setAttribute("message", "Thêm mới phim");
+        request.setAttribute("message", "Add new movie");
         request.getRequestDispatcher("admin/formMovie.jsp").forward(request, response);
     }
 
@@ -154,7 +154,7 @@ public class AdminServlet extends HttpServlet {
         request.setAttribute("directorListSelected", directorListSelected);
         request.setAttribute("writerListSelected", writerListSelected);
         request.setAttribute("genreList", genreList);
-        request.setAttribute("message", "Chỉnh sửa phim");
+        request.setAttribute("message", "Movie Editing");
         request.setAttribute("movie", movie);
         request.getRequestDispatcher("admin/formMovie.jsp").forward(request, response);
     }

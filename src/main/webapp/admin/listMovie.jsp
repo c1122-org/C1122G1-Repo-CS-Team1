@@ -13,7 +13,7 @@
     <div class="header">
         <nav class="navbar navbar-expand-lg bg-body-tertiary" style="box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;">
             <div class="container-fluid">
-                <a class="navbar-brand fw-bold" href="home">Trang chủ</a>
+                <a class="navbar-brand fw-bold" href="home">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -25,7 +25,7 @@
                             <a class="nav-link" aria-current="page" href="admin?path=movie">Movies</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="admin?path=user">User</a>
+                            <a class="nav-link" href="admin?path=user">Users</a>
                         </li>
                     </ul>
                     <ul>
@@ -37,9 +37,9 @@
                                 </button>
                                 <ul class="dropdown-menu" style="left: auto !important; right: 0 !important;">
                                     <c:if test="${(sessionScope.account.isAdmin() ? 1: 0) == 1}">
-                                        <li><a class="dropdown-item" href="admin">Quản lí</a></li>
+                                        <li><a class="dropdown-item" href="admin">Admin Management</a></li>
                                     </c:if>
-                                    <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
+                                    <li><a class="dropdown-item" href="logout">Log out</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -96,12 +96,12 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Xác nhận</h1>
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        Chắc chắn xoá phim này ?
+                                        You want to delete this movie ?
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close

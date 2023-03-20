@@ -66,7 +66,7 @@
 <div class="header" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold" href="home">Trang chủ</a>
+            <a class="navbar-brand fw-bold" href="home">Home</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -90,9 +90,9 @@
                             </button>
                             <ul class="dropdown-menu" style="left: auto !important; right: 0 !important;">
                                 <c:if test="${(sessionScope.account.isAdmin() ? 1: 0) == 1}">
-                                    <li><a class="dropdown-item" href="admin">Quản lí</a></li>
+                                    <li><a class="dropdown-item" href="admin">Manager</a></li>
                                 </c:if>
-                                <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
+                                <li><a class="dropdown-item" href="logout">Log out</a></li>
                             </ul>
                         </div>
                     </div>
@@ -115,71 +115,71 @@
     <c:if test="${movie == null}">
         <form id="login" method="post">
             <h1>${message}</h1>
-            <p>Tên phim</p>
+            <p>Name Movie</p>
             <input
                     type="text"
                     name="title"
                     class="username w-100"
-                    placeholder="Nhập tên phim"
+                    placeholder="Name movie"
             />
-            <p>Thể loại</p>
+            <p>Movie Genre</p>
             <select name="type" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
                     aria-label="Default select example">
-                <option selected>Chọn thể loại</option>
+                <option selected>Choose genre</option>
                 <c:forEach items="${genreList}" var="genre">
                     <option value="${genre.getId()}">${genre.getName()}</option>
                 </c:forEach>
             </select>
-            <p style="margin-top: 16px">Đạo diễn phim</p>
+            <p style="margin-top: 16px">Movie Director</p>
             <select name="director" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
                     aria-label="Default select example" id="director" multiple>
                 <c:forEach items="${directorList}" var="director">
                     <option value="${director.getId()}">${director.getName()}</option>
                 </c:forEach>
             </select>
-            <p style="margin-top: 16px">Tác giả phim</p>
+            <p style="margin-top: 16px">Author</p>
             <select name="writer" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
                     aria-label="Default select example" id="writer" multiple>
                 <c:forEach items="${writerList}" var="writer">
                     <option value="${writer.getId()}">${writer.getName()}</option>
                 </c:forEach>
             </select>
-            <p style="margin-top: 16px">Điểm số phim</p>
+            <p style="margin-top: 16px">Rating</p>
             <input
                     type="text"
                     name="rating"
                     class="username w-100"
-                    placeholder="Nhập điểm bình chọn"
+                    placeholder="Enter rating"
             />
-            <p>Xếp hạng phim</p>
+            <p>Rank</p>
             <input
                     type="text"
                     name="rank"
                     class="username w-100"
-                    placeholder="Nhập vị trí xếp hạng"
+                    placeholder="Enter rank"
             />
-            <p>Năm sản xuất</p>
+            <p>Year Public</p>
             <input
                     type="text"
                     name="yearPublic"
                     class="username w-100"
-                    placeholder="Nhập năm sản xuất"
+                    placeholder="Enter year public"
             />
-            <p>Link ảnh đại diện</p>
+            <p>Link Image</p>
             <input
                     type="text"
                     name="image"
                     class="username w-100"
-                    placeholder="Nhập link ảnh"
+                    placeholder="Link image"
             />
-            <p>Miêu tả phim</p>
+            <p>Description</p>
             <input
                     type="text"
                     name="description"
                     class="username w-100"
-                    placeholder="Miêu tả về phim"
+                    placeholder="Description"
             />
-            <p>Link trailer phim</p>
+            <p>Link trailer</p>
             <input
                     type="text"
                     name="trailer"
@@ -190,22 +190,22 @@
                     type="submit"
                     onclick="showToastMessageCreateSuccess()"
                     class="submit-btn w-100 fw-bold"
-                    value="Thêm mới"
+                    value="Create"
             />
         </form>
     </c:if>
     <c:if test="${movie != null}">
         <form id="login" method="post">
             <h1>${message}</h1>
-            <p>Tên phim</p>
+            <p>Name movie</p>
             <input
                     type="text"
                     name="title"
                     class="username w-100"
-                    placeholder="Nhập tên phim"
+                    placeholder="Enter name movie"
                     value="${movie.getTitle()}"
             />
-            <p>Thể loại</p>
+            <p>Movie Genre</p>
             <select name="type" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
                     aria-label="Default select example">
                 <c:forEach items="${genreList}" var="genre">
@@ -217,7 +217,7 @@
                     </c:if>
                 </c:forEach>
             </select>
-            <p style="margin-top: 16px">Đạo diễn phim</p>
+            <p style="margin-top: 16px">Movie Director</p>
             <select name="directorSelected" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
                     aria-label="Default select example" id="directorSelected" multiple="multiple">
                 <c:forEach items="${directorListSelected}" var="directorSelected">
@@ -227,7 +227,7 @@
                     <option value="${director.getId()}">${director.getName()}</option>
                 </c:forEach>
             </select>
-            <p style="margin-top: 16px">Tác giả phim</p>
+            <p style="margin-top: 16px">Author</p>
             <select name="writerSelected" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
                     aria-label="Default select example" id="writerSelected" multiple>
                 <c:forEach items="${writerListSelected}" var="writerSelected">
@@ -237,47 +237,47 @@
                     <option value="${writer.getId()}">${writer.getName()}</option>
                 </c:forEach>
             </select>
-            <p style="margin-top: 16px">Điểm số phim</p>
+            <p style="margin-top: 16px">Rating</p>
             <input
                     type="text"
                     name="rating"
                     class="username w-100"
-                    placeholder="Nhập điểm bình chọn"
+                    placeholder="Enter rating"
                     value="${movie.getRating()}"
             />
-            <p>Xếp hạng phim</p>
+            <p>Rank</p>
             <input
                     type="text"
                     name="rank"
                     class="username w-100"
-                    placeholder="Nhập vị trí xếp hạng"
+                    placeholder="Enter rank"
                     value="${movie.getRank()}"
             />
-            <p>Năm sản xuất</p>
+            <p>Year Public</p>
             <input
                     type="text"
                     name="yearPublic"
                     class="username w-100"
-                    placeholder="Nhập năm sản xuất"
+                    placeholder="Enter year public"
                     value="${movie.getYearPublic()}"
             />
-            <p>Link ảnh đại diện</p>
+            <p>Link Image</p>
             <input
                     type="text"
                     name="image"
                     class="username w-100"
-                    placeholder="Nhập link ảnh"
+                    placeholder="Link Image"
                     value="${movie.getImage()}"
             />
-            <p>Miêu tả phim</p>
+            <p>Description</p>
             <input
                     type="text"
                     name="description"
                     class="username w-100"
-                    placeholder="Miêu tả về phim"
+                    placeholder="Description"
                     value="${movie.getDescription()}"
             />
-            <p>Link trailer phim</p>
+            <p>Link trailer</p>
             <input
                     type="text"
                     name="trailer"
@@ -290,7 +290,7 @@
                     id="update-submit-btn"
                     class="submit-btn w-100 fw-bold"
                     data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                    value="Chỉnh sửa"
+                    value="Edit"
             />
         </form>
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -298,12 +298,12 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Xác nhận</h1>
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Submit</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Xác nhận chỉnh sửa "${movie.getTitle()}" ?
+                        Edit "${movie.getTitle()}" ?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
