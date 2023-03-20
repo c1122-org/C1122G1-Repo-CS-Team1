@@ -18,9 +18,9 @@
 <body>
 <form action="/admin?action=update" method="post">
     <input type="text" name="password" value="${account.getPassword()}">
-    <input type="text" name="c" value="${account.getPassword()}">
+    <input type="text" name="" value="${account.getPassword()}">
     <input type="text" name="password" value="${account.getPassword()}">
-    <input type="submit">
+    <button onclick="location.href='admin?path=user&action=update&id=${acount.getId()}'" type="submit">
 </form>
 </body>
 <script

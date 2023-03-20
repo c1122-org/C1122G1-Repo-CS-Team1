@@ -93,9 +93,6 @@ public class AdminServlet extends HttpServlet {
             case "update":
                 showupdateUser(request,response);
                 break;
-            case "list":
-                updateUser(request,response);
-                break;
             case "delete":
                 break;
             default:
@@ -127,9 +124,9 @@ public class AdminServlet extends HttpServlet {
         boolean admin = Boolean.parseBoolean(request.getParameter("admin"));
         AccountUser accountUser = new AccountUser(id,name,pass,client,admin);
         RequestDispatcher dispatcher;
-        loginService.updateUserRegister(id, accountUser);
+        loginService.updateUser(id, accountUser);
         request.setAttribute("account", accountUser);
-        dispatcher = request.getRequestDispatcher("admin/update.jsp");
+        dispatcher = request.getRequestDispatcher("admin?path=user");
         dispatcher.forward(request,response);
     }
 
