@@ -9,9 +9,12 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.List;
 
+@MultipartConfig()
 @WebServlet(name = "AdminServlet", value = "/admin")
 public class AdminServlet extends HttpServlet {
     private HomeServiceImpl homeService = new HomeServiceImpl();
@@ -191,7 +194,14 @@ public class AdminServlet extends HttpServlet {
         double rating = Double.parseDouble(request.getParameter("rating"));
         int rank = Integer.parseInt(request.getParameter("rank"));
         int yearPublic = Integer.parseInt(request.getParameter("yearPublic"));
-        String image = request.getParameter("image");
+        Part part = request.getPart("img");
+        String realPath = request.getServletContext().getRealPath("/images");
+        String filename = Path.of(part.getSubmittedFileName()).getFileName().toString();
+        if (!Files.exists(Path.of(realPath))) {
+            Files.createDirectory(Path.of(realPath));
+        }
+        part.write("C:\\Users\\ADMIN\\Desktop\\TraillerMovie\\src\\main\\webapp\\assets\\images\\" + filename);
+        String image = "../webapp/assets/images/" + filename;
         String description = request.getParameter("description");
         String trailer = request.getParameter("trailer");
         int id_genre = Integer.parseInt(request.getParameter("type"));
@@ -216,7 +226,7 @@ public class AdminServlet extends HttpServlet {
 
     public void updateMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        if (request.getParameter("title").equals("") || request.getParameter("image").equals("") || request.getParameter("description").equals("") || request.getParameter("trailer").equals("")) {
+        if (request.getParameter("title").equals("") || request.getParameter("description").equals("") || request.getParameter("trailer").equals("")) {
             response.sendRedirect("admin?path=movie&action=update&id=" + id + "&status=false&error=required");
             return;
         }
@@ -228,7 +238,14 @@ public class AdminServlet extends HttpServlet {
         int rank = Integer.parseInt(request.getParameter("rank"));
         int yearPublic = Integer.parseInt(request.getParameter("yearPublic"));
         String title = request.getParameter("title");
-        String image = request.getParameter("image");
+        Part part = request.getPart("img");
+        String realPath = request.getServletContext().getRealPath("/images");
+        String filename = Path.of(part.getSubmittedFileName()).getFileName().toString();
+        if (!Files.exists(Path.of(realPath))) {
+            Files.createDirectory(Path.of(realPath));
+        }
+        part.write(realPath + "/" + filename);
+        String image = "images/" + filename;
         String description = request.getParameter("description");
         String trailer = request.getParameter("trailer");
         int id_genre = Integer.parseInt(request.getParameter("type"));

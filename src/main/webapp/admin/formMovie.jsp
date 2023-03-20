@@ -118,7 +118,7 @@
 
 <div class="form-login" style="margin: 100px auto 100px;">
     <c:if test="${movie == null}">
-        <form id="login" method="post">
+        <form id="login" method="post" enctype="multipart/form-data">
             <h1>${message}</h1>
             <p>Tên phim</p>
             <input
@@ -184,21 +184,9 @@
                     style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Bắt buộc phải là số. Vui
                 lòng thử lại</p></c:if>
             <p>Link ảnh đại diện</p>
-            <input
-                    type="text"
-                    name="image"
-                    class="username w-100"
-                    placeholder="Nhập link ảnh"
-                    required
-            />
+            <input class="mb-3" type="file" id="img" name="img" accept="image/*">
             <p>Miêu tả phim</p>
-            <input
-                    type="text"
-                    name="description"
-                    class="username w-100"
-                    placeholder="Miêu tả về phim"
-                    required
-            />
+            <textarea name="description" class="username w-100"></textarea>
             <p>Link trailer phim</p>
             <input
                     type="text"
@@ -215,7 +203,7 @@
         </form>
     </c:if>
     <c:if test="${movie != null}">
-        <form id="login" method="post">
+        <form id="login" method="post" enctype="multipart/form-data">
             <h1>${message}</h1>
             <p>Tên phim</p>
             <input
@@ -304,26 +292,12 @@
                     style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Bắt buộc phải là số. Vui
                 lòng thử lại</p></c:if>
             <p>Link ảnh đại diện</p>
-            <input
-                    type="text"
-                    name="image"
-                    class="username w-100"
-                    placeholder="Nhập link ảnh"
-                    value="${movie.getImage()}"
-                    required
-            />
+            <input class="mb-3" type="file" id="img" name="img" accept="image/*">
             <c:if test="${param.status == false && param.error.equals('required')}"><p
                     style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Vui lòng nhập đầy đủ các
                 trường.</p></c:if>
             <p>Miêu tả phim</p>
-            <input
-                    type="text"
-                    name="description"
-                    class="username w-100"
-                    placeholder="Miêu tả về phim"
-                    value="${movie.getDescription()}"
-                    required
-            />
+            <textarea name="description" class="username w-100">${movie.getDescription()}</textarea>
             <c:if test="${param.status == false && param.error.equals('required')}"><p
                     style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Vui lòng nhập đầy đủ các
                 trường.</p></c:if>
