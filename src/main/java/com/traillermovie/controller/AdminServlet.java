@@ -90,12 +90,10 @@ public class AdminServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-            case "create":
-                break;
-            case "selectID":
-                selectUser(request, response);
-                break;
             case "update":
+                showupdateUser(request,response);
+                break;
+            case "list":
                 updateUser(request,response);
                 break;
             case "delete":
@@ -106,37 +104,33 @@ public class AdminServlet extends HttpServlet {
         }
     }
 
-    private void selectUser(HttpServletRequest request, HttpServletResponse response) {
+    private void showupdateUser(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         AccountUser accountUser =loginService.selectById(id);
         request.setAttribute("account", accountUser);
+
         RequestDispatcher dispatcherType = request.getRequestDispatcher("admin/update.jsp");
+
         try {
             dispatcherType.forward(request,response);
-        } catch (ServletException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    //
+
     private void updateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
-        String pass = request.getParameter("passWord");
+        String pass = request.getParameter("password");
         boolean client = Boolean.parseBoolean(request.getParameter("client"));
         boolean admin = Boolean.parseBoolean(request.getParameter("admin"));
         AccountUser accountUser = new AccountUser(id,name,pass,client,admin);
         RequestDispatcher dispatcher;
-        if (accountUser != null) {
-            this.loginService.updateUserRegister(id, accountUser);
-            request.setAttribute("accountUser", accountUser);
-            request.setAttribute("message", "Users Information was updated");
-            dispatcher = request.getRequestDispatcher("admin/update.jsp");
-            dispatcher.forward(request,response);
-        }
-
+        loginService.updateUserRegister(id, accountUser);
+        request.setAttribute("account", accountUser);
+        dispatcher = request.getRequestDispatcher("admin/update.jsp");
+        dispatcher.forward(request,response);
     }
 
     public void showListMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

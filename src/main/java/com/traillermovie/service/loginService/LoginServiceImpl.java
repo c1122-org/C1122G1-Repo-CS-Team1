@@ -35,5 +35,13 @@ public class LoginServiceImpl implements ILoginService{
     @Override
     public AccountUser selectById(int id) {
         return loginRepository.selectById(id);
+
+    }    @Override
+    public int deleteUser(int id){ return loginRepository.deleteUser(id);
+    }
+
+    @Override
+    public List<AccountUser> getListAccountUserInAdmin() {
+        return loginRepository.getListAccountUserInAdmin();
     }
 }

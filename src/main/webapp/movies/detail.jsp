@@ -25,15 +25,16 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/movies/detail.css"/>
+
 </head>
-<body style="background-image: linear-gradient(rgba(0, 0, 0, 0.8), #000000),url(${movie.getImage()}); background-repeat: no-repeat; background-size: cover">
+<body class="bg-img-body" style="background-image: linear-gradient(rgba(0, 0, 0, 0.8), #000000),url(${movie.getImage()}); background-repeat: no-repeat; background-size: cover">
 <jsp:include page="../common/header.jsp"></jsp:include>
 <div class="content">
     <div class="movie-content d-flex">
-        <div class="movie-content__poster">
-            <img src="${movie.getImage()}" style="image-rendering: smooth;" alt="">
+        <div class="movie-content__poster row1">
+            <img src="${movie.getImage()}" style="image-rendering: smooth;" alt="" class="img-width">
         </div>
-        <div class="movie-content__info">
+        <div class="movie-content__info row2">
             <h1 class="title fw-bold">${movie.getTitle()}</h1>
             <div class="more-info">
                 <span>Rating: ${movie.getRating()}</span>
@@ -49,13 +50,13 @@
                     <c:forEach items="${directorList}" var="director">
                         <div class="casts-item">
                             <img src="${director.getImage()}" alt="">
-                            <p class="casts-item-name p-2 fw-semibold" style="font-size: 14px">${director.getName()}</p>
+                            <p class="casts-item-name p-2 fw-semibold size" style="font-size: 14px">${director.getName()}</p>
                         </div>
                     </c:forEach>
                     <c:forEach items="${writerList}" var="writer">
                         <div class="casts-item">
                             <img src="${writer.getImage()}" alt="">
-                            <p class="casts-item-name p-2 fw-semibold" style="font-size: 14px">${writer.getName()}</p>
+                            <p class="casts-item-name p-2 fw-semibold size" style="font-size: 14px">${writer.getName()}</p>
                         </div>
                     </c:forEach>
                 </div>

@@ -17,7 +17,10 @@
 </head>
 <body>
 <form action="/admin?action=update" method="post">
-    <input type="text" name="">
+    <input type="text" name="password" value="${account.getPassword()}">
+    <input type="text" name="c" value="${account.getPassword()}">
+    <input type="text" name="password" value="${account.getPassword()}">
+    <input type="submit">
 </form>
 </body>
 <script

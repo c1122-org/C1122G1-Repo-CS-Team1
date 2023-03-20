@@ -11,4 +11,6 @@ public interface ILoginRepository {
     void saveAccountRegister(String name, String password);
     boolean updateUserRegister(int id,AccountUser accountUser);
     AccountUser selectById(int id);
+    int deleteUser (int id);
+    List<AccountUser> getListAccountUserInAdmin();
 }
