@@ -18,7 +18,8 @@ public class LoginRepositoryImpl implements ILoginRepository {
     @Override
     public List<AccountUser> getListAccountUser() {
         List<AccountUser> accountUserList = new ArrayList<>();
-        try (Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ACCOUNT)) {
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ACCOUNT)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id_acc");
