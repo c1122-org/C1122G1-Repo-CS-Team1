@@ -93,8 +93,8 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <span>Bạn có muốn xóa ${acountUser.getUsername()}</span>
-                                            <span>này không?</span>
+                                        <span>Do you want to delete ${acountUser.getUsername()}</span>
+                                            <span>?</span>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
