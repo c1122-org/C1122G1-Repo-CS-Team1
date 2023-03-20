@@ -9,9 +9,12 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.List;
 
+@MultipartConfig()
 @WebServlet(name = "AdminServlet", value = "/admin")
 public class AdminServlet extends HttpServlet {
     private HomeServiceImpl homeService = new HomeServiceImpl();
@@ -181,17 +184,27 @@ public class AdminServlet extends HttpServlet {
         }
     }
 
-    public void createNewMovie(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void createNewMovie(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         int id = adminService.getIdMovieLatestVersion();
         String title = request.getParameter("title");
+        if (!isNumeric(request.getParameter("rating")) || !isNumeric(request.getParameter("rank")) || !isNumeric(request.getParameter("yearPublic"))) {
+            response.sendRedirect("admin?path=movie&action=create&status=false");
+            return;
+        }
         double rating = Double.parseDouble(request.getParameter("rating"));
         int rank = Integer.parseInt(request.getParameter("rank"));
         int yearPublic = Integer.parseInt(request.getParameter("yearPublic"));
-        String image = request.getParameter("image");
+        Part part = request.getPart("img");
+        String realPath = request.getServletContext().getRealPath("/images");
+        String filename = Path.of(part.getSubmittedFileName()).getFileName().toString();
+        if (!Files.exists(Path.of(realPath))) {
+            Files.createDirectory(Path.of(realPath));
+        }
+        part.write("C:\\Users\\ADMIN\\Desktop\\TraillerMovie\\src\\main\\webapp\\assets\\images\\" + filename);
+        String image = "../webapp/assets/images/" + filename;
         String description = request.getParameter("description");
         String trailer = request.getParameter("trailer");
         int id_genre = Integer.parseInt(request.getParameter("type"));
-
 //        GET LIST DIRECTORS AND WRITERS SELECTED TO SAVE DATABASE BY ID MOVIE
 
         String[] directors = request.getParameterValues("director");
@@ -208,20 +221,35 @@ public class AdminServlet extends HttpServlet {
         adminService.saveWriterListByIdMovie(id, id_writers);
         Movie movie = new Movie(id, title, rating, rank, yearPublic, image, description, trailer, id_genre);
         adminService.saveMovie(movie);
-        response.sendRedirect("admin?path=movie&action=create");
+        response.sendRedirect("admin?path=movie&action=create&status=true");
     }
 
     public void updateMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        String title = request.getParameter("title");
+        if (request.getParameter("title").equals("") || request.getParameter("description").equals("") || request.getParameter("trailer").equals("")) {
+            response.sendRedirect("admin?path=movie&action=update&id=" + id + "&status=false&error=required");
+            return;
+        }
+        if (!isNumeric(request.getParameter("rating")) || !isNumeric(request.getParameter("rank")) || !isNumeric(request.getParameter("yearPublic"))) {
+            response.sendRedirect("admin?path=movie&action=update&id=" + id + "&status=false&error=number");
+            return;
+        }
         double rating = Double.parseDouble(request.getParameter("rating"));
         int rank = Integer.parseInt(request.getParameter("rank"));
         int yearPublic = Integer.parseInt(request.getParameter("yearPublic"));
-        String image = request.getParameter("image");
+        String title = request.getParameter("title");
+        Part part = request.getPart("img");
+        String realPath = request.getServletContext().getRealPath("/images");
+        String filename = Path.of(part.getSubmittedFileName()).getFileName().toString();
+        if (!Files.exists(Path.of(realPath))) {
+            Files.createDirectory(Path.of(realPath));
+        }
+        part.write(realPath + "/" + filename);
+        String image = "images/" + filename;
         String description = request.getParameter("description");
         String trailer = request.getParameter("trailer");
         int id_genre = Integer.parseInt(request.getParameter("type"));
-        //        GET LIST DIRECTORS AND WRITERS SELECTED TO SAVE DATABASE BY ID MOVIE
+//        GET LIST DIRECTORS AND WRITERS SELECTED TO SAVE DATABASE BY ID MOVIE
 
         String[] directors = request.getParameterValues("directorSelected");
         String[] writers = request.getParameterValues("writerSelected");
@@ -239,12 +267,24 @@ public class AdminServlet extends HttpServlet {
         adminService.saveWriterListByIdMovie(id, id_writers);
         Movie movie = new Movie(id, title, rating, rank, yearPublic, image, description, trailer, id_genre);
         adminService.updateMovie(movie);
-        response.sendRedirect("admin?path=movie&action=update&id=" + id);
+        response.sendRedirect("admin?path=movie&action=update&id=" + id + "&status=true");
     }
 
     public void deleteMovie(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         adminService.deleteMovieById(id);
         response.sendRedirect("admin");
+    }
+
+    public boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 }

@@ -75,11 +75,8 @@
                     <td>${movie.getRank()}</td>
                     <td style="width: 100px">${movie.getYearPublic()}</td>
                     <td><img width="150px" src="${movie.getImage()}" alt=""></td>
-                    <td>${movie.getDescription()}</td>
-                    <td>
-                        <iframe src="${movie.getTrailer()}">
-                        </iframe>
-                    </td>
+                    <td><textarea style="height: 220px;">${movie.getDescription()}</textarea></td>
+                    <td>${movie.getTrailer()}</td>
                     <td>
                         <button type="button"
                                 onclick="location.href='admin?path=movie&action=update&id=${movie.getId()}';"
