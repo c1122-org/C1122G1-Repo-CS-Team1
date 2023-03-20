@@ -16,7 +16,7 @@
                 </ul>
             </li>
             <li onClick="navigateNewPage('hot-movie')">Phim hot</li>
-            <li>Khác</li>
+            <li onclick="">Khác</li>
         </ul>
     </div>
     <div class="right-header">

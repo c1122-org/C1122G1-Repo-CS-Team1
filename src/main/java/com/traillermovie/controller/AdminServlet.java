@@ -56,9 +56,25 @@ public class AdminServlet extends HttpServlet {
                 handleSubmitFormMovie(request, response);
                 break;
             case "user":
+                handleSubmitFormUser(request, response);
                 break;
             default:
                 showListMovie(request, response);
+                break;
+        }
+    }
+
+    private void handleSubmitFormUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "update":
+                updateUser(request, response);
+                break;
+            default:
+                showListUSer(request, response);
                 break;
         }
     }
@@ -91,7 +107,7 @@ public class AdminServlet extends HttpServlet {
         }
         switch (action) {
             case "update":
-                showupdateUser(request,response);
+                showUpdateUser(request, response);
                 break;
             case "delete":
                 break;
@@ -101,33 +117,34 @@ public class AdminServlet extends HttpServlet {
         }
     }
 
-    private void showupdateUser(HttpServletRequest request, HttpServletResponse response) {
+    private void showUpdateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        AccountUser accountUser =loginService.selectById(id);
+        AccountUser accountUser = loginService.selectById(id);
         request.setAttribute("account", accountUser);
-
-        RequestDispatcher dispatcherType = request.getRequestDispatcher("admin/update.jsp");
-
-        try {
-            dispatcherType.forward(request,response);
-        } catch (ServletException | IOException e) {
-            throw new RuntimeException(e);
-        }
+        request.getRequestDispatcher("admin/update.jsp").forward(request, response);
     }
 
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        String pass = request.getParameter("password");
-        boolean client = Boolean.parseBoolean(request.getParameter("client"));
-        boolean admin = Boolean.parseBoolean(request.getParameter("admin"));
-        AccountUser accountUser = new AccountUser(id,name,pass,client,admin);
-        RequestDispatcher dispatcher;
+        AccountUser accountUser = loginService.selectById(id);
         loginService.updateUser(id, accountUser);
         request.setAttribute("account", accountUser);
-        dispatcher = request.getRequestDispatcher("admin?path=user");
-        dispatcher.forward(request,response);
+        response.sendRedirect("admin?path=user&action=update&id=");
+
+//        int id = Integer.parseInt(request.getParameter("id"));
+//        String name = request.getParameter("name");
+//        String pass = request.getParameter("password");
+//        boolean client = Boolean.parseBoolean(request.getParameter("client"));
+//        boolean admin = Boolean.parseBoolean(request.getParameter("admin"));
+//        AccountUser accountUser = new AccountUser(id,name,pass,client,admin);
+
+//        loginService.updateUser(id,accountUser);
+//        request.setAttribute("account", accountUser);
+//
+//        RequestDispatcher requestDispatcher =request.getRequestDispatcher("admin/listUser.jsp");
+//        response.sendRedirect("admin?path=user&action=update&id=");
+
     }
 
     public void showListMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

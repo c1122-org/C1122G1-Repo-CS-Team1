@@ -77,16 +77,22 @@ public class LoginRepositoryImpl implements ILoginRepository {
     }
 
     @Override
-
-    public boolean updateUserRegister(int id ,AccountUser accountUser) {
+    public boolean updateUser(int id ,AccountUser accountUser) {
         Connection connection = DBConnection.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ACCOUNT_USER);
-            preparedStatement.setInt(1, accountUser.getId());
-            preparedStatement.setString(2, accountUser.getPassword());
+            preparedStatement.setString(1, accountUser.getPassword());
+            preparedStatement.setInt(2, id);
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+        finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

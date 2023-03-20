@@ -29,7 +29,7 @@ public class LoginServiceImpl implements ILoginService{
 
     @Override
     public boolean updateUser(int id,AccountUser accountUser) {
-        return loginRepository.updateUserRegister(id,accountUser);
+        return loginRepository.updateUser(id,accountUser);
     }
 
     @Override

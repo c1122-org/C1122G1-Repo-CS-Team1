@@ -14,13 +14,41 @@
             integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
             crossorigin="anonymous"
     />
+
 </head>
 <body>
-<form action="/admin?action=update" method="post">
-    <input type="text" name="password" value="${account.getPassword()}">
-    <input type="text" name="" value="${account.getPassword()}">
-    <input type="text" name="password" value="${account.getPassword()}">
-    <button onclick="location.href='admin?path=user&action=update&id=${acount.getId()}'" type="submit">
+<form action="/admin?path=user&action=update" method="post">
+    <input
+            type="text"
+            name="id"
+            class="password w-100"
+            value="${account.getId()}"
+    />
+
+    <input
+            type="password"
+            name="password"
+            class="password w-100"
+           value="${account.getPassword()}"
+    />
+
+    <input
+            type="password"
+            name="password"
+            class="password w-100"
+            placeholder="Nhập mật khẩu mới"
+    />
+    <input
+            type="password"
+            name="confirmPassword"
+            class="password w-100"
+            placeholder="Nhập lại mật khẩu"
+    />
+    <input
+            type="submit"
+            class="submit-btn w-100 fw-bold"
+            value="Submit"
+    />
 </form>
 </body>
 <script
