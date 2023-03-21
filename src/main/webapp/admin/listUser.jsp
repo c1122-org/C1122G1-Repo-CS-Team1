@@ -44,9 +44,9 @@
                                 </button>
                                 <ul class="dropdown-menu" style="left: auto !important; right: 0 !important;">
                                     <c:if test="${(sessionScope.account.isAdmin() ? 1: 0) == 1}">
-                                        <li><a class="dropdown-item" href="admin">Quản lí</a></li>
+                                        <li><a class="dropdown-item" href="admin">Admin management</a></li>
                                     </c:if>
-                                    <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
+                                    <li><a class="dropdown-item" href="logout">Log out</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                 <th>ID</th>
                 <th>Username</th>
                 <th>Password</th>
-                <th>Lựa chọn</th>
+                <th>Choice</th>
             </tr>
             </tr>
             </thead>
@@ -93,13 +93,13 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <span>Bạn có muốn xóa ${acountUser.getUsername()}</span>
-                                            <span>này không?</span>
+                                        <span>Do you want delete ${acountUser.getUsername()}</span>
+                                            <span>?</span>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                         <button type="button" class="btn btn-primary"
-                                                                onclick="location.href='admin?path=user&action=delete&id=${acountUser.getId()}'">Yes</button>
+                                                                onclick="location.href='admin?path=user&action=delete&id=${acountUser.getId()}'">Delete</button>
                                                     </div>
                                                 </div>
                                             </div>

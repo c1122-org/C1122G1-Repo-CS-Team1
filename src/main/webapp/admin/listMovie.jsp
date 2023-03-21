@@ -130,7 +130,7 @@
                             <a class="nav-link" aria-current="page" href="admin?path=movie">Movies</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="admin?path=user">User</a>
+                            <a class="nav-link" href="admin?path=user">Users</a>
                         </li>
                     </ul>
                     <ul>
@@ -140,10 +140,10 @@
                                     <i class="fa-solid fa-house-user"></i>
                                 </button>
                                 <ul class="dropdown-menu" style="left: auto !important; right: 0 !important;">
-
-                                    <li><a class="dropdown-item" href="admin">Quản lí</a></li>
-
-                                    <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
+                                    <c:if test="${(sessionScope.account.isAdmin() ? 1: 0) == 1}">
+                                        <li><a class="dropdown-item" href="admin">Admin Management</a></li>
+                                    </c:if>
+                                    <li><a class="dropdown-item" href="logout">Log out</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -201,18 +201,17 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Xác nhận</h1>
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        Chắc chắn xoá phim này ?
+                                        You want to delete this movie ?
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
                                         </button>
                                         <button type="button"
-                                            <%--                                            ${movie.getId()}--%>
                                                 onclick="location.href='admin?path=movie&action=delete&id='+passID()"
                                                 class="btn btn-danger">Delete
                                         </button>

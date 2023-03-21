@@ -8,7 +8,10 @@ import com.traillermovie.service.loginService.LoginServiceImpl;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.SQLException;
@@ -140,7 +143,7 @@ public class AdminServlet extends HttpServlet {
         request.setAttribute("directorList", directorList);
         request.setAttribute("writerList", writerList);
         request.setAttribute("genreList", genreList);
-        request.setAttribute("message", "Thêm mới phim");
+        request.setAttribute("message", "Add new movie");
         request.getRequestDispatcher("admin/formMovie.jsp").forward(request, response);
     }
 
@@ -157,7 +160,7 @@ public class AdminServlet extends HttpServlet {
         request.setAttribute("directorListSelected", directorListSelected);
         request.setAttribute("writerListSelected", writerListSelected);
         request.setAttribute("genreList", genreList);
-        request.setAttribute("message", "Chỉnh sửa phim");
+        request.setAttribute("message", "Movie Editing");
         request.setAttribute("movie", movie);
         request.getRequestDispatcher("admin/formMovie.jsp").forward(request, response);
     }
@@ -195,10 +198,19 @@ public class AdminServlet extends HttpServlet {
         int rank = Integer.parseInt(request.getParameter("rank"));
         int yearPublic = Integer.parseInt(request.getParameter("yearPublic"));
         Part part = request.getPart("img");
-        String realPath = request.getServletContext().getRealPath("/images");
-        String filename = "";
-        part.write("C:\\Users\\ADMIN\\Desktop\\TraillerMovie\\src\\main\\webapp\\assets\\images\\" + filename);
-        String image = "../webapp/assets/images/" + filename;
+        String imageFileName = part.getSubmittedFileName();
+        String uploadPath = "C:/Users/ADMIN/Desktop/TraillerMovie/src/main/webapp/files/" + imageFileName;
+        try {
+            FileOutputStream fos = new FileOutputStream(uploadPath);
+            InputStream is = part.getInputStream();
+            byte[] data = new byte[is.available()];
+            is.read(data);
+            fos.write(data);
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String image = "/files/" + imageFileName;
         String description = request.getParameter("description");
         String trailer = request.getParameter("trailer");
         int id_genre = Integer.parseInt(request.getParameter("type"));
@@ -236,10 +248,19 @@ public class AdminServlet extends HttpServlet {
         int yearPublic = Integer.parseInt(request.getParameter("yearPublic"));
         String title = request.getParameter("title");
         Part part = request.getPart("img");
-        String realPath = request.getServletContext().getRealPath("/images");
-        String filename = "";
-        part.write(realPath + "/" + filename);
-        String image = "images/" + filename;
+        String imageFileName = part.getSubmittedFileName();
+        String uploadPath = "C:/Users/ADMIN/Desktop/TraillerMovie/src/main/webapp/files/" + imageFileName;
+        try {
+            FileOutputStream fos = new FileOutputStream(uploadPath);
+            InputStream is = part.getInputStream();
+            byte[] data = new byte[is.available()];
+            is.read(data);
+            fos.write(data);
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String image = "/files/" + imageFileName;
         String description = request.getParameter("description");
         String trailer = request.getParameter("trailer");
         int id_genre = Integer.parseInt(request.getParameter("type"));
@@ -280,5 +301,20 @@ public class AdminServlet extends HttpServlet {
             return false;
         }
         return true;
+    }
+    public boolean uploadFile(InputStream is, String path) {
+        boolean test = false;
+        try {
+            byte[] byt = new byte[is.available()];
+            is.read();
+            FileOutputStream fops = new FileOutputStream(path);
+            fops.write(byt);
+            fops.flush();
+            fops.close();
+            test = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return test;
     }
 }
