@@ -20,25 +20,25 @@
     <nav class="d-flex justify-content-between align-items-center pt-3 pb-3">
         <img src="./assets/images/logo.png" class="logo" />
         <div>
-            <button>Tiếng việt</button>
-            <a href="login">Đăng nhập</a>
+            <button>English</button>
+            <a href="login">Login</a>
         </div>
     </nav>
     <div class="header-content">
-        <h1 class="title-header-content">Chương trình truyền hình, phim không giới hạn và nhiều nội dung khác.</h1>
-        <h3 class="fw-normal mb-3">Xem ở mọi nơi. Hủy bất kỳ lúc nào.</h3>
-        <p>Bạn đã sẵn sàng xem chưa? Nhập email để tạo hoặc kích hoạt lại tư cách thành viên của bạn.</p>
+        <h1 class="title-header-content">Unlimited TV shows, movies and more.</h1>
+        <h3 class="fw-normal mb-3">Watch anywhere. Cancel anytime.</h3>
+        <p>Ready to watch? Enter your email to create or restart your membership.</p>
         <form class="email-signup" onsubmit="return false;">
             <input type="email" placeholder="Email address" required>
-            <button type="submit">Bắt đầu</button>
+            <button type="submit">Get Started</button>
         </form>
     </div>
 </div>
 <div class="features">
     <div class="row-feature reveal ">
         <div class="col-6 col-title mb-5">
-            <h1>Thưởng thức trên chính TV của bạn.</h1>
-            <h3  class="fw-normal mt-3">Xem trên TV thông minh, Playstation, Xbox, Chromecast, Apple TV, đầu phát Blu-ray và nhiều thiết bị khác.</h3>
+            <h1>Enjoy on your TV.</h1>
+            <h3  class="fw-normal mt-3">Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple TV, Blu-ray players, and more.</h3>
         </div>
         <div class="col-6 col-img mb-5 d-flex justify-content-center">
             <img src="./assets/images/feature-1.png" alt="">
@@ -49,14 +49,14 @@
             <img class="me-5" src="./assets/images/feature-2.png" alt="">
         </div>
         <div class="col-6 col-title mb-5">
-            <h1>Tải xuống nội dung để xem ngoại tuyến.</h1>
-            <h3  class="fw-normal mt-3">Lưu lại những nội dung yêu thích một cách dễ dàng và luôn có thứ để xem.</h3>
+            <h1>Download your shows to watch offline.</h1>
+            <h3  class="fw-normal mt-3">Save your favorites easily and always have something to watch.</h3>
         </div>
     </div>
     <div class="row-feature reveal">
         <div class="col-6 col-title mb-5">
-            <h1>Xem ở mọi nơi.</h1>
-            <h3  class="fw-normal mt-3">Phát trực tuyến không giới hạn phim và chương trình truyền hình trên điện thoại, máy tính bảng, máy tính xách tay và TV.</h3>
+            <h1>Watch everywhere.</h1>
+            <h3  class="fw-normal mt-3">Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV.</h3>
         </div>
         <div class="col-6 col-img mb-5 d-flex justify-content-center">
             <img src="./assets/images/feature-3.png" alt="">
@@ -67,64 +67,64 @@
             <img src="./assets/images/feature-4.png" alt="">
         </div>
         <div class="col-6 col-title mb-5">
-            <h1>Tạo hồ sơ cho trẻ em.</h1>
-            <h3  class="fw-normal mt-3">Đưa các em vào những cuộc phiêu lưu với nhân vật được yêu thích trong một không gian riêng. Tính năng này đi kèm miễn phí với tư cách thành viên của bạn.</h3>
+            <h1>Create profiles for kids.</h1>
+            <h3  class="fw-normal mt-3">Send kids on adventures with their favorite characters in a space made just for them—free with your membership.</h3>
         </div>
     </div>
 </div>
 <div class="faq reveal">
-    <h2>Câu hỏi thường gặp</h2>
+    <h2>Frequently Asked Questions</h2>
     <ul class="accordion">
         <li>
             <input type="radio" name="accordion" id="first">
-            <label for="first">Netflix là gì?</label>
+            <label for="first">What is OneTeam?</label>
             <div class="content">
-                <p>Netflix là dịch vụ phát trực tuyến mang đến đa dạng các loại chương trình truyền hình, phim, anime, phim tài liệu đoạt giải thưởng và nhiều nội dung khác trên hàng nghìn thiết bị có kết nối Internet.</p>
-                <p>Bạn có thể xem bao nhiêu tùy thích, bất cứ lúc nào bạn muốn mà không gặp phải một quảng cáo nào – tất cả chỉ với một mức giá thấp hàng tháng. Luôn có những nội dung mới để bạn khám phá và những chương trình truyền hình, phim mới được bổ sung mỗi tuần!</p>
+                <p>OneTeam is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices.</p>
+                <p>You can watch as much as you want, whenever you want without a single commercial – all for one low monthly price. There's always something new to discover and new TV shows and movies are added every week!</p>
             </div>
         </li>
         <li>
             <input type="radio" name="accordion" id="second">
-            <label for="second">Tôi phải trả bao nhiêu tiền để xem Netflix?</label>
+            <label for="second">How much does OneTeam cost?</label>
             <div class="content">
-                <p>Xem Netflix trên điện thoại thông minh, máy tính bảng, TV thông minh, máy tính xách tay hoặc thiết bị phát trực tuyến, chỉ với một khoản phí cố định hàng tháng. Các gói dịch vụ với mức giá từ 70,000 ₫ đến 260,000 ₫ mỗi tháng. Không phụ phí, không hợp đồng.</p>
+                <p>Watch OneTeam on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee. Plans range from 70,000 ₫ to 260,000 ₫ a month. No extra costs, no contracts.</p>
             </div>
         </li>
         <li>
             <input type="radio" name="accordion" id="third">
-            <label for="third">Tôi có thể xem ở đâu?</label>
+            <label for="third">Where can I watch?</label>
             <div class="content">
-                <p>Xem mọi lúc, mọi nơi. Đăng nhập bằng tài khoản Netflix của bạn để xem ngay trên trang web netflix.com từ máy tính cá nhân, hoặc trên bất kỳ thiết bị nào có kết nối Internet và có cài đặt ứng dụng Netflix, bao gồm TV thông minh, điện thoại thông minh, máy tính bảng, thiết bị phát đa phương tiện trực tuyến và máy chơi game.</p>
-                <p>Bạn cũng có thể tải xuống các chương trình yêu thích bằng ứng dụng trên iOS, Android hoặc Windows 10. Vào phần nội dung đã tải xuống để xem trong khi di chuyển và khi không có kết nối Internet. Mang Netflix theo bạn đến mọi nơi.</p>
+                <p>Watch anywhere, anytime. Sign in with your OneTeam account to watch instantly on the web at oneteam.com from your personal computer or on any internet-connected device that offers the OneTeam app, including smart TVs, smartphones, tablets, streaming media players and game consoles.</p>
+                <p>You can also download your favorite shows with the iOS, Android, or Windows 10 app. Use downloads to watch while you're on the go and without an internet connection. Take OneTeam with you anywhere.</p>
             </div>
         </li>
         <li>
             <input type="radio" name="accordion" id="four">
-            <label for="four">Làm thế nào để hủy?</label>
+            <label for="four">How do I cancel?</label>
             <div class="content">
-                <p>Netflix rất linh hoạt. Không có hợp đồng phiền toái, không ràng buộc. Bạn có thể dễ dàng hủy tài khoản trực tuyến chỉ trong hai cú nhấp chuột. Không mất phí hủy – bạn có thể bắt đầu hoặc ngừng tài khoản bất cứ lúc nào.</p>
+                <p>OneTeam is flexible. There are no pesky contracts and no commitments. You can easily cancel your account online in two clicks. There are no cancellation fees – start or stop your account anytime.</p>
             </div>
         </li>
         <li>
             <input type="radio" name="accordion" id="five">
-            <label for="five">Tôi có thể xem gì trên Netflix?</label>
+            <label for="five">What can I watch on OneTeam?</label>
             <div class="content">
-                <p>Netflix có một thư viện phong phú gồm các phim truyện, phim tài liệu, chương trình truyền hình, anime, tác phẩm giành giải thưởng của Netflix và nhiều nội dung khác. Xem không giới hạn bất cứ lúc nào bạn muốn.</p>
+                <p>OneTeam has an extensive library of feature films, documentaries, TV shows, anime, award-winning OneTeam originals, and more. Watch as much as you want, anytime you want.</p>
             </div>
         </li>
         <li>
             <input type="radio" name="accordion" id="six">
-            <label for="six">Netflix có phù hợp cho trẻ em không?</label>
+            <label for="six">Is OneTeam good for kids?</label>
             <div class="content">
-                <p>Trải nghiệm Netflix Trẻ em có sẵn trong gói dịch vụ của bạn, trao cho phụ huynh quyền kiểm soát trong khi các em có thể thưởng thức các bộ phim và chương trình phù hợp cho gia đình tại không gian riêng.</p>
-                <p>Hồ sơ Trẻ em đi kèm tính năng kiểm soát của cha mẹ (được bảo vệ bằng mã PIN), cho phép bạn giới hạn độ tuổi cho nội dung con mình được phép xem, cũng như chặn những phim hoặc chương trình mà bạn không muốn các em nhìn thấy.</p>
+                <p>The OneTeam Kids experience is included in your membership to give parents control while kids enjoy family-friendly TV shows and movies in their own space.</p>
+                <p>Kids profiles come with PIN-protected parental controls that let you restrict the maturity rating of content kids can watch and block specific titles you don’t want kids to see.</p>
             </div>
         </li>
     </ul>
-    <small>Bạn đã sẵn sàng xem chưa? Nhập email để tạo hoặc kích hoạt lại tư cách thành viên của bạn.</small>
+    <small>Ready to watch? Enter your email to create or restart your membership.</small>
     <form class="email-signup" onsubmit="return false;">
         <input type="email" placeholder="Email address" required>
-        <button type="submit">Bắt đầu</button>
+        <button type="submit">Get Started</button>
     </form>
 </div>
 </body>

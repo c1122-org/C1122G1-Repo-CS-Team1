@@ -3,7 +3,7 @@
 <div class="movies">
   <div class="new-movie d-flex flex-column justify-content-start align-items-center">
     <div class="title-new-movie w-100 pb-3">
-      <h2 class="fs-24">Phim mới</h2>
+      <h2 class="fs-24">New movie</h2>
     </div>
     <swiper-container class="mySwiper w-100" space-between="30"
                       slides-per-view="5">
@@ -31,7 +31,7 @@
   </div>
   <div class="action-movie d-flex flex-column justify-content-start align-items-center">
     <div class="title-action-movie w-100 pb-3">
-      <h2 class="fs-24">Hành động</h2>
+      <h2 class="fs-24">Action</h2>
     </div>
     <swiper-container class="mySwiper w-100" space-between="30"
                       slides-per-view="5">
@@ -59,7 +59,7 @@
   </div>
   <div class="popular-movie d-flex flex-column justify-content-start align-items-center">
     <div class="title-popular-movie w-100 pb-3">
-      <h2 class="fs-24">Phổ biến</h2>
+      <h2 class="fs-24">Popular</h2>
     </div>
     <swiper-container class="mySwiper w-100" space-between="30"
                       slides-per-view="5">
@@ -87,7 +87,7 @@
   </div>
   <div class="animation-movie d-flex flex-column justify-content-start align-items-center">
     <div class="title-animation-movie w-100 pb-3">
-      <h2 class="fs-24">Hoạt hình</h2>
+      <h2 class="fs-24">Animation</h2>
     </div>
     <swiper-container class="mySwiper w-100" space-between="30"
                       slides-per-view="5">
