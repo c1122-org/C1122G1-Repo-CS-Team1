@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -101,19 +102,23 @@
         </div>
     </nav>
 </div>
-<div class="toast align-items-center"
-     style="position: fixed; top: 70px; right: 5px; background: forestgreen; color: #ffffff" role="alert"
-     aria-live="assertive" aria-atomic="true">
-    <div class="d-flex">
-        <div class="toast-body">
-            Hello, world! This is a toast message.
+<c:if test="${param.status == true}">
+    <div class="toast align-items-center"
+         style="position: fixed;display: block; top: 70px; background: forestgreen; right: 5px; color: #ffffff"
+         role="alert"
+         aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                    ${message} thành công.
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
-        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
-</div>
+</c:if>
+
 <div class="form-login" style="margin: 100px auto 100px;">
     <c:if test="${movie == null}">
-        <form id="login" method="post">
+        <form id="login" method="post" enctype="multipart/form-data">
             <h1>${message}</h1>
             <p>Tên phim</p>
             <input
@@ -121,10 +126,11 @@
                     name="title"
                     class="username w-100"
                     placeholder="Nhập tên phim"
+                    required
             />
             <p>Thể loại</p>
             <select name="type" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
-                    aria-label="Default select example">
+                    aria-label="Default select example" required>
                 <option selected>Chọn thể loại</option>
                 <c:forEach items="${genreList}" var="genre">
                     <option value="${genre.getId()}">${genre.getName()}</option>
@@ -132,14 +138,14 @@
             </select>
             <p style="margin-top: 16px">Đạo diễn phim</p>
             <select name="director" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
-                    aria-label="Default select example" id="director" multiple>
+                    aria-label="Default select example" id="director" required multiple>
                 <c:forEach items="${directorList}" var="director">
                     <option value="${director.getId()}">${director.getName()}</option>
                 </c:forEach>
             </select>
             <p style="margin-top: 16px">Tác giả phim</p>
             <select name="writer" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
-                    aria-label="Default select example" id="writer" multiple>
+                    aria-label="Default select example" id="writer" required multiple>
                 <c:forEach items="${writerList}" var="writer">
                     <option value="${writer.getId()}">${writer.getName()}</option>
                 </c:forEach>
@@ -150,52 +156,54 @@
                     name="rating"
                     class="username w-100"
                     placeholder="Nhập điểm bình chọn"
+                    required
             />
+            <c:if test="${param.status == false}"><p
+                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Bắt buộc phải là số. Vui
+                lòng thử lại</p></c:if>
             <p>Xếp hạng phim</p>
             <input
                     type="text"
                     name="rank"
                     class="username w-100"
                     placeholder="Nhập vị trí xếp hạng"
+                    required
             />
+            <c:if test="${param.status == false}"><p
+                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Bắt buộc phải là số. Vui
+                lòng thử lại</p></c:if>
             <p>Năm sản xuất</p>
             <input
                     type="text"
                     name="yearPublic"
                     class="username w-100"
                     placeholder="Nhập năm sản xuất"
+                    required
             />
+            <c:if test="${param.status == false}"><p
+                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Bắt buộc phải là số. Vui
+                lòng thử lại</p></c:if>
             <p>Link ảnh đại diện</p>
-            <input
-                    type="text"
-                    name="image"
-                    class="username w-100"
-                    placeholder="Nhập link ảnh"
-            />
+            <input class="mb-3" type="file" id="img" name="img" accept="image/*">
             <p>Miêu tả phim</p>
-            <input
-                    type="text"
-                    name="description"
-                    class="username w-100"
-                    placeholder="Miêu tả về phim"
-            />
+            <textarea name="description" class="username w-100"></textarea>
             <p>Link trailer phim</p>
             <input
                     type="text"
                     name="trailer"
                     class="username w-100"
                     placeholder="Link trailer"
+                    required
             />
             <input
                     type="submit"
-                    onclick="showToastMessageCreateSuccess()"
                     class="submit-btn w-100 fw-bold"
                     value="Thêm mới"
             />
         </form>
     </c:if>
     <c:if test="${movie != null}">
-        <form id="login" method="post">
+        <form id="login" method="post" enctype="multipart/form-data">
             <h1>${message}</h1>
             <p>Tên phim</p>
             <input
@@ -204,10 +212,14 @@
                     class="username w-100"
                     placeholder="Nhập tên phim"
                     value="${movie.getTitle()}"
+                    required
             />
+            <c:if test="${param.status == false && param.error.equals('required')}"><p
+                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Vui lòng nhập đầy đủ các
+                trường.</p></c:if>
             <p>Thể loại</p>
             <select name="type" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
-                    aria-label="Default select example">
+                    aria-label="Default select example" required>
                 <c:forEach items="${genreList}" var="genre">
                     <c:if test="${movie.getGenre() == genre.getId()}">
                         <option value="${genre.getId()}" selected>${genre.getName()}</option>
@@ -217,9 +229,11 @@
                     </c:if>
                 </c:forEach>
             </select>
+            <c:if test="${param.status == false && param.error.equals('required')}"><p
+                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Vui lòng nhập đầy đủ các trường.</p></c:if>
             <p style="margin-top: 16px">Đạo diễn phim</p>
             <select name="directorSelected" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
-                    aria-label="Default select example" id="directorSelected" multiple="multiple">
+                    aria-label="Default select example" id="directorSelected" required multiple="multiple">
                 <c:forEach items="${directorListSelected}" var="directorSelected">
                     <option value="${directorSelected.getId()}" selected>${directorSelected.getName()}</option>
                 </c:forEach>
@@ -227,9 +241,11 @@
                     <option value="${director.getId()}">${director.getName()}</option>
                 </c:forEach>
             </select>
+            <c:if test="${param.status == false && param.error.equals('required')}"><p
+                    style="color: red; font-weight: unset;font-size: 12px;">Vui lòng nhập đầy đủ các trường.</p></c:if>
             <p style="margin-top: 16px">Tác giả phim</p>
             <select name="writerSelected" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
-                    aria-label="Default select example" id="writerSelected" multiple>
+                    aria-label="Default select example" id="writerSelected" required multiple>
                 <c:forEach items="${writerListSelected}" var="writerSelected">
                     <option value="${writerSelected.getId()}" selected>${writerSelected.getName()}</option>
                 </c:forEach>
@@ -237,6 +253,8 @@
                     <option value="${writer.getId()}">${writer.getName()}</option>
                 </c:forEach>
             </select>
+            <c:if test="${param.status == false && param.error.equals('required')}"><p
+                    style="color: red; font-weight: unset;font-size: 12px;">Vui lòng nhập đầy đủ các trường.</p></c:if>
             <p style="margin-top: 16px">Điểm số phim</p>
             <input
                     type="text"
@@ -244,7 +262,11 @@
                     class="username w-100"
                     placeholder="Nhập điểm bình chọn"
                     value="${movie.getRating()}"
+                    required
             />
+            <c:if test="${param.status == false && param.error.equals('number')}"><p
+                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Bắt buộc phải là số. Vui
+                lòng thử lại</p></c:if>
             <p>Xếp hạng phim</p>
             <input
                     type="text"
@@ -252,7 +274,11 @@
                     class="username w-100"
                     placeholder="Nhập vị trí xếp hạng"
                     value="${movie.getRank()}"
+                    required
             />
+            <c:if test="${param.status == false && param.error.equals('number')}"><p
+                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Bắt buộc phải là số. Vui
+                lòng thử lại</p></c:if>
             <p>Năm sản xuất</p>
             <input
                     type="text"
@@ -260,23 +286,21 @@
                     class="username w-100"
                     placeholder="Nhập năm sản xuất"
                     value="${movie.getYearPublic()}"
+                    required
             />
+            <c:if test="${param.status == false && param.error.equals('number')}"><p
+                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Bắt buộc phải là số. Vui
+                lòng thử lại</p></c:if>
             <p>Link ảnh đại diện</p>
-            <input
-                    type="text"
-                    name="image"
-                    class="username w-100"
-                    placeholder="Nhập link ảnh"
-                    value="${movie.getImage()}"
-            />
+            <input class="mb-3" type="file" id="img" name="img" accept="image/*">
+            <c:if test="${param.status == false && param.error.equals('required')}"><p
+                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Vui lòng nhập đầy đủ các
+                trường.</p></c:if>
             <p>Miêu tả phim</p>
-            <input
-                    type="text"
-                    name="description"
-                    class="username w-100"
-                    placeholder="Miêu tả về phim"
-                    value="${movie.getDescription()}"
-            />
+            <textarea name="description" class="username w-100">${movie.getDescription()}</textarea>
+            <c:if test="${param.status == false && param.error.equals('required')}"><p
+                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Vui lòng nhập đầy đủ các
+                trường.</p></c:if>
             <p>Link trailer phim</p>
             <input
                     type="text"
@@ -284,7 +308,11 @@
                     class="username w-100"
                     placeholder="Link trailer"
                     value="${movie.getTrailer()}"
+                    required
             />
+            <c:if test="${param.status == false && param.error.equals('required')}"><p
+                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Vui lòng nhập đầy đủ các
+                trường.</p></c:if>
             <input
                     type="button"
                     id="update-submit-btn"
@@ -324,22 +352,18 @@
         crossorigin="anonymous"></script>
 <script type="text/javascript">
     function handleSubmitFromUpdate() {
-        let btn = document.getElementById("login").submit();
+        document.getElementById("login").submit();
     };
-
-    function showToastMessageCreateSuccess() {
-        let toast = document.getElementsByClassName("toast")[0];
+    let toast = document.getElementsByClassName("toast")[0];
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const statusAdd = urlParams.get("status");
+    if (statusAdd) {
         setTimeout(() => {
-            toast.style.display = "block";
-        }, 1000);
+            toast.style.opacity = "0";
+            toast.style.transition = "opacity 1s ease-in";
+        }, 2000);
     }
-    let formCreate = document.getElementById("login");
-    formCreate.addEventListener('submit', function (event) {
-        setTimeout(() => {
-            formCreate.submit();
-        },2500);
-        event.preventDefault();
-    })
     new MultiSelectTag('director');
     new MultiSelectTag('writer');
 </script>
