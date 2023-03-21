@@ -11,12 +11,13 @@
     <title>Admin</title>
     <style>
         body {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../assets/images/header-image.png);
+            background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(../assets/images/header-image.png);
             font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu, sans-serif;
         }
         .header {
             color: #d9d9d9;
             background: #0b0b0b;
+            width: 100%;
             height: 60px;
             position: fixed;
             top: 0;
@@ -25,7 +26,6 @@
             display: flex;
             justify-content: space-between;
             z-index: 1;
-            flex-direction: column;
         }
         .bg-body-tertiary {
             --bs-bg-opacity: 0;
@@ -34,9 +34,12 @@
             .navbar-expand-lg .navbar-collapse {
                 display: flex !important;
                 flex-basis: auto;
-                flex-direction: column;
                 font-size: 1.4rem;
             }
+        }
+        .navbar {
+            width: 100%;
+            justify-content: space-between;
         }
         .navbar>.container-fluid{
             align-items: flex-start;
@@ -47,11 +50,6 @@
         .nav-link:hover {
             color: #167ac6;
         }
-        /*.btn-primary {*/
-        /*    --bs-btn-color: #fff;*/
-        /*    --bs-btn-bg: #22a6b3;*/
-        /*    --bs-btn-border-color: #22a6b3;*/
-        /*}*/
         .btn-primary {
             --bs-btn-color: #000;
             --bs-btn-bg: #fff;
@@ -71,8 +69,8 @@
             background: none;
             border: none;
         }
-        button.navbar-toggler {
-            background: #dee2e6;
+        button.dropdown-toggle {
+            color: #ffffff !important;
 
         }
         @media only screen and (max-width: 992px){
@@ -107,11 +105,6 @@
                 display: block;
             }
         }
-        /*@media only screen and(max-width: 350px) {*/
-        /*    tr>th , tr>td {*/
-        /*        */
-        /*    }*/
-        /*}*/
 
     </style>
 </head>
@@ -120,7 +113,7 @@
     <div class="header">
         <nav class="navbar navbar-expand-lg bg-body-tertiary" style="box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;">
             <div class="container-fluid">
-                <img src="/oneteam.png" alt="Trang chủ" href="home" style="width: 12rem;height: 3.7rem">
+                <img src="/oneteam.png" alt="Trang chủ" onclick="location.href='home'" style="width: 8rem;height: 3rem">
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -140,6 +133,9 @@
                                     <i class="fa-solid fa-house-user"></i>
                                 </button>
                                 <ul class="dropdown-menu" style="left: auto !important; right: 0 !important;">
+                                    <c:if test="${sessionScope.account != null}">
+                                        <li><a class="dropdown-item">Hi ${sessionScope.account.getUsername()}</a></li>
+                                    </c:if>
                                     <c:if test="${(sessionScope.account.isAdmin() ? 1: 0) == 1}">
                                         <li><a class="dropdown-item" href="admin">Admin Management</a></li>
                                     </c:if>

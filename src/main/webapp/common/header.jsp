@@ -31,6 +31,9 @@
                     <i class="fa-solid fa-house-user"></i>
                 </button>
                 <ul class="dropdown-menu">
+                    <c:if test="${sessionScope.account != null}">
+                        <li><a class="dropdown-item">Hi ${sessionScope.account.getUsername()}</a></li>
+                    </c:if>
                     <c:if test="${(sessionScope.account.isAdmin() ? 1: 0) == 1}">
                         <li><a class="dropdown-item" href="admin">Admin Management</a></li>
                     </c:if>

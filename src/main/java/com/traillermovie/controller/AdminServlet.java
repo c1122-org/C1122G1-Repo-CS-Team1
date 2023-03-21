@@ -63,7 +63,7 @@ public class AdminServlet extends HttpServlet {
                 break;
             case "user":
                 try {
-                    handlePathUser(request, response);
+                    handleSubmitFromUser(request, response);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -101,9 +101,8 @@ public class AdminServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-            case "create":
-                break;
             case "update":
+                showFormUpdateAccountUser(request, response);
                 break;
             case "delete":
                 deleteUser(request, response);
@@ -113,7 +112,20 @@ public class AdminServlet extends HttpServlet {
                 break;
         }
     }
-
+    public void handleSubmitFromUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "update":
+                updateFormMovie(request, response);
+                break;
+            default:
+                showListMovie(request, response);
+                break;
+        }
+    }
     private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         loginService.deleteUser(id);
@@ -134,7 +146,12 @@ public class AdminServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("admin/listUser.jsp");
         dispatcher.forward(request, response);
     }
-
+    public void showFormUpdateAccountUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        AccountUser accountUser = adminService.getAccountUserById(id);
+        request.setAttribute("accountUser", accountUser);
+        request.getRequestDispatcher("admin/formUser.jsp").forward(request, response);
+    }
     //    SHOW FORM CRUD MOVIE
     public void showCreateFormMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Genre> genreList = homeService.getAllGenre();
@@ -284,7 +301,19 @@ public class AdminServlet extends HttpServlet {
         adminService.updateMovie(movie);
         response.sendRedirect("admin?path=movie&action=update&id=" + id + "&status=true");
     }
-
+    public void updateFormMovie(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String newPassword = request.getParameter("newPassword");
+        String confirmPassword = request.getParameter("confirmPassword");
+        if (!newPassword.equals(confirmPassword)) {
+            response.sendRedirect("admin?path=user&action=update&id=" + id + "&status=false");
+            return;
+        }
+        else {
+            adminService.updateAccountUser(id, newPassword);
+            response.sendRedirect("admin?path=user&action=update&id=" + id + "&status=true");
+        }
+    }
     public void deleteMovie(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         adminService.deleteMovieById(id);
