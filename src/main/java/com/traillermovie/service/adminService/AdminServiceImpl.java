@@ -1,5 +1,6 @@
 package com.traillermovie.service.adminService;
 
+import com.traillermovie.model.AccountUser;
 import com.traillermovie.model.Director;
 import com.traillermovie.model.Movie;
 import com.traillermovie.model.Writer;
@@ -57,6 +58,16 @@ public class AdminServiceImpl implements IAdminService{
     @Override
     public void removeOldWriterByIdMovie(int id_movie) {
         adminRepository.removeOldWriterByIdMovie(id_movie);
+    }
+
+    @Override
+    public void updateAccountUser(int id_account, String password) {
+        adminRepository.updatePasswordAccountUser(id_account, password);
+    }
+
+    @Override
+    public AccountUser getAccountUserById(int id_account) {
+        return adminRepository.getAccountUserById(id_account);
     }
 
 }

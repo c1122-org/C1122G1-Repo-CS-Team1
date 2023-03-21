@@ -8,92 +8,160 @@
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/dist/css/multi-select-tag.css">
     <title>Admin</title>
-</head>
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        border: none;
-        font-family: 'Open Sans', sans-serif;
-    }
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../assets/images/header-image.png);
+            font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu, sans-serif;
+            color: #ddd;
+        }
 
-    .form-login {
-        width: 600px;
-        border-radius: 5px;
-        padding: 60px 68px 40px;
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            border: none;
+            font-family: 'Open Sans', sans-serif;
+        }
 
-    .form-login #login h1 {
-        font-size: 32px;
-        font-weight: 600;
-        margin-bottom: 28px;
-    }
+        .form-login {
+            width: 600px;
+            border-radius: 5px;
+            padding: 60px 68px 40px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            backdrop-filter: brightness(0.2);
+        }
 
-    .form-login #login p {
-        margin: 0;
-        font-weight: 600;
-    }
+        .form-login #login h1 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 28px;
+        }
 
-    #login .username,
-    #login .password {
-        outline: 0;
-        border: 1px;
-        background: #d9d9d9;
-        border-radius: 4px;
-        height: 50px;
-        line-height: 50px;
-        padding: 8px 20px;
-        margin-bottom: 16px;
-        line-height: 50px;
-    }
+        .form-login #login p {
+            margin: 0;
+            font-weight: 600;
+        }
+        input:not(:last-child), select {
+            background: #ffffff !important;
+        }
+        #login .username,
+        #login .password {
+            outline: 0;
+            border: 1px;
+            background: #d9d9d9;
+            border-radius: 4px;
+            height: 50px;
+            line-height: 50px;
+            padding: 8px 20px;
+            margin-bottom: 16px;
+            line-height: 50px;
+        }
 
-    #login .submit-btn {
-        background: #e50914;
-        border-radius: 4px;
-        font-size: 16px;
-        color: #fff;
-        font-weight: 500;
-        margin: 24px 0 12px;
-        height: 50px;
-    }
+        #login .submit-btn {
+            background: #e50914;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #fff;
+            font-weight: 500;
+            margin: 24px 0 12px;
+            height: 50px;
+        }
 
-    .mult-select-tag .rounded {
-        background: #d9d9d9;
-    }
-</style>
+        .mult-select-tag {
+            color: #000000;
+            background: #ffffff;
+        }
+        select {
+            background: #ffffff !important;
+        }
+
+        .mult-select-tag .rounded, textarea {
+            background: #ffffff !important;
+
+        }
+
+
+        .header {
+            color: #d9d9d9;
+            background: #0b0b0b;
+            height: 60px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            z-index: 1;
+        }
+        .navbar.navbar-expand-lg {
+            width: 100%;
+        }
+        .navbar > .container-fluid {
+            align-items: flex-start;
+            height: 70px;
+            align-items: center;
+            background: #0b0b0b;
+        }
+
+        @media only screen and (max-width: 992px) {
+            .navbar > .container-fluid {
+                align-items: center;
+                margin-right: 2em;
+            }
+
+
+        }
+
+
+        @media only screen and (min-width: 992px) {
+            .navbar-expand-lg .navbar-toggler {
+                display: none;
+            }
+
+            .navbar-expand-lg .navbar-collapse {
+                display: flex !important;
+                flex-basis: auto;
+                font-size: 1.4rem;
+            }
+        }
+
+
+        button.navbar-toggler {
+            background: #dee2e6;
+        }
+
+    </style>
 </head>
 <body>
-<div class="header" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+<div class="header">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold" href="home">Trang chủ</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+            <img src="/oneteam.png" alt="Trang chủ" href="home" style="width: 8rem;height: 3rem">
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="admin?path=movie">Movies</a>
+                        <a class="nav-link" style="color: #fff; font-weight: 500" aria-current="page" href="admin?path=movie">Movies</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="admin?path=user">User</a>
+                        <a class="nav-link"style="color: #fff; font-weight: 500" href="admin?path=user">Users</a>
                     </li>
                 </ul>
                 <ul>
                     <div class="account-user">
                         <div class="dropdown">
-                            <button class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
-                                    style="background: transparent; outline: 0; border: 0; color: #000000">
+                            <button class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="background: transparent; outline: 0; border: 0; color: #ffffff">
                                 <i class="fa-solid fa-house-user"></i>
                             </button>
                             <ul class="dropdown-menu" style="left: auto !important; right: 0 !important;">
-                                <c:if test="${(sessionScope.account.isAdmin() ? 1: 0) == 1}">
-                                    <li><a class="dropdown-item" href="admin">Quản lí</a></li>
+                                <c:if test="${sessionScope.account != null}">
+                                    <li><a class="dropdown-item">Hi ${sessionScope.account.getUsername()}</a></li>
                                 </c:if>
-                                <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
+                                <c:if test="${(sessionScope.account.isAdmin() ? 1: 0) == 1}">
+                                    <li><a class="dropdown-item" href="admin">Admin Management</a></li>
+                                </c:if>
+                                <li><a class="dropdown-item" href="logout">Log out</a></li>
                             </ul>
                         </div>
                     </div>
@@ -109,7 +177,7 @@
          aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
-                    ${message} thành công.
+                    ${message} success.
             </div>
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
@@ -120,74 +188,74 @@
     <c:if test="${movie == null}">
         <form id="login" method="post" enctype="multipart/form-data">
             <h1>${message}</h1>
-            <p>Tên phim</p>
+            <p>Name Movie</p>
             <input
                     type="text"
                     name="title"
                     class="username w-100"
-                    placeholder="Nhập tên phim"
-                    required
+                    placeholder="Name movie"
             />
-            <p>Thể loại</p>
+            <p>Movie Genre</p>
             <select name="type" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
-                    aria-label="Default select example" required>
-                <option selected>Chọn thể loại</option>
+                    aria-label="Default select example">
+                <option selected>Choose genre</option>
                 <c:forEach items="${genreList}" var="genre">
                     <option value="${genre.getId()}">${genre.getName()}</option>
                 </c:forEach>
             </select>
-            <p style="margin-top: 16px">Đạo diễn phim</p>
+            <p style="margin-top: 16px">Movie Director</p>
             <select name="director" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
                     aria-label="Default select example" id="director" required multiple>
                 <c:forEach items="${directorList}" var="director">
                     <option value="${director.getId()}">${director.getName()}</option>
                 </c:forEach>
             </select>
-            <p style="margin-top: 16px">Tác giả phim</p>
+            <p style="margin-top: 16px">Author</p>
             <select name="writer" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
                     aria-label="Default select example" id="writer" required multiple>
                 <c:forEach items="${writerList}" var="writer">
                     <option value="${writer.getId()}">${writer.getName()}</option>
                 </c:forEach>
             </select>
-            <p style="margin-top: 16px">Điểm số phim</p>
+            <p style="margin-top: 16px">Rating</p>
             <input
                     type="text"
                     name="rating"
                     class="username w-100"
-                    placeholder="Nhập điểm bình chọn"
-                    required
+                    placeholder="Enter rating"
             />
             <c:if test="${param.status == false}"><p
-                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Bắt buộc phải là số. Vui
-                lòng thử lại</p></c:if>
-            <p>Xếp hạng phim</p>
+                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Must be a number</p></c:if>
+            <p>Rank</p>
             <input
                     type="text"
                     name="rank"
                     class="username w-100"
-                    placeholder="Nhập vị trí xếp hạng"
-                    required
+                    placeholder="Enter rank"
             />
             <c:if test="${param.status == false}"><p
-                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Bắt buộc phải là số. Vui
-                lòng thử lại</p></c:if>
-            <p>Năm sản xuất</p>
+                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Must be a number
+            </p></c:if>
+            <p>Year Public</p>
             <input
                     type="text"
                     name="yearPublic"
                     class="username w-100"
-                    placeholder="Nhập năm sản xuất"
-                    required
+                    placeholder="Enter year public"
+            />
+            <p>Avatar</p>
+            <input class="mb-3" type="file" id="img" name="img" style="color: #000000" accept="image/*">
+            <p>Description</p>
+            <input
+                    type="text"
+                    name="description"
+                    class="username w-100"
+                    placeholder="Description"
             />
             <c:if test="${param.status == false}"><p
-                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Bắt buộc phải là số. Vui
-                lòng thử lại</p></c:if>
-            <p>Link ảnh đại diện</p>
-            <input class="mb-3" type="file" id="img" name="img" accept="image/*">
-            <p>Miêu tả phim</p>
-            <textarea name="description" class="username w-100"></textarea>
-            <p>Link trailer phim</p>
+                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Must be a
+                number.</p></c:if>
+            <p>Link trailer</p>
             <input
                     type="text"
                     name="trailer"
@@ -198,7 +266,7 @@
             <input
                     type="submit"
                     class="submit-btn w-100 fw-bold"
-                    value="Thêm mới"
+                    value="Create movie"
             />
         </form>
     </c:if>
@@ -230,7 +298,8 @@
                 </c:forEach>
             </select>
             <c:if test="${param.status == false && param.error.equals('required')}"><p
-                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Vui lòng nhập đầy đủ các trường.</p></c:if>
+                    style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Vui lòng nhập đầy đủ các
+                trường.</p></c:if>
             <p style="margin-top: 16px">Đạo diễn phim</p>
             <select name="directorSelected" style="background: #d9d9d9; margin-bottom: 16px" class="form-select"
                     aria-label="Default select example" id="directorSelected" required multiple="multiple">
@@ -292,7 +361,7 @@
                     style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Bắt buộc phải là số. Vui
                 lòng thử lại</p></c:if>
             <p>Link ảnh đại diện</p>
-            <input class="mb-3" type="file" id="img" name="img" accept="image/*">
+            <input class="mb-3" type="file" id="img" name="img" style="color: #000000" value="${movie.getImage()}" accept="image/*">
             <c:if test="${param.status == false && param.error.equals('required')}"><p
                     style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Vui lòng nhập đầy đủ các
                 trường.</p></c:if>
@@ -321,29 +390,29 @@
                     value="Chỉnh sửa"
             />
         </form>
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Xác nhận</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Xác nhận chỉnh sửa "${movie.getTitle()}" ?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button"
-                                onclick="handleSubmitFromUpdate()"
-                                class="btn btn-warning">Update
-                        </button>
-                    </div>
-                </div>
+    </c:if>
+</div>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Xác nhận</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Xác nhận chỉnh sửa "${movie.getTitle()}" ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button"
+                        onclick="handleSubmitFromUpdate()"
+                        class="btn btn-warning">Update
+                </button>
             </div>
         </div>
-    </c:if>
+    </div>
 </div>
 </body>
 <script src="${pageContext.request.contextPath}/assets/dist/js/multi-select-tag.js"></script>

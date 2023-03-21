@@ -1,5 +1,6 @@
 package com.traillermovie.service.adminService;
 
+import com.traillermovie.model.AccountUser;
 import com.traillermovie.model.Director;
 import com.traillermovie.model.Movie;
 import com.traillermovie.model.Writer;
@@ -18,4 +19,6 @@ public interface IAdminService {
     int getIdMovieLatestVersion();
     void removeOldDirectorByIdMovie(int id_movie);
     void removeOldWriterByIdMovie(int id_movie);
+    void updateAccountUser(int id_account, String password);
+    AccountUser getAccountUserById(int id_account);
 }

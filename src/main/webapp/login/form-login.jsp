@@ -37,12 +37,12 @@
     <div class="main">
         <div class="form-login">
             <form id="login" method="post">
-                <h1>Đăng nhập</h1>
+                <h1>Login</h1>
                 <input
                         type="text"
                         name="username"
                         class="username w-100"
-                        placeholder="Nhập tên người dùng"
+                        placeholder="Username"
                 />
                 <c:if test="${message != null}">
                     <p style="color: red; margin-top: -8px; margin-bottom: 8px" class="title-error-login">${message}</p>
@@ -51,30 +51,29 @@
                         type="password"
                         name="password"
                         class="password w-100"
-                        placeholder="Mật khẩu"
+                        placeholder="Password"
                 />
                 <input
                         type="submit"
                         class="submit-btn w-100 fw-bold"
-                        value="Đăng nhập"
+                        value="Login"
                 />
                 <div class="modified">
                     <div class="remember-me">
                         <input type="checkbox" class="me-2" id="remember-me"/><label
                             for="remember-me"
-                    >Ghi nhớ tôi</label
+                    >Remember me</label
                     >
                     </div>
-                    <a href="">Bạn cần trợ giúp ?</a>
+                    <a href="">Do you need help ?</a>
                 </div>
                 <div class="login-form-other">
                     <p>
-                        Bạn mới tham gia Netflix?
-                        <b id="register-btn" style="color: #fff; margin-left: 5px" onclick="location.href = 'register'">Đăng kí ngay</b>
+                        You just joined OneTeam?
+                        <b id="register-btn" style="color: #fff; margin-left: 5px" onclick="location.href = 'register'">Register</b>
                     </p>
                     <p>
-                        Trang này được Google reCAPTCHA bảo vệ để đảm bảo bạn không phải
-                        là robot. Tìm hiểu thêm.
+                        This page is protected by Google reCAPTCHA to make sure you're not a robot. Find out more.
                     </p>
                 </div>
             </form>

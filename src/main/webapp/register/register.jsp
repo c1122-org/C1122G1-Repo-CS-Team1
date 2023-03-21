@@ -30,12 +30,12 @@
   <div class="main">
     <div class="form-login">
       <form id="login" method="post">
-        <h1>Đăng ký</h1>
+        <h1>Sign Up</h1>
         <input
                 type="text"
                 name="username"
                 class="username w-100"
-                placeholder="Nhập tên người dùng"
+                placeholder="Username"
                 <c:if test="${param.status == 0}">
                   value="${username}"
                 </c:if>
@@ -47,7 +47,7 @@
                 type="password"
                 name="password"
                 class="password w-100"
-                placeholder="Mật khẩu"
+                placeholder="Password"
                 <c:if test="${param.status == 0}">
                   value="${password}"
                 </c:if>
@@ -59,12 +59,12 @@
                 type="password"
                 name="confirmPassword"
                 class="password w-100"
-                placeholder="Nhập lại mật khẩu"
+                placeholder="Confirm Password"
         />
         <input
                 type="submit"
                 class="submit-btn w-100 fw-bold"
-                value="Đăng ký"
+                value="Register"
         />
         <div class="modified">
           <div class="remember-me">
@@ -73,12 +73,11 @@
           >Ghi nhớ tôi</label
           >
           </div>
-          <a href="">Bạn cần trợ giúp ?</a>
+          <a href="">Do you need help?</a>
         </div>
         <div class="login-form-other">
           <p>
-            Trang này được Google reCAPTCHA bảo vệ để đảm bảo bạn không phải
-            là robot. Tìm hiểu thêm.
+            This page is protected by Google reCAPTCHA to make sure you are not are robots. Find out more.
           </p>
         </div>
       </form>

@@ -1,5 +1,6 @@
 package com.traillermovie.repository.adminRepository;
 
+import com.traillermovie.model.AccountUser;
 import com.traillermovie.model.Director;
 import com.traillermovie.model.Movie;
 import com.traillermovie.model.Writer;
@@ -23,6 +24,8 @@ public class AdminRepositoryImpl implements IAdminRepository {
 
     private final static String REMOVE_OLD_DIRECTOR_BY_ID_MOVIE = "delete from movie_director where id_movie = ?;";
     private final static String REMOVE_OLD_WRITER_BY_ID_MOVIE = "delete from movie_writer where id_movie = ?;";
+    private final static String UPDATE_ACCOUNT_USER = "update account set password = ? where id_acc = ?;";
+    private final static String GET_ACCOUNT_USER_BY_ID = "select * from account where id_acc = ?;";
     @Override
     public int saveMovie(Movie movie) {
         try (Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SAVE_MOVIE)) {
@@ -182,6 +185,39 @@ public class AdminRepositoryImpl implements IAdminRepository {
             preparedStatement.setInt(1, id_movie);
             preparedStatement.executeUpdate();
             DBConnection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void updatePasswordAccountUser(int id_account, String password) {
+        try(Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ACCOUNT_USER)) {
+            preparedStatement.setString(1, password);
+            preparedStatement.setInt(2, id_account);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            DBConnection.close();
+        } catch (SQLException e) {
+            throw  new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public AccountUser getAccountUserById(int id_account) {
+        try(Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(GET_ACCOUNT_USER_BY_ID)) {
+            preparedStatement.setInt(1, id_account);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            AccountUser accountUser = null;
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id_acc");
+                String nameAccount = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                boolean isClient = resultSet.getBoolean("isClient");
+                boolean isAdmin = resultSet.getBoolean("isAdmin");
+                accountUser = new AccountUser(id, nameAccount, password, isClient, isAdmin);
+            }
+        return accountUser;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
