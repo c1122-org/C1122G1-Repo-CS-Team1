@@ -307,7 +307,8 @@
             />
             <c:if test="${param.status == false && param.error.equals('number')}"><p
                     style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Must be a number.</p></c:if>
-            <input class="mb-3" type="file" id="img" name="img" accept="image/*">
+            <p>Avatar</p>
+            <input class="mb-3" type="file" id="img" name="img" value="${movie.getImage()}" accept="image/*">
             <c:if test="${param.status == false && param.error.equals('required')}"><p
                     style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Please enter all fields.</p></c:if>
             <textarea name="description" class="username w-100">${movie.getDescription()}</textarea>
