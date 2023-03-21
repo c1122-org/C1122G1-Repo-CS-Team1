@@ -292,7 +292,7 @@
                     style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Bắt buộc phải là số. Vui
                 lòng thử lại</p></c:if>
             <p>Link ảnh đại diện</p>
-            <input class="mb-3" type="file" id="img" name="img" accept="image/*">
+            <input class="mb-3" type="file" id="img" name="img" value="${movie.getImage()}" accept="image/*">
             <c:if test="${param.status == false && param.error.equals('required')}"><p
                     style="color: red; font-weight: unset;font-size: 12px; margin-top: -8px">Vui lòng nhập đầy đủ các
                 trường.</p></c:if>
