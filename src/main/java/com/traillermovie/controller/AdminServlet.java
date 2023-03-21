@@ -59,14 +59,25 @@ public class AdminServlet extends HttpServlet {
                 handleSubmitFormMovie(request, response);
                 break;
             case "user":
-                try {
-                    handlePathUser(request, response);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                handleSubmitFormUser(request, response);
                 break;
             default:
                 showListMovie(request, response);
+                break;
+        }
+    }
+
+    private void handleSubmitFormUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "update":
+                updateUser(request, response);
+                break;
+            default:
+                showListUSer(request, response);
                 break;
         }
     }
@@ -98,23 +109,44 @@ public class AdminServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-            case "create":
-                break;
             case "update":
+                showUpdateUser(request, response);
                 break;
             case "delete":
-                deleteUser(request, response);
                 break;
             default:
-                showListUser(request, response);
+                showListUSer(request, response);
                 break;
         }
     }
 
-    private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void showUpdateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        loginService.deleteUser(id);
-        response.sendRedirect("admin?path=user");
+        AccountUser accountUser = loginService.selectById(id);
+        request.setAttribute("account", accountUser);
+        request.getRequestDispatcher("admin/update.jsp").forward(request, response);
+    }
+
+
+    private void updateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        AccountUser accountUser = loginService.selectById(id);
+        loginService.updateUser(id, accountUser);
+        request.setAttribute("account", accountUser);
+        response.sendRedirect("admin?path=user&action=update&id=");
+
+//        int id = Integer.parseInt(request.getParameter("id"));
+//        String name = request.getParameter("name");
+//        String pass = request.getParameter("password");
+//        boolean client = Boolean.parseBoolean(request.getParameter("client"));
+//        boolean admin = Boolean.parseBoolean(request.getParameter("admin"));
+//        AccountUser accountUser = new AccountUser(id,name,pass,client,admin);
+
+//        loginService.updateUser(id,accountUser);
+//        request.setAttribute("account", accountUser);
+//
+//        RequestDispatcher requestDispatcher =request.getRequestDispatcher("admin/listUser.jsp");
+//        response.sendRedirect("admin?path=user&action=update&id=");
 
     }
 
@@ -125,8 +157,8 @@ public class AdminServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    public void showListUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<AccountUser> accountUserList = loginService.getListAccountUserInAdmin();
+    public void showListUSer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<AccountUser> accountUserList = loginService.getListAccountUser();
         request.setAttribute("accountUserList", accountUserList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("admin/listUser.jsp");
         dispatcher.forward(request, response);

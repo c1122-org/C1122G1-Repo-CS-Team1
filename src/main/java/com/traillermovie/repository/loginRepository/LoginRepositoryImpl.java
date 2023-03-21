@@ -11,8 +11,15 @@ public class LoginRepositoryImpl implements ILoginRepository {
     private static final String SELECT_ALL_ACCOUNT = "select * from account;";
     private static final String SAVE_ACCOUNT_REGISTER = "insert into account(username, password, isClient, isAdmin) \n" +
             "values (?,?,1,0);";
+
+    private static final String UPDATE_ACCOUNT_USER="update account set password= ?  where id_acc = ?";
+
+    private final String SELECT_BY_ID = "select id_acc,username,password,isClient,isAdmin from account where id_acc =?";
+    private final static String SET_FOREIGN_KEY_0 = "SET FOREIGN_KEY_CHECKS=0";
+    private final static String SET_FOREIGN_KEY_1 = "SET FOREIGN_KEY_CHECKS=1";
     private static final String DELETE_ACCOUNT_USER = "delete from account where id_acc = ?";
     private static final String SELECT_ALL_ACCOUNT_USER = "select * from account where isAdmin = 0;";
+
 
 
     @Override
@@ -70,6 +77,25 @@ public class LoginRepositoryImpl implements ILoginRepository {
     }
 
     @Override
+    public boolean updateUser(int id ,AccountUser accountUser) {
+        Connection connection = DBConnection.getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ACCOUNT_USER);
+            preparedStatement.setString(1, accountUser.getPassword());
+            preparedStatement.setInt(2, id);
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     public int deleteUser(int id) {
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ACCOUNT_USER)) {
@@ -80,6 +106,29 @@ public class LoginRepositoryImpl implements ILoginRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    @Override
+    public AccountUser selectById(int id) {
+        AccountUser accountUser = null;
+        Connection connection = DBConnection.getConnection();
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String name = resultSet.getString("username");
+                String passWord = resultSet.getString("password");
+                boolean isClient = resultSet.getBoolean("isClient");
+                boolean isAdmin = resultSet.getBoolean("isAdmin");
+                accountUser = new AccountUser(id, name, passWord, isClient, isClient);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return accountUser;
     }
     public List<AccountUser> getListAccountUserInAdmin() {
         List<AccountUser> accountUserList = new ArrayList<>();
