@@ -8,20 +8,24 @@
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/dist/css/multi-select-tag.css">
     <title>Admin</title>
-</head>
 <style>
+    body {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../assets/images/header-image.png);
+        font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu, sans-serif;
+        color: #ddd;
+    }
     * {
         margin: 0;
         padding: 0;
         border: none;
         font-family: 'Open Sans', sans-serif;
     }
-
     .form-login {
         width: 600px;
         border-radius: 5px;
         padding: 60px 68px 40px;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        backdrop-filter: brightness(0.5);
     }
 
     .form-login #login h1 {
@@ -61,6 +65,49 @@
     .mult-select-tag .rounded {
         background: #d9d9d9;
     }
+    .header {
+        color: #d9d9d9;
+        background: #0b0b0b;
+        height: 60px;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        display: flex;
+        justify-content: space-between;
+        z-index: 1;
+        flex-direction: column;
+    }
+    .navbar>.container-fluid {
+        align-items: flex-start;
+    }
+    @media only screen and (max-width: 992px) {
+        .navbar > .container-fluid {
+            align-items: center;
+            margin-right: 2em;
+        }
+
+
+    }
+
+
+    @media only screen and (min-width: 992px) {
+        .navbar-expand-lg .navbar-toggler {
+            display: none;
+        }
+        .navbar-expand-lg .navbar-collapse {
+            display: flex !important;
+            flex-basis: auto;
+            flex-direction: column;
+            font-size: 1.4rem;
+        }
+    }
+
+
+    button.navbar-toggler {
+         background: #dee2e6;
+     }
+
 </style>
 </head>
 <body>
