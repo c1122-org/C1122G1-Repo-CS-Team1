@@ -4,9 +4,8 @@
     <div class="left-header">
         <ul>
             <li onClick="navigateNewPage('#')"><img src="${pageContext.request.contextPath}/assets/images/logo.png" alt=""></li>
-            <li onClick="navigateNewPage('general')">Tổng hợp</li>
-            <li onclick="handleDropdown()" class="dropdown-toggle" id="dropdown-header" data-bs-toggle="dropdown">Thể
-                loại
+            <li onClick="navigateNewPage('general')">Movie compilation</li>
+            <li onclick="handleDropdown()" class="dropdown-toggle" id="dropdown-header" data-bs-toggle="dropdown">Movie genre
                 <ul id="dropdown-menu-header" class="dropdown-menu"
                     style="display: none">
                     <c:forEach items="${genreList}" var="genre">
@@ -15,8 +14,8 @@
                     </c:forEach>
                 </ul>
             </li>
-            <li onClick="navigateNewPage('hot-movie')">Phim hot</li>
-            <li>Khác</li>
+            <li onClick="navigateNewPage('hot-movie')">Hot movies</li>
+            <li>Other</li>
         </ul>
     </div>
     <div class="right-header">
@@ -33,9 +32,9 @@
                 </button>
                 <ul class="dropdown-menu">
                     <c:if test="${(sessionScope.account.isAdmin() ? 1: 0) == 1}">
-                        <li><a class="dropdown-item" href="admin">Quản lí</a></li>
+                        <li><a class="dropdown-item" href="admin">Admin Management</a></li>
                     </c:if>
-                    <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
+                    <li><a class="dropdown-item" href="logout">Log out</a></li>
                 </ul>
             </div>
         </div>

@@ -24,13 +24,13 @@ public class RegisterServlet extends HttpServlet {
         if (loginService.checkUsernameRetrive(username) == 0) {
             request.setAttribute("username", username);
             request.setAttribute("password", password);
-            request.setAttribute("usernameMessage","Tên tài khoản này đã được sử dụng");
+            request.setAttribute("usernameMessage","Username is already exists.");
             request.getRequestDispatcher("register/register.jsp?status=0").forward(request, response);
         }
         if (!password.equals(confirmPassword)) {
             request.setAttribute("username", username);
             request.setAttribute("password", password);
-            request.setAttribute("passwordMessage","Mật khẩu của bạn không khớp. Vui lòng thử lại");
+            request.setAttribute("passwordMessage","Password not match.");
             request.getRequestDispatcher("register/register.jsp?status=0").forward(request, response);
         }
         else {
