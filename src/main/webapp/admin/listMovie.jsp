@@ -104,7 +104,6 @@
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
                                         </button>
                                         <button type="button"
-                                            <%--                                            ${movie.getId()}--%>
                                                 onclick="location.href='admin?path=movie&action=delete&id='+passID()"
                                                 class="btn btn-danger">Delete
                                         </button>
