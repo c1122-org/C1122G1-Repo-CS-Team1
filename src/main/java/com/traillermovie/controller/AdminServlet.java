@@ -196,10 +196,7 @@ public class AdminServlet extends HttpServlet {
         int yearPublic = Integer.parseInt(request.getParameter("yearPublic"));
         Part part = request.getPart("img");
         String realPath = request.getServletContext().getRealPath("/images");
-        String filename = Path.of(part.getSubmittedFileName()).getFileName().toString();
-        if (!Files.exists(Path.of(realPath))) {
-            Files.createDirectory(Path.of(realPath));
-        }
+        String filename = "";
         part.write("C:\\Users\\ADMIN\\Desktop\\TraillerMovie\\src\\main\\webapp\\assets\\images\\" + filename);
         String image = "../webapp/assets/images/" + filename;
         String description = request.getParameter("description");
@@ -240,10 +237,7 @@ public class AdminServlet extends HttpServlet {
         String title = request.getParameter("title");
         Part part = request.getPart("img");
         String realPath = request.getServletContext().getRealPath("/images");
-        String filename = Path.of(part.getSubmittedFileName()).getFileName().toString();
-        if (!Files.exists(Path.of(realPath))) {
-            Files.createDirectory(Path.of(realPath));
-        }
+        String filename = "";
         part.write(realPath + "/" + filename);
         String image = "images/" + filename;
         String description = request.getParameter("description");
