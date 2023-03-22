@@ -18,7 +18,7 @@
 <body>
 <div class="header">
     <nav class="d-flex justify-content-between align-items-center pt-3 pb-3">
-        <img src="./assets/images/logo.png" class="logo" />
+        <img src="./assets/images/oneteam.png" class="logo" />
         <div>
             <button>English</button>
             <a href="login">Login</a>
