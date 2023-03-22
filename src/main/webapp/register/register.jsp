@@ -36,6 +36,8 @@
                 name="username"
                 class="username w-100"
                 placeholder="Username"
+                required pattern="[A-Za-z0-9]{6,}"
+                title="More than 6 characters"
                 <c:if test="${param.status == 0}">
                   value="${username}"
                 </c:if>
@@ -48,6 +50,8 @@
                 name="password"
                 class="password w-100"
                 placeholder="Password"
+                required pattern="[A-Za-z0-9]{6,}"
+                title="More than 6 characters"
                 <c:if test="${param.status == 0}">
                   value="${password}"
                 </c:if>
@@ -60,6 +64,8 @@
                 name="confirmPassword"
                 class="password w-100"
                 placeholder="Confirm Password"
+                required pattern="[A-Za-z0-9]{6,}"
+                title="More than 6 characters"
         />
         <input
                 type="submit"

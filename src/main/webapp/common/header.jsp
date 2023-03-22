@@ -3,7 +3,7 @@
 <div class="header">
     <div class="left-header">
         <ul>
-            <li onClick="navigateNewPage('#')"><img src="${pageContext.request.contextPath}/assets/images/logo.png" alt=""></li>
+            <li onClick="navigateNewPage('#')"><img style="height: 70%" src="${pageContext.request.contextPath}/assets/images/oneteam.png" alt=""></li>
             <li onClick="navigateNewPage('general')">Movie compilation</li>
             <li onclick="handleDropdown()" class="dropdown-toggle" id="dropdown-header" data-bs-toggle="dropdown">Movie genre
                 <ul id="dropdown-menu-header" class="dropdown-menu"

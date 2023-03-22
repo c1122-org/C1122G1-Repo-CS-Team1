@@ -93,7 +93,8 @@ public class HomeServlet extends HttpServlet {
         List<Movie> movieList = homeService.getListMoviesByName(search);
             request.setAttribute("movieList", movieList);
             if (movieList.size() == 0) {
-            request.setAttribute("message", "Không thể tìm thấy bộ phim có lên là \"" + search+ "\". Vui lòng thử lại.");
+            request.setAttribute("message", "Can't find a movie named \"" + search+ "\". Please try again" +
+                    "");
         }
         request.getRequestDispatcher("navigation/generalMovie/generalMovie.jsp").forward(request, response);
     }
